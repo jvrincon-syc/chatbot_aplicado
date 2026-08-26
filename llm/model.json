@@ -1,0 +1,36 @@
+{
+  "model": {
+    "name": "qwen3-1.7b",
+    "quant": "IQ4_XS",
+    "file": "Qwen_Qwen3-1.7B-IQ4_XS.gguf",
+    "pathEnvVar": "CHATBOT_LLM_MODEL_PATH",
+    "defaultPath": "C:\\Users\\jvrincon\\Documents\\rag-models\\qwen3-1.7b\\Qwen_Qwen3-1.7B-IQ4_XS.gguf"
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8001,
+    "corsOrigins": "localhost"
+  },
+  "generation": {
+    "temperature": 0,
+    "maxOutputTokens": 120,
+    "reasoning": "off",
+    "enableThinking": false
+  },
+  "runtime": {
+    "device": "none",
+    "gpuLayers": 0,
+    "threads": 3,
+    "threadsBatch": 6,
+    "poll": 0,
+    "priority": -1,
+    "contextSize": 2048,
+    "batchSize": 512,
+    "ubatchSize": 256,
+    "cacheTypeK": "q4_0",
+    "cacheTypeV": "q4_0",
+    "parallelSlots": 1,
+    "cacheRam": 64,
+    "cacheReuse": 64
+  }
+}

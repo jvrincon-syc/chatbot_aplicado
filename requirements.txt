@@ -1,0 +1,6 @@
+# Dev tooling ONLY — never a backend/runtime dependency.
+# The LLM runtime is llama.cpp; do NOT add torch/transformers here.
+# Install inside .venv_tools:  python -m pip install -r requirements.txt
+
+# Hugging Face CLI — download/manage GGUF model files locally.
+huggingface_hub[cli]>=0.24

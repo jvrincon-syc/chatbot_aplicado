@@ -1,0 +1,32 @@
+@host = http://localhost:5254
+
+### Liveness
+GET {{host}}/health
+
+### LLM reachability
+GET {{host}}/health/llm
+
+### Chat WITH evidence fragments → grounded answer (calls the model)
+POST {{host}}/api/chat
+Content-Type: application/json
+
+{
+  "message": "¿Cada cuánto se revisa el extintor?",
+  "fragments": [
+    {
+      "content": "Los extintores portátiles deben inspeccionarse mensualmente y recargarse según la norma.",
+      "documentId": "manual-sst-2024",
+      "documentTitle": "Manual SST",
+      "page": "12",
+      "section": "4.3 Extintores"
+    }
+  ]
+}
+
+### Chat WITHOUT fragments → fail-closed abstention (no model call)
+POST {{host}}/api/chat
+Content-Type: application/json
+
+{
+  "message": "¿Cada cuánto se revisa el extintor?"
+}

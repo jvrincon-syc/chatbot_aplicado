@@ -1,0 +1,33 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+
+# Node / React (front, added later)
+node_modules/
+dist/
+build/
+
+# Python tooling-only venv
+.venv_tools/
+__pycache__/
+
+# Secrets & local config
+*.env
+.env*
+!secrets.example.env
+appsettings.*.local.json
+
+# Model weights are external infrastructure — never commit
+*.gguf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+Agents.md
+CLAUDE.md
+.claude/
+app\back\AGENTS.md
+app\front\AGENTS.md
