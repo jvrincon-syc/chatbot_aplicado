@@ -5,9 +5,8 @@ using Chatbot.Sst.Domain;
 namespace Chatbot.Sst.Application;
 
 /// <summary>
-/// Grounded generation use case: normalize → (fail-closed gate) → build payload → LLM.
-/// Retrieval that produces the evidence is a separate concern (IRagRetriever, not yet wired);
-/// this service takes the evidence it is given and never fabricates any.
+/// Grounded generation use case: normalize -> fail-closed gate -> build payload -> LLM.
+/// This service answers only from the chunks it receives and never fabricates context on its own.
 /// </summary>
 public sealed class GroundedAnswerService : IChatService
 {
@@ -22,7 +21,6 @@ public sealed class GroundedAnswerService : IChatService
 
     public async Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
     {
-        // Fail-closed: no evidence ⇒ deterministic abstention, no LLM call.
         if (evidence.IsEmpty)
         {
             return ChatResponse.Abstention();
@@ -31,8 +29,9 @@ public sealed class GroundedAnswerService : IChatService
         var normalized = _normalizer.Normalize(question);
         var messages = EvidencePromptBuilder.Build(normalized, evidence);
         var response = await _llm.GenerateAsync(new LlmRequest(messages), cancellationToken);
+        var formattedAnswer = GeneratedAnswerFormatter.Format(response.Content);
 
-        var citations = evidence.Items.Select(e => e.Citation).ToArray();
-        return new ChatResponse(response.Content, citations, Abstained: false);
+        var citations = evidence.Items.Select(e => e.Citation).Distinct().ToArray();
+        return new ChatResponse(formattedAnswer, citations, Abstained: false);
     }
 }

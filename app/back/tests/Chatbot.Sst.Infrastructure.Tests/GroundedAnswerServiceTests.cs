@@ -54,6 +54,23 @@ public class GroundedAnswerServiceTests
     }
 
     [Fact]
+    public async Task With_evidence_formats_plain_text_and_deduplicates_citations()
+    {
+        var llm = new SpyLlm("### **Correo**\nEl correo es **convivencia@empresa.com**.\n\nFuentes\n- doc-1");
+        var citation = new Citation("doc-1", "Manual SST", "12");
+        var evidence = new EvidencePackage(
+            [new Evidence("Texto uno", citation, 0.9), new Evidence("Texto dos", citation, 0.8)],
+            20);
+
+        var result = await Service(llm).AnswerAsync(new UserQuestion("Â¿CuÃ¡l es el correo?"), evidence, CancellationToken.None);
+
+        Assert.False(result.Abstained);
+        Assert.Equal("Correo\nEl correo es convivencia@empresa.com.", result.Answer);
+        Assert.Single(result.Citations);
+        Assert.Equal(1, llm.Calls);
+    }
+
+    [Fact]
     public void Prompt_builder_numbers_sources_and_includes_system_prompt()
     {
         var evidence = new EvidencePackage(
@@ -62,6 +79,9 @@ public class GroundedAnswerServiceTests
 
         Assert.Equal(LlmRole.System, messages[0].Role);
         Assert.Contains("only from the supplied evidence", messages[0].Content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("warm, clear", messages[0].Content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("exact data first", messages[0].Content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("plain text only", messages[0].Content, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("[SOURCE 1]", messages[1].Content);
         Assert.Contains("Doc Uno", messages[1].Content);
         Assert.Contains("texto uno", messages[1].Content);

@@ -1,0 +1,10 @@
+Usando la configuración de inicio de src\Chatbot.Sst.Api\Properties\launchSettings.json...
+Compilando...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5254
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api

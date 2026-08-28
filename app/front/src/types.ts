@@ -1,4 +1,4 @@
-// Shared domain types, mirrored from the backend contract (Chatbot.Sst.Domain).
+// Shared domain types, mirrored from the backend contract.
 
 export interface Citation {
   documentId: string;
@@ -13,13 +13,29 @@ export interface ChatResponse {
   abstained: boolean;
 }
 
-export interface EvidenceFragment {
-  content: string;
-  documentId?: string;
-  documentTitle?: string;
-  page?: string;
-  section?: string;
-  score?: number;
+export type ChatRequestState = "pending" | "completed" | "failed";
+
+export interface ChatRequestStatus {
+  requestId: string;
+  question: string;
+  state: ChatRequestState;
+  conversationId?: string | null;
+  dispatchId?: string | null;
+  chunksSent?: number | null;
+  answer?: string | null;
+  citations?: Citation[] | null;
+  abstained?: boolean | null;
+  errorCode?: string | null;
+  error?: string | null;
+}
+
+// Structured chat failure, preserved from the failed request status (or a transport-level
+// ApiError) so the UI can distinguish error kinds instead of collapsing everything to a string.
+export interface ChatError {
+  code: string;
+  message: string;
+  chunksSent?: number | null;
+  requestId?: string | null;
 }
 
 export type Role = "user" | "assistant";

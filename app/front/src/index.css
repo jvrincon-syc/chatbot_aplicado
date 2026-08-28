@@ -212,10 +212,37 @@ body {
   background: var(--danger-bg);
   color: var(--danger-ink);
   border: 1px solid #f3caca;
-  padding: 10px 14px;
+  padding: 14px 16px;
   border-radius: 12px;
   font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
+.error__headline { margin: 0; font-weight: 600; }
+.error__detail { margin: 0; }
+.error__meta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+}
+.error__retry {
+  align-self: flex-start;
+  margin-top: 4px;
+  border: 1px solid var(--danger-ink);
+  background: transparent;
+  color: var(--danger-ink);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.error__retry:hover { background: var(--danger-ink); color: #fff; }
 
 /* ── Composer ──────────────────────────────────────────────────────────── */
 .composer {

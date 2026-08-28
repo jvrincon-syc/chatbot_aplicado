@@ -1,0 +1,44 @@
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://127.0.0.1:5254
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\bin\Debug\net10.0
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[100]
+      Start processing HTTP request GET http://127.0.0.1:8765/api/platform/projects/proj_sst-general/releases?*
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[100]
+      Sending HTTP request GET http://127.0.0.1:8765/api/platform/projects/proj_sst-general/releases?*
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
+      Received HTTP response headers after 668.7454ms - 200
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
+      End processing HTTP request after 685.5914ms - 200
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[100]
+      Start processing HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[100]
+      Sending HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: Chatbot.Sst.Application.ChatDispatchCoordinator[0]
+      Evidence trimmed from 10 to 5 chunks by score (estimated tokens 2111 -> 880).
+info: System.Net.Http.HttpClient.ILlmProvider.LogicalHandler[100]
+      Start processing HTTP request POST http://127.0.0.1:8001/v1/chat/completions
+info: System.Net.Http.HttpClient.ILlmProvider.ClientHandler[100]
+      Sending HTTP request POST http://127.0.0.1:8001/v1/chat/completions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
+      Received HTTP response headers after 65244.546ms - 202
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
+      End processing HTTP request after 65245.4391ms - 202
+info: System.Net.Http.HttpClient.ILlmProvider.ClientHandler[101]
+      Received HTTP response headers after 25394.6047ms - 200
+info: System.Net.Http.HttpClient.ILlmProvider.LogicalHandler[101]
+      End processing HTTP request after 25395.9811ms - 200
+info: System.Net.Http.HttpClient.ILlmProvider.LogicalHandler[100]
+      Start processing HTTP request GET http://127.0.0.1:8001/health
+info: System.Net.Http.HttpClient.ILlmProvider.ClientHandler[100]
+      Sending HTTP request GET http://127.0.0.1:8001/health
+info: System.Net.Http.HttpClient.ILlmProvider.ClientHandler[101]
+      Received HTTP response headers after 29.0712ms - 200
+info: System.Net.Http.HttpClient.ILlmProvider.LogicalHandler[101]
+      End processing HTTP request after 29.3107ms - 200

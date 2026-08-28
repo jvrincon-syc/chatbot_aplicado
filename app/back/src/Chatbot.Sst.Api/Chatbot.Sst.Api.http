@@ -1,4 +1,5 @@
 @host = http://localhost:5254
+@requestId = msg_demo_001
 
 ### Liveness
 GET {{host}}/health
@@ -6,27 +7,54 @@ GET {{host}}/health
 ### LLM reachability
 GET {{host}}/health/llm
 
-### Chat WITH evidence fragments → grounded answer (calls the model)
-POST {{host}}/api/chat
+### Frontend submit -> external chatbot backend dispatch
+POST {{host}}/api/chat/requests
 Content-Type: application/json
 
 {
-  "message": "¿Cada cuánto se revisa el extintor?",
-  "fragments": [
-    {
-      "content": "Los extintores portátiles deben inspeccionarse mensualmente y recargarse según la norma.",
-      "documentId": "manual-sst-2024",
-      "documentTitle": "Manual SST",
-      "page": "12",
-      "section": "4.3 Extintores"
-    }
-  ]
+  "question": "¿Cuál es el procedimiento para reportar un accidente de trabajo?",
+  "conversationId": "conv_123",
+  "messageId": "{{requestId}}",
+  "topK": 8
 }
 
-### Chat WITHOUT fragments → fail-closed abstention (no model call)
-POST {{host}}/api/chat
+### Poll request status
+GET {{host}}/api/chat/requests/{{requestId}}
+
+### External chatbot backend webhook -> local LLM grounding
+POST {{host}}/api/chat/webhook
 Content-Type: application/json
 
 {
-  "message": "¿Cada cuánto se revisa el extintor?"
+  "dispatch_id": "chatq_demo_001",
+  "project_id": "proj_sst-general",
+  "rag_variant_id": "ragv_local-bge",
+  "rag_release_id": "ragr_demo_20260827",
+  "retrieval_profile_id": "retrieval-profile-demo",
+  "question": "¿Cuál es el procedimiento para reportar un accidente de trabajo?",
+  "conversation_id": "conv_123",
+  "message_id": "{{requestId}}",
+  "top_k": 8,
+  "chunks": [
+    {
+      "node_id": "node_001",
+      "document_id": "doc_001",
+      "parent_node_id": "parent_001",
+      "child_chunk_id": "child_001",
+      "text": "Todo accidente de trabajo debe reportarse de inmediato al jefe directo y al área SST para iniciar el registro e investigación.",
+      "score": 0.91,
+      "source": "vector",
+      "page_start": 3,
+      "page_end": 3,
+      "section_title": "Reporte e investigación",
+      "section_path": "Manual > Incidentes",
+      "metadata": {
+        "retrieval_mode": "hybrid",
+        "rag_release_id": "ragr_demo_20260827"
+      },
+      "embedding_profile_id": "bge-m3",
+      "corpus_version": "2026-08-27"
+    }
+  ],
+  "dispatched_at": "2026-08-27T15:45:00Z"
 }

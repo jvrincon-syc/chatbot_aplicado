@@ -1,5 +1,5 @@
 using Chatbot.Sst.Application.Abstractions;
-using Chatbot.Sst.Application.Generation;
+using Chatbot.Sst.Api;
 using Chatbot.Sst.Domain;
 using Chatbot.Sst.Infrastructure;
 using Chatbot.Sst.Infrastructure.Llm;
@@ -20,14 +20,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Liveness + LLM reachability.
-app.MapHealthChecks("/health");
+app.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    Predicate = HealthEndpointPredicates.IncludeForLiveness
+});
 app.MapHealthChecks("/health/llm", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
 {
-    Predicate = check => check.Tags.Contains("llm")
+    Predicate = HealthEndpointPredicates.IncludeLlmOnly
 });
 
-// Dev-only smoke path: proves API -> ILlmProvider -> llama.cpp -> Qwen. NOT the chat orchestration.
 if (app.Environment.IsDevelopment())
 {
     app.MapPost("/dev/llm/smoke", async (ILlmProvider llm, CancellationToken ct) =>
@@ -46,50 +47,93 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// Chat endpoint the React client calls. Receives the question + its N evidence fragments and passes
-// them to the grounded generation use case. Fail-closed: no fragments ⇒ abstention, no LLM call.
-// ponytail: fragments arrive from the caller for now; when IRagRetriever is implemented the API will
-// retrieve them server-side from the RAG (Postgres) instead of receiving them in the request body.
-app.MapPost("/api/chat", async (ChatRequest body, IChatService chat, CancellationToken ct) =>
+app.MapPost("/api/chat/requests", async (StartChatRequest body, IChatDispatchCoordinator coordinator, CancellationToken ct) =>
 {
-    if (string.IsNullOrWhiteSpace(body.Message))
+    if (string.IsNullOrWhiteSpace(body.Question))
     {
-        return Results.BadRequest(new { error = "Message is required." });
+        return Results.BadRequest(new { error = "Question is required." });
     }
 
-    var evidence = body.ToEvidencePackage();
-    var response = await chat.AnswerAsync(new UserQuestion(body.Message), evidence, ct);
-    return Results.Ok(response);
+    if (body.TopK is < 1 or > 25)
+    {
+        return Results.BadRequest(new { error = "TopK must be between 1 and 25." });
+    }
+
+    var snapshot = await coordinator.SubmitAsync(body.ToDomain(), ct);
+    if (snapshot.State == ChatRequestState.Failed)
+    {
+        return Results.Json(
+            new { requestId = snapshot.RequestId, errorCode = snapshot.ErrorCode, error = snapshot.Error },
+            statusCode: StatusCodes.Status502BadGateway);
+    }
+
+    return Results.Accepted($"/api/chat/requests/{snapshot.RequestId}", ChatRequestStatusResponse.From(snapshot));
+});
+
+app.MapGet("/api/chat/requests/{requestId}", (string requestId, IChatDispatchCoordinator coordinator) =>
+{
+    var snapshot = coordinator.Get(requestId);
+    return snapshot is null
+        ? Results.NotFound(new { error = "Request not found." })
+        : Results.Ok(ChatRequestStatusResponse.From(snapshot));
+});
+
+app.MapPost("/api/chat/webhook", async (ChatWebhookRequest body, IChatDispatchCoordinator coordinator, CancellationToken ct) =>
+{
+    if (string.IsNullOrWhiteSpace(body.DispatchId) ||
+        string.IsNullOrWhiteSpace(body.ProjectId) ||
+        string.IsNullOrWhiteSpace(body.RagVariantId) ||
+        string.IsNullOrWhiteSpace(body.RagReleaseId) ||
+        string.IsNullOrWhiteSpace(body.RetrievalProfileId) ||
+        string.IsNullOrWhiteSpace(body.Question))
+    {
+        return Results.BadRequest(new
+        {
+            error = "dispatch_id, project_id, rag_variant_id, rag_release_id, retrieval_profile_id, and question are required."
+        });
+    }
+
+    var snapshot = await coordinator.CompleteAsync(body.ToDomain(), ct);
+    if (snapshot is null)
+    {
+        return Results.NotFound(new { error = "Unknown dispatch_id or message_id." });
+    }
+
+    if (snapshot.State == ChatRequestState.Failed)
+    {
+        return Results.Json(
+            new { requestId = snapshot.RequestId, errorCode = snapshot.ErrorCode, error = snapshot.Error },
+            statusCode: StatusCodes.Status502BadGateway);
+    }
+
+    return Results.Accepted($"/api/chat/requests/{snapshot.RequestId}", ChatRequestStatusResponse.From(snapshot));
+});
+
+app.MapGet("/api/chat/rag-releases", async (IChatbotDispatchClient dispatchClient, ILogger<Program> logger, CancellationToken ct) =>
+{
+    try
+    {
+        var releases = await dispatchClient.ListRagReleasesAsync(ct);
+        return Results.Ok(releases.Select(RagReleaseResponse.From).ToArray());
+    }
+    catch (ChatDispatchException ex)
+    {
+        return Results.Json(
+            new { errorCode = ex.ErrorCode, error = ex.Message },
+            statusCode: StatusCodes.Status502BadGateway);
+    }
+    catch (Exception ex)
+    {
+        // Fail closed: an unreachable/unexpected chatbot-sst failure here (e.g. connection
+        // refused) must not leak a raw exception to callers, same as the background dispatch
+        // path in ChatDispatchCoordinator.
+        logger.LogError(ex, "Unexpected failure listing RAG releases from the external chatbot backend.");
+        return Results.Json(
+            new { errorCode = "CHATBOT_RAG_RELEASES_UNEXPECTED_FAILURE", error = "No se pudieron consultar las releases RAG disponibles." },
+            statusCode: StatusCodes.Status502BadGateway);
+    }
 });
 
 app.Run();
-
-/// <summary>Question + the N evidence fragments supplied for grounding.</summary>
-public sealed record ChatRequest(string Message, IReadOnlyList<EvidenceFragment>? Fragments = null)
-{
-    public EvidencePackage ToEvidencePackage()
-    {
-        var items = (Fragments ?? [])
-            .Where(f => !string.IsNullOrWhiteSpace(f.Content))
-            .Select(f => new Evidence(
-                f.Content,
-                new Citation(f.DocumentId ?? "unknown", f.DocumentTitle, f.Page, f.Section),
-                f.Score ?? 0))
-            .ToArray();
-
-        if (items.Length == 0) return EvidencePackage.Empty;
-
-        var tokens = items.Sum(i => EvidencePromptBuilder.EstimateTokens(i.Content));
-        return new EvidencePackage(items, tokens);
-    }
-}
-
-public sealed record EvidenceFragment(
-    string Content,
-    string? DocumentId = null,
-    string? DocumentTitle = null,
-    string? Page = null,
-    string? Section = null,
-    double? Score = null);
 
 public partial class Program;

@@ -1,7 +1,7 @@
 using Chatbot.Sst.Application;
 using Chatbot.Sst.Application.Abstractions;
+using Chatbot.Sst.Infrastructure.Dispatch;
 using Chatbot.Sst.Infrastructure.Llm;
-using Chatbot.Sst.Infrastructure.Rag;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -12,14 +12,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        // RagTarget — validated on startup, fail closed if any identifier is missing.
-        services.AddOptions<RagTargetOptions>()
-            .Bind(configuration.GetSection(RagTargetOptions.SectionName))
+        services.AddOptions<ChatbotDispatchOptions>()
+            .Bind(configuration.GetSection(ChatbotDispatchOptions.SectionName))
             .ValidateDataAnnotations()
             .ValidateOnStart();
-        services.AddSingleton<IRagTargetProvider, ConfiguredRagTargetProvider>();
 
-        // LLM — typed HttpClient to the local OpenAI-compatible server.
         services.AddOptions<LlmOptions>()
             .Bind(configuration.GetSection(LlmOptions.SectionName))
             .ValidateDataAnnotations()
@@ -32,9 +29,22 @@ public static class DependencyInjection
             client.Timeout = TimeSpan.FromSeconds(options.RequestTimeoutSeconds);
         });
 
-        // Application use cases (pure orchestration; depend only on Domain + ports).
+        services.AddHttpClient<IChatbotDispatchClient, HttpChatbotDispatchClient>((sp, client) =>
+        {
+            var options = sp.GetRequiredService<IOptions<ChatbotDispatchOptions>>().Value;
+            client.BaseAddress = new Uri(options.BaseUrl);
+            client.Timeout = TimeSpan.FromSeconds(options.RequestTimeoutSeconds);
+            // The Python side is stdlib http.server.ThreadingHTTPServer, not a real
+            // ASGI server — it doesn't reliably support HTTP keep-alive connection
+            // reuse under load ("response ended prematurely" on pooled connections
+            // it already half-closed). Force a fresh connection per request.
+            client.DefaultRequestHeaders.ConnectionClose = true;
+        });
+
         services.AddSingleton<IQueryNormalizer, DefaultQueryNormalizer>();
         services.AddSingleton<IChatService, GroundedAnswerService>();
+        services.AddSingleton<IChatRequestStore, InMemoryChatRequestStore>();
+        services.AddSingleton<IChatDispatchCoordinator, ChatDispatchCoordinator>();
 
         return services;
     }

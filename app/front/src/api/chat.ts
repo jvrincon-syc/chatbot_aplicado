@@ -1,7 +1,19 @@
-import { postJson } from "./client";
-import type { ChatResponse, EvidenceFragment } from "../types";
+import { getJson, postJson } from "./client";
+import type { ChatRequestStatus } from "../types";
 
-// Sends the question plus its evidence fragments (empty for now — the backend abstains fail-closed
-// until server-side retrieval feeds them).
-export const sendChat = (message: string, fragments: EvidenceFragment[] = []) =>
-  postJson<ChatResponse>("/api/chat", { message, fragments });
+export interface StartChatOptions {
+  conversationId?: string;
+  messageId?: string;
+  topK?: number;
+}
+
+export const startChat = (question: string, options: StartChatOptions = {}) =>
+  postJson<ChatRequestStatus>("/api/chat/requests", {
+    question,
+    conversationId: options.conversationId,
+    messageId: options.messageId,
+    topK: options.topK,
+  });
+
+export const getChatRequest = (requestId: string) =>
+  getJson<ChatRequestStatus>(`/api/chat/requests/${encodeURIComponent(requestId)}`);

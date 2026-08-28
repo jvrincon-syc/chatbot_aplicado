@@ -1,0 +1,1429 @@
+Compilación iniciada a las 28/08/2026 12:20:00 p. m..
+     1>Proyecto "C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\Chatbot.Sst.slnx" en el nodo 1 (VSTest destinos).
+     1>ValidateSolutionConfiguration:
+         Compilando la configuración de soluciones "Debug|Any CPU".
+Serie de pruebas para C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\tests\Chatbot.Sst.Domain.Tests\bin\Debug\net10.0\Chatbot.Sst.Domain.Tests.dll (.NETCoreApp,Version=v10.0)
+Serie de pruebas para C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\tests\Chatbot.Sst.Infrastructure.Tests\bin\Debug\net10.0\Chatbot.Sst.Infrastructure.Tests.dll (.NETCoreApp,Version=v10.0)
+1 archivos de prueba en total coincidieron con el patrón especificado.
+1 archivos de prueba en total coincidieron con el patrón especificado.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.4+50e68bbb8b (64-bit .NET 10.0.11)
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.4+50e68bbb8b (64-bit .NET 10.0.11)
+[xUnit.net 00:00:00.07]   Discovering: Chatbot.Sst.Domain.Tests
+[xUnit.net 00:00:00.07]   Discovering: Chatbot.Sst.Infrastructure.Tests
+[xUnit.net 00:00:00.07]   Discovered:  Chatbot.Sst.Domain.Tests
+Ninguna prueba coincide con el filtro de casos de prueba proporcionado "FullyQualifiedName~Dispatches_61_questions_through_local_api" en C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\tests\Chatbot.Sst.Domain.Tests\bin\Debug\net10.0\Chatbot.Sst.Domain.Tests.dll
+[xUnit.net 00:00:00.12]   Discovered:  Chatbot.Sst.Infrastructure.Tests
+
+[xUnit.net 00:00:00.14]   Starting:    Chatbot.Sst.Infrastructure.Tests
+[2026-08-28T12:20:02.6538172-05:00] Starting chunk-dispatch run for 61 questions.
+local_api=http://localhost:5254
+conversation_id=conv_chunks_20260828172002
+polling_timeout=180s
+polling_interval=3s
+health_status=200 OK
+Healthy
+---
+[2026-08-28T12:20:02.8900425-05:00] [1/61] Que establece la politica de seguridad y salud en el trabajo?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172002_01","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:20:16.5793830-05:00] [2/61] Cuales son los objetivos del SG-SST?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172016_02","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:20:24.2398887-05:00] [3/61] Como identifica la empresa los peligros y valora los riesgos?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172024_03","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:20:33.8508236-05:00] [4/61] Que programas conforman la planificacion del SG-SST?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172033_04","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:20:43.9536956-05:00] [5/61] Como se gestionan los requisitos legales en SST?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172043_05","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:20:51.9336466-05:00] [6/61] Que contempla la gestion del cambio en seguridad y salud?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:20:51.9839014-05:00] [7/61] Como se prepara la empresa para emergencias?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172051_07","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:21:00.4331302-05:00] [8/61] Que lineamientos aplican a proveedores y contratistas en SST?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172100_08","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:21:07.8976106-05:00] [9/61] Como se hacen auditorias internas del SG-SST?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172107_09","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:21:16.9802643-05:00] [10/61] Como se revisa el SG-SST por la alta direccion?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:17.1181082-05:00] [11/61] Que fuentes se usan para identificar oportunidades de mejora continua?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172117_11","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:21:25.1853434-05:00] [12/61] Como se gestionan las acciones correctivas y preventivas?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:25.2973979-05:00] [13/61] Como se investigan incidentes accidentes y enfermedades laborales?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172125_13","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:21:34.7469647-05:00] [14/61] Que debe comunicarse al COPASST sobre investigaciones de accidentes?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.8162410-05:00] [15/61] Que responsabilidades tiene la ARL en seguridad y salud en el trabajo?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.8333294-05:00] [16/61] Que responsabilidades de SST tiene la organizacion?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.8500394-05:00] [17/61] Como funciona la induccion y capacitacion anual en SST?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.8651569-05:00] [18/61] Cuales son las funciones del COPASST?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.8762978-05:00] [19/61] Que funciones tiene el presidente del COPASST?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.8895102-05:00] [20/61] Que funciones tiene la secretaria del COPASST?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.9007972-05:00] [21/61] Como se puede comunicar un trabajador con el COPASST?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.9141584-05:00] [22/61] Quienes son los miembros principales y suplentes del COPASST 2025 a 2027?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.9248917-05:00] [23/61] Quien fue nombrado presidente y secretaria del COPASST?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.9344861-05:00] [24/61] Que es el comite de convivencia laboral?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:34.9441650-05:00] [25/61] Cuales son las funciones del comite de convivencia?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172134_25","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:21:43.7651108-05:00] [26/61] Cual es el objetivo del reglamento del comite de convivencia?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:43.7958672-05:00] [27/61] Como se conforma el comite de convivencia laboral?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:43.8061087-05:00] [28/61] Como funcionan las reuniones del comite de convivencia?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:43.8158380-05:00] [29/61] Que metodologia siguen las sesiones del comite de convivencia?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:43.8269300-05:00] [30/61] Como se presentan quejas o denuncias de convivencia?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:43.8388287-05:00] [31/61] A que correo se envian las quejas de convivencia laboral?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172143_31","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:21:52.0399920-05:00] [32/61] Que derechos tienen los trabajadores en convivencia laboral?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:21:52.0737275-05:00] [33/61] Que deberes de convivencia laboral deben cumplir los trabajadores?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172152_33","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:22:00.3481350-05:00] [34/61] Que principios y valores orientan la convivencia laboral?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.3656088-05:00] [35/61] En que consiste la politica de desconexion laboral?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.3779205-05:00] [36/61] Que normas de convivencia deben cumplir los trabajadores?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.3874089-05:00] [37/61] Que marco legal soporta el comite y la convivencia laboral?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.3963737-05:00] [38/61] Que dice la politica de prevencion del acoso laboral?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.4056055-05:00] [39/61] Que es la sala amiga de la familia lactante?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.4173201-05:00] [40/61] Cuales son las ventajas de la sala amiga?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.4286450-05:00] [41/61] Donde esta ubicada la sala amiga y quienes pueden usarla?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.4380410-05:00] [42/61] Como solicito o pido vacaciones?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.4525850-05:00] [43/61] Que tipos de faltas contempla el reglamento interno de trabajo?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.4624401-05:00] [44/61] Que sanciones aplican por consumo de alcohol o sustancias psicoactivas?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.4723230-05:00] [45/61] Que dice la politica de prevencion de alcohol y drogas?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.4826299-05:00] [46/61] Cuando puede la empresa requerir pruebas de deteccion de consumo?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.4927468-05:00] [47/61] En que consiste el programa o politica de pausas activas?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.5032937-05:00] [48/61] Por que son importantes las pausas activas para la salud fisica?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.5141740-05:00] [49/61] Como ayudan las pausas activas a la concentracion y al estres?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.5227876-05:00] [50/61] Que recomendaciones de seguridad vial aparecen en el corpus?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.5336655-05:00] [51/61] Que compromisos tiene el PESV o plan estrategico de seguridad vial?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.5435874-05:00] [52/61] Que significa cero tolerancia frente a alcohol y sustancias en seguridad vial?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.5564582-05:00] [53/61] Que documentos o reglas hablan de prevencion del acoso laboral?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.5675033-05:00] [54/61] Cual es el objetivo general del manual de convivencia laboral?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:00.5789773-05:00] [55/61] Cuales son los objetivos especificos del manual de convivencia?
+  START FAILED: 502 Bad Gateway
+  {"requestId":"msg_chunks_20260828172200_55","errorCode":"CHATBOT_WEBHOOK_DELIVERY_FAILED","error":"El backend de contexto no acept� la pregunta del chatbot."}
+---
+[2026-08-28T12:22:09.6837332-05:00] [56/61] En cuanto tiempo debe el Comite de Convivencia dar tramite a una queja?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:09.7637496-05:00] [57/61] Que ocurre si un integrante del Comite de Convivencia es parte de una queja o investigacion?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:09.7728254-05:00] [58/61] Por que la seguridad vial es una responsabilidad compartida?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:09.7821616-05:00] [59/61] Que programa incluye el PESV para proteger actores viales vulnerables?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:09.7913986-05:00] [60/61] Que metodologia debe adoptar la empresa para mejorar continuamente la prevencion del riesgo vial?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+---
+[2026-08-28T12:22:09.8003570-05:00] [61/61] Que medidas preventivas y correctivas contempla el reglamento interno frente al acoso laboral y sexual?
+  START FAILED: 500 Internal Server Error
+  System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpIOException: The response ended prematurely. (ResponseEnded)
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Chatbot.Sst.Infrastructure.Dispatch.HttpChatbotDispatchClient.DispatchAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Infrastructure\Dispatch\HttpChatbotDispatchClient.cs:line 53
+   at Chatbot.Sst.Application.ChatDispatchCoordinator.SubmitAsync(ChatQuestionSubmission submission, CancellationToken cancellationToken) in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Application\ChatDispatchCoordinator.cs:line 38
+   at Program.<>c.<<<Main>$>b__0_1>d.MoveNext() in C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\src\Chatbot.Sst.Api\Program.cs:line 62
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+HEADERS
+=======
+Host: localhost:5254
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+===
+SUMMARY -- 61 questions dispatched
+  #1   chunks=0   status=start_failed_502 Que establece la politica de seguridad y salud en el trabajo...
+  #2   chunks=0   status=start_failed_502 Cuales son los objetivos del SG-SST?
+  #3   chunks=0   status=start_failed_502 Como identifica la empresa los peligros y valora los riesgos...
+  #4   chunks=0   status=start_failed_502 Que programas conforman la planificacion del SG-SST?
+  #5   chunks=0   status=start_failed_502 Como se gestionan los requisitos legales en SST?
+  #6   chunks=0   status=start_failed_500 Que contempla la gestion del cambio en seguridad y salud?
+  #7   chunks=0   status=start_failed_502 Como se prepara la empresa para emergencias?
+  #8   chunks=0   status=start_failed_502 Que lineamientos aplican a proveedores y contratistas en SST...
+  #9   chunks=0   status=start_failed_502 Como se hacen auditorias internas del SG-SST?
+  #10  chunks=0   status=start_failed_500 Como se revisa el SG-SST por la alta direccion?
+  #11  chunks=0   status=start_failed_502 Que fuentes se usan para identificar oportunidades de mejora...
+  #12  chunks=0   status=start_failed_500 Como se gestionan las acciones correctivas y preventivas?
+  #13  chunks=0   status=start_failed_502 Como se investigan incidentes accidentes y enfermedades labo...
+  #14  chunks=0   status=start_failed_500 Que debe comunicarse al COPASST sobre investigaciones de acc...
+  #15  chunks=0   status=start_failed_500 Que responsabilidades tiene la ARL en seguridad y salud en e...
+  #16  chunks=0   status=start_failed_500 Que responsabilidades de SST tiene la organizacion?
+  #17  chunks=0   status=start_failed_500 Como funciona la induccion y capacitacion anual en SST?
+  #18  chunks=0   status=start_failed_500 Cuales son las funciones del COPASST?
+  #19  chunks=0   status=start_failed_500 Que funciones tiene el presidente del COPASST?
+  #20  chunks=0   status=start_failed_500 Que funciones tiene la secretaria del COPASST?
+  #21  chunks=0   status=start_failed_500 Como se puede comunicar un trabajador con el COPASST?
+  #22  chunks=0   status=start_failed_500 Quienes son los miembros principales y suplentes del COPASST...
+  #23  chunks=0   status=start_failed_500 Quien fue nombrado presidente y secretaria del COPASST?
+  #24  chunks=0   status=start_failed_500 Que es el comite de convivencia laboral?
+  #25  chunks=0   status=start_failed_502 Cuales son las funciones del comite de convivencia?
+  #26  chunks=0   status=start_failed_500 Cual es el objetivo del reglamento del comite de convivencia...
+  #27  chunks=0   status=start_failed_500 Como se conforma el comite de convivencia laboral?
+  #28  chunks=0   status=start_failed_500 Como funcionan las reuniones del comite de convivencia?
+  #29  chunks=0   status=start_failed_500 Que metodologia siguen las sesiones del comite de convivenci...
+  #30  chunks=0   status=start_failed_500 Como se presentan quejas o denuncias de convivencia?
+  #31  chunks=0   status=start_failed_502 A que correo se envian las quejas de convivencia laboral?
+  #32  chunks=0   status=start_failed_500 Que derechos tienen los trabajadores en convivencia laboral?
+  #33  chunks=0   status=start_failed_502 Que deberes de convivencia laboral deben cumplir los trabaja...
+  #34  chunks=0   status=start_failed_500 Que principios y valores orientan la convivencia laboral?
+  #35  chunks=0   status=start_failed_500 En que consiste la politica de desconexion laboral?
+  #36  chunks=0   status=start_failed_500 Que normas de convivencia deben cumplir los trabajadores?
+  #37  chunks=0   status=start_failed_500 Que marco legal soporta el comite y la convivencia laboral?
+  #38  chunks=0   status=start_failed_500 Que dice la politica de prevencion del acoso laboral?
+  #39  chunks=0   status=start_failed_500 Que es la sala amiga de la familia lactante?
+  #40  chunks=0   status=start_failed_500 Cuales son las ventajas de la sala amiga?
+  #41  chunks=0   status=start_failed_500 Donde esta ubicada la sala amiga y quienes pueden usarla?
+  #42  chunks=0   status=start_failed_500 Como solicito o pido vacaciones?
+  #43  chunks=0   status=start_failed_500 Que tipos de faltas contempla el reglamento interno de traba...
+  #44  chunks=0   status=start_failed_500 Que sanciones aplican por consumo de alcohol o sustancias ps...
+  #45  chunks=0   status=start_failed_500 Que dice la politica de prevencion de alcohol y drogas?
+  #46  chunks=0   status=start_failed_500 Cuando puede la empresa requerir pruebas de deteccion de con...
+  #47  chunks=0   status=start_failed_500 En que consiste el programa o politica de pausas activas?
+  #48  chunks=0   status=start_failed_500 Por que son importantes las pausas activas para la salud fis...
+  #49  chunks=0   status=start_failed_500 Como ayudan las pausas activas a la concentracion y al estre...
+  #50  chunks=0   status=start_failed_500 Que recomendaciones de seguridad vial aparecen en el corpus?
+  #51  chunks=0   status=start_failed_500 Que compromisos tiene el PESV o plan estrategico de segurida...
+  #52  chunks=0   status=start_failed_500 Que significa cero tolerancia frente a alcohol y sustancias ...
+  #53  chunks=0   status=start_failed_500 Que documentos o reglas hablan de prevencion del acoso labor...
+  #54  chunks=0   status=start_failed_500 Cual es el objetivo general del manual de convivencia labora...
+  #55  chunks=0   status=start_failed_502 Cuales son los objetivos especificos del manual de convivenc...
+  #56  chunks=0   status=start_failed_500 En cuanto tiempo debe el Comite de Convivencia dar tramite a...
+  #57  chunks=0   status=start_failed_500 Que ocurre si un integrante del Comite de Convivencia es par...
+  #58  chunks=0   status=start_failed_500 Por que la seguridad vial es una responsabilidad compartida?
+  #59  chunks=0   status=start_failed_500 Que programa incluye el PESV para proteger actores viales vu...
+  #60  chunks=0   status=start_failed_500 Que metodologia debe adoptar la empresa para mejorar continu...
+  #61  chunks=0   status=start_failed_500 Que medidas preventivas y correctivas contempla el reglament...
+With chunks: 0/61
+With answer: 0/61
+Failed:      61/61
+[xUnit.net 00:02:07.39]   Finished:    Chatbot.Sst.Infrastructure.Tests
+  Correctas Chatbot.Sst.Infrastructure.Tests.ManualChatbotDispatchLoadTests.Dispatches_61_questions_through_local_api_and_prints_chunks_per_question [2 m 7 s]
+
+La serie de pruebas se ejecutó correctamente.
+Pruebas totales: 1
+     Correcto: 1
+ Tiempo total: 2,1342 Minutos
+     1>Compilación del proyecto terminada "C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\back\Chatbot.Sst.slnx" (VSTest destinos).
+
+Compilación correcta.
+    0 Advertencia(s)
+    0 Errores
+
+Tiempo transcurrido 00:02:09.30

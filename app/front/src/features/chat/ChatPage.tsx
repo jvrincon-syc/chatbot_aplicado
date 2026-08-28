@@ -11,7 +11,7 @@ const SUGGESTIONS = [
 ];
 
 export function ChatPage() {
-  const { messages, loading, error, send } = useChat();
+  const { messages, loading, error, send, retry } = useChat();
   const empty = messages.length === 0 && !loading;
 
   return (
@@ -35,7 +35,7 @@ export function ChatPage() {
         )}
       </section>
 
-      <ErrorBanner message={error} />
+      <ErrorBanner error={error} onRetry={retry} />
       <ChatInput onSend={send} disabled={loading} />
     </main>
   );
