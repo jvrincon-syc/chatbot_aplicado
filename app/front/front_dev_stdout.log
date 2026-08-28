@@ -1,8 +1,4 @@
 
-  VITE v6.4.3  ready in 905 ms
+  VITE v6.4.3  ready in 700 ms
 
   ➜  Local:   http://127.0.0.1:5173/
-5:47:34 p. m. [vite] (client) hmr update /src/features/chat/ChatPage.tsx
-5:47:58 p. m. [vite] (client) hmr update /src/features/chat/ChatPage.tsx
-5:48:07 p. m. [vite] (client) hmr update /src/components/ErrorBanner.tsx
-5:48:23 p. m. [vite] (client) hmr update /src/components/ErrorBanner.tsx
