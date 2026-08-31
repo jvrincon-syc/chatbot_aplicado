@@ -1,6 +1,8 @@
 using System.Net;
+using System.Runtime.CompilerServices;
 using Chatbot.Sst.Application;
 using Chatbot.Sst.Application.Abstractions;
+using Chatbot.Sst.Application.Generation;
 using Chatbot.Sst.Domain;
 using Chatbot.Sst.Infrastructure.Dispatch;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -21,7 +23,7 @@ public sealed class ChatDispatchCoordinatorTests
         var dispatchClient = new GatedDispatchClient(gate.Task);
         var store = new InMemoryChatRequestStore();
         var coordinator = new ChatDispatchCoordinator(
-            store, dispatchClient, new NeverCalledChatService(), NullLogger<ChatDispatchCoordinator>.Instance);
+            store, dispatchClient, new NeverCalledChatService(), new RecordingChatEventStream(), new GenerationOptions(), NullLogger<ChatDispatchCoordinator>.Instance);
 
         var submitTask = coordinator.SubmitAsync(
             new ChatQuestionSubmission("question", "conv_1", "msg_1", 8), CancellationToken.None);
@@ -44,7 +46,7 @@ public sealed class ChatDispatchCoordinatorTests
         var dispatchClient = new ThrowingDispatchClient();
         var store = new InMemoryChatRequestStore();
         var coordinator = new ChatDispatchCoordinator(
-            store, dispatchClient, new NeverCalledChatService(), NullLogger<ChatDispatchCoordinator>.Instance);
+            store, dispatchClient, new NeverCalledChatService(), new RecordingChatEventStream(), new GenerationOptions(), NullLogger<ChatDispatchCoordinator>.Instance);
 
         var snapshot = await coordinator.SubmitAsync(
             new ChatQuestionSubmission("question", "conv_1", "msg_2", 8), CancellationToken.None);
@@ -63,7 +65,7 @@ public sealed class ChatDispatchCoordinatorTests
         var chat = new GatedChatService(gate.Task);
         var store = new InMemoryChatRequestStore();
         var coordinator = new ChatDispatchCoordinator(
-            store, new NeverCalledDispatchClient(), chat, NullLogger<ChatDispatchCoordinator>.Instance);
+            store, new NeverCalledDispatchClient(), chat, new RecordingChatEventStream(), new GenerationOptions(), NullLogger<ChatDispatchCoordinator>.Instance);
         var pending = store.CreatePending(new ChatQuestionSubmission("Pregunta SST", "conv-1", "msg-3", 8));
         var delivery = CreateDelivery("msg-3");
 
@@ -90,7 +92,7 @@ public sealed class ChatDispatchCoordinatorTests
         var chat = new ThrowingChatService();
         var store = new InMemoryChatRequestStore();
         var coordinator = new ChatDispatchCoordinator(
-            store, new NeverCalledDispatchClient(), chat, NullLogger<ChatDispatchCoordinator>.Instance);
+            store, new NeverCalledDispatchClient(), chat, new RecordingChatEventStream(), new GenerationOptions(), NullLogger<ChatDispatchCoordinator>.Instance);
         store.CreatePending(new ChatQuestionSubmission("Pregunta SST", "conv-1", "msg-4", 8));
         var delivery = CreateDelivery("msg-4");
 
@@ -111,7 +113,7 @@ public sealed class ChatDispatchCoordinatorTests
         var chat = new ThrowingChatService(new HttpRequestException("Connection refused"));
         var store = new InMemoryChatRequestStore();
         var coordinator = new ChatDispatchCoordinator(
-            store, new NeverCalledDispatchClient(), chat, NullLogger<ChatDispatchCoordinator>.Instance);
+            store, new NeverCalledDispatchClient(), chat, new RecordingChatEventStream(), new GenerationOptions(), NullLogger<ChatDispatchCoordinator>.Instance);
         store.CreatePending(new ChatQuestionSubmission("Pregunta SST", "conv-1", "msg-5", 8));
         var delivery = CreateDelivery("msg-5");
 
@@ -131,7 +133,7 @@ public sealed class ChatDispatchCoordinatorTests
         var chat = new ThrowingChatService(new TaskCanceledException("The request timed out."));
         var store = new InMemoryChatRequestStore();
         var coordinator = new ChatDispatchCoordinator(
-            store, new NeverCalledDispatchClient(), chat, NullLogger<ChatDispatchCoordinator>.Instance);
+            store, new NeverCalledDispatchClient(), chat, new RecordingChatEventStream(), new GenerationOptions(), NullLogger<ChatDispatchCoordinator>.Instance);
         store.CreatePending(new ChatQuestionSubmission("Pregunta SST", "conv-1", "msg-6", 8));
         var delivery = CreateDelivery("msg-6");
 
@@ -154,7 +156,7 @@ public sealed class ChatDispatchCoordinatorTests
             statusCode: HttpStatusCode.InternalServerError));
         var store = new InMemoryChatRequestStore();
         var coordinator = new ChatDispatchCoordinator(
-            store, new NeverCalledDispatchClient(), chat, NullLogger<ChatDispatchCoordinator>.Instance);
+            store, new NeverCalledDispatchClient(), chat, new RecordingChatEventStream(), new GenerationOptions(), NullLogger<ChatDispatchCoordinator>.Instance);
         store.CreatePending(new ChatQuestionSubmission("Pregunta SST", "conv-1", "msg-7", 8));
         var delivery = CreateDelivery("msg-7");
 
@@ -169,12 +171,12 @@ public sealed class ChatDispatchCoordinatorTests
     }
 
     [Fact]
-    public async Task CompleteAsync_caps_evidence_to_top_5_by_score_and_citations_match_kept_set()
+    public async Task CompleteAsync_caps_evidence_to_top_4_by_score_and_citations_match_kept_set()
     {
         var chat = new CapturingChatService();
         var store = new InMemoryChatRequestStore();
         var coordinator = new ChatDispatchCoordinator(
-            store, new NeverCalledDispatchClient(), chat, NullLogger<ChatDispatchCoordinator>.Instance);
+            store, new NeverCalledDispatchClient(), chat, new RecordingChatEventStream(), new GenerationOptions(), NullLogger<ChatDispatchCoordinator>.Instance);
         store.CreatePending(new ChatQuestionSubmission("Pregunta SST", "conv-1", "msg-8", 8));
         var delivery = CreateDelivery("msg-8") with
         {
@@ -196,10 +198,11 @@ public sealed class ChatDispatchCoordinatorTests
         await WaitUntilAsync(() => chat.CapturedEvidence is not null);
 
         var evidence = chat.CapturedEvidence!;
-        Assert.Equal(5, evidence.Items.Count);
+        Assert.Equal(4, evidence.Items.Count);
         var keptDocIds = evidence.Items.Select(i => i.Citation.DocumentId).ToHashSet();
-        Assert.Equal(new[] { "doc-6", "doc-2", "doc-4", "doc-5", "doc-3" }.ToHashSet(), keptDocIds);
+        Assert.Equal(new[] { "doc-6", "doc-2", "doc-4", "doc-5" }.ToHashSet(), keptDocIds);
         Assert.DoesNotContain("doc-1", keptDocIds);
+        Assert.DoesNotContain("doc-3", keptDocIds);
         Assert.DoesNotContain("doc-7", keptDocIds);
 
         await WaitUntilAsync(() => store.Get(snapshot!.RequestId)?.State == ChatRequestState.Completed);
@@ -213,7 +216,7 @@ public sealed class ChatDispatchCoordinatorTests
         var chat = new CapturingChatService();
         var store = new InMemoryChatRequestStore();
         var coordinator = new ChatDispatchCoordinator(
-            store, new NeverCalledDispatchClient(), chat, NullLogger<ChatDispatchCoordinator>.Instance);
+            store, new NeverCalledDispatchClient(), chat, new RecordingChatEventStream(), new GenerationOptions(), NullLogger<ChatDispatchCoordinator>.Instance);
         store.CreatePending(new ChatQuestionSubmission("Pregunta SST", "conv-1", "msg-9", 8));
         var delivery = CreateDelivery("msg-9"); // 2 chunks, well under the cap
 
@@ -229,7 +232,7 @@ public sealed class ChatDispatchCoordinatorTests
         var chat = new CapturingChatService();
         var store = new InMemoryChatRequestStore();
         var coordinator = new ChatDispatchCoordinator(
-            store, new NeverCalledDispatchClient(), chat, NullLogger<ChatDispatchCoordinator>.Instance);
+            store, new NeverCalledDispatchClient(), chat, new RecordingChatEventStream(), new GenerationOptions(), NullLogger<ChatDispatchCoordinator>.Instance);
         store.CreatePending(new ChatQuestionSubmission("Pregunta SST", "conv-1", "msg-10", 8));
         var delivery = CreateDelivery("msg-10") with
         {
@@ -241,7 +244,37 @@ public sealed class ChatDispatchCoordinatorTests
         await coordinator.CompleteAsync(delivery, CancellationToken.None);
         await WaitUntilAsync(() => chat.CapturedEvidence is not null);
 
-        Assert.Equal(5, chat.CapturedEvidence!.Items.Count);
+        Assert.Equal(4, chat.CapturedEvidence!.Items.Count);
+    }
+
+    [Fact]
+    public async Task CompleteAsync_truncates_the_top_chunk_when_it_alone_exceeds_the_token_budget()
+    {
+        var chat = new CapturingChatService();
+        var store = new InMemoryChatRequestStore();
+        // Budget 100 tokens ~= 400 chars. EstimateTokens = (len+3)/4.
+        var coordinator = new ChatDispatchCoordinator(
+            store, new NeverCalledDispatchClient(), chat, new RecordingChatEventStream(),
+            new GenerationOptions { EvidenceTokenBudget = 100 },
+            NullLogger<ChatDispatchCoordinator>.Instance);
+        store.CreatePending(new ChatQuestionSubmission("Pregunta SST", "conv-1", "msg-11", 8));
+        var delivery = CreateDelivery("msg-11") with
+        {
+            Chunks =
+            [
+                new WebhookChunk("n1", "doc-1", new string('x', 4000), 0.99, "vector"),
+                new WebhookChunk("n2", "doc-2", "small chunk", 0.10, "vector"),
+            ]
+        };
+
+        await coordinator.CompleteAsync(delivery, CancellationToken.None);
+        await WaitUntilAsync(() => chat.CapturedEvidence is not null);
+
+        var evidence = chat.CapturedEvidence!;
+        Assert.Single(evidence.Items);
+        Assert.Equal("doc-1", evidence.Items[0].Citation.DocumentId);
+        Assert.Equal(400, evidence.Items[0].Content.Length); // truncated to budget * 4 chars
+        Assert.True(evidence.EstimatedTokens <= 100);
     }
 
     private sealed class CapturingChatService : IChatService
@@ -253,6 +286,42 @@ public sealed class ChatDispatchCoordinatorTests
             CapturedEvidence = evidence;
             var citations = evidence.Items.Select(e => e.Citation).ToArray();
             return Task.FromResult(new ChatResponse("Respuesta final", citations, false));
+        }
+
+        public async IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(
+            UserQuestion question, EvidencePackage evidence, [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            CapturedEvidence = evidence;
+            var citations = evidence.Items.Select(e => e.Citation).ToArray();
+            yield return ChatAnswerChunk.Token("Respuesta final");
+            yield return ChatAnswerChunk.Completed(new ChatResponse("Respuesta final", citations, false));
+            await Task.CompletedTask;
+        }
+    }
+
+    private sealed class RecordingChatEventStream : IChatEventStream
+    {
+        private readonly List<ChatStreamEvent> _events = [];
+
+        public IReadOnlyList<ChatStreamEvent> Published
+        {
+            get { lock (_events) { return _events.ToArray(); } }
+        }
+
+        public Task PublishAsync(string requestId, ChatStreamEvent evt, CancellationToken cancellationToken)
+        {
+            lock (_events) { _events.Add(evt); }
+            return Task.CompletedTask;
+        }
+
+        public async IAsyncEnumerable<ChatStreamEvent> SubscribeAsync(
+            string requestId, [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            foreach (var evt in Published)
+            {
+                yield return evt;
+            }
+            await Task.CompletedTask;
         }
     }
 
@@ -316,6 +385,9 @@ public sealed class ChatDispatchCoordinatorTests
     {
         public Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
             => throw new InvalidOperationException("Should not be called in these tests.");
+
+        public IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
+            => throw new InvalidOperationException("Should not be called in these tests.");
     }
 
     private sealed class NeverCalledDispatchClient : IChatbotDispatchClient
@@ -334,6 +406,14 @@ public sealed class ChatDispatchCoordinatorTests
             await gate;
             return new ChatResponse("Respuesta final", [new Citation("doc-1", "doc-1", "3", "Incidentes")], false);
         }
+
+        public async IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(
+            UserQuestion question, EvidencePackage evidence, [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            await gate;
+            yield return ChatAnswerChunk.Completed(
+                new ChatResponse("Respuesta final", [new Citation("doc-1", "doc-1", "3", "Incidentes")], false));
+        }
     }
 
     private sealed class ThrowingChatService(Exception? toThrow = null) : IChatService
@@ -341,6 +421,9 @@ public sealed class ChatDispatchCoordinatorTests
         private readonly Exception _toThrow = toThrow ?? new InvalidOperationException("boom: simulated unexpected generation failure.");
 
         public Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
+            => throw _toThrow;
+
+        public IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
             => throw _toThrow;
     }
 }

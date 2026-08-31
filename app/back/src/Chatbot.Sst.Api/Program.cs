@@ -78,6 +78,29 @@ app.MapGet("/api/chat/requests/{requestId}", (string requestId, IChatDispatchCoo
         : Results.Ok(ChatRequestStatusResponse.From(snapshot));
 });
 
+// Server-Sent Events: streams answer.delta.v1 tokens as the LLM produces them, then a terminal
+// answer.completed.v1 / request.failed.v1. Replaces the frontend's 1s polling loop.
+app.MapGet("/api/chat/requests/{requestId}/events", async (
+    string requestId,
+    IChatEventStream events,
+    HttpResponse response,
+    CancellationToken ct) =>
+{
+    response.Headers.ContentType = "text/event-stream";
+    response.Headers.CacheControl = "no-cache";
+    response.Headers.Append("X-Accel-Buffering", "no");
+
+    await foreach (var evt in events.SubscribeAsync(requestId, ct))
+    {
+        await response.WriteAsync($"event: {evt.EventType}\ndata: {evt.DataJson}\n\n", ct);
+        await response.Body.FlushAsync(ct);
+        if (evt.IsTerminal)
+        {
+            break;
+        }
+    }
+});
+
 app.MapPost("/api/chat/webhook", async (ChatWebhookRequest body, IChatDispatchCoordinator coordinator, CancellationToken ct) =>
 {
     if (string.IsNullOrWhiteSpace(body.DispatchId) ||

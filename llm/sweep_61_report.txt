@@ -1,0 +1,447 @@
+#01 [ 14.4s ttft= 0.9s] Que establece la politica de seguridad y salud en el trabajo?
+    -> La política de seguridad y salud en el trabajo está establecida en el Manual_SGSST.pdf, donde se declara que la alta dirección comprometese con la prevención de lesiones y enfermedades laborales, el cumplimiento de las normativas vigentes y la mejora continua del SG-SST. Sus objetivos incluyen identificar peligros, valorar y controlar riesgos, cumplir requisitos legales y proteger a todos los trabajadores y contratistas.
+
+La organización asigna responsabilidades, recursos y realiza auditorías internas y revisiones por la dirección. Además, el programa de pausas activas promueve breves ejercicios durante la jornada para prevenir lesiones musculoesqueleticas y fatiga, reduciendo la tensión muscular, mejorando la concentración y disminuyendo el estrés. La política de desconexion laboral garantiza el derecho a no atender asuntos
+#02 [ 14.6s ttft= 0.3s] Cuales son los objetivos del SG-SST?
+    -> Los objetivos del SG-SST (Sistema de Seguridad Nacional) son los siguientes:
+
+1. Objetivo: La política de seguridad y salud en el trabajo declara el compromiso de la alta dirección con la prevención de lesiones y enfermedades laborales, el cumplimiento de la normativa vigente y la meja continua del SG-SST. Sus objetivos incluyen identificar peligros, valorar y controlar riesgos, cumplir requisitos legales y proteger a todos los trabajadores y contratistas. La organización asigna responsabilidades, recursos y realiza auditorías internas y revisiones por la dirección.
+
+2. Objetivo de la investigación de incidentes: La investigación de incidentes, accidentes de trabajo y enfermedades laborales se realiza dentro de los 15 días siguientes, por un equipo con el jefe inmediato, representante del
+#03 [ 14.3s ttft= 0.4s] Como identifica la empresa los peligros y valora los riesgos?
+    -> La empresa identifica los peligros y valora los riesgos mediante procesos estructurados y metodológicos, como se detalla en los documentos mencionados:
+
+1. Identificación de Peligros:
+   - Se realiza investigaciones de incidentes, accidentes de trabajo y enfermedades laborales dentro de 15 días siguientes a su ocurrencia, por un equipo compuesto del jefe inmediato, representante del COPASST y responsable del SG-SST. Se identifican causas inmediatas y básicas, definición de acciones correctivas y preventivas, y se comunican los resultados al COPASST para actualizar programas de prevención.
+
+2. Valoración y Control de Riesgos:
+   - La política de seguridad y salud en el trabajo incluye la prevención de lesiones y enfermedades laborales, cumplimiento de normativas vigentes y mejora continua del SG-SST.
+#04 [ 12.9s ttft= 0.3s] Que programas conforman la planificacion del SG-SST?
+    -> La planificación del SG-SST (Sistema de Gestión de Seguridad y Salud en el Trabajo) se compone de varios programas, incluyendo:
+
+1. Política de Seguridad y Salud en el Trabajo (SG-ST): Esta política establece los objetivos y responsabilidades para la prevención de lesiones y enfermedades laborales, cumplimiento de normativas legales y mejora continua del SG-SST.
+
+2. Comitéte de Convivencia Laboral: Este comité maneja el acoso laboral, procesa denuncias, y garantiza un trámite dentro de cinco días hábiles, con una reunión mensual y un proceso paritario para resolver quejas.
+
+3. Investigación de Incidentes, Accidentes y Enfermedades Laborales: Se lleva a cabo en 15 días siguientes al suceso, por un equipo compuesto del jefe
+#05 [ 13.8s ttft= 0.3s] Como se gestionan los requisitos legales en SST?
+    -> Los requisitos legales en el SST (Sistema de Seguridad y Salud en el Trabajo) se gestionan según el Manual_SGSST.pdf, específicamente en las páginas 1, 2 y 3.
+
+- Pagina 1: El manual declara un compromiso de la alta dirección con la prevención de lesiones y enfermedades laborales, cumplimiento de normativas vigentes y mejora continua del SG-SST. Sus objetivos incluyen identificar peligros, valorar y controlar riesgos, cumplir requisitos legales y proteger a todos los trabajadores y contratistas.
+
+- Pagina 2: La investigación de incidentes, accidentes de trabajo y enfermedades laborales se realiza dentro de los quince días siguientes, por un equipo con el jefe inmediato, representante del COPASST y responsable del SG-SST. Se identifican causas inmediatas y bás
+#06 [ 12.7s ttft= 0.4s] Que contempla la gestion del cambio en seguridad y salud?
+    -> La gestión del cambio en seguridad y salud en el trabajo (SG-SST) se basa en la política de seguridad y salud en el trabajo descrita en el Manual_SGSST.pdf, que incluye objetivos, responsabilidades, recursos y acciones para prevenir lesiones y enfermedades laborales.
+
+Contenido clave:
+1. Compromiso de la alta dirección:
+   - Prevención de lesiones y enfermedades laborales.
+   - Cumplimiento de normativas legales.
+   - Mejora continua del SG-SST.
+
+2. Programa de pausas activas:
+   - Ejercicios breves durante la jornada para prevenir lesiones musculoesqueleticas y fatiga.
+   - Reducción de tensión muscular, mejoría de concentración y disminución del estrés.
+
+3. Plan Estrategico de Seguridad Vial (PESV):
+#07 [ 12.5s ttft= 0.3s] Como se prepara la empresa para emergencias?
+    -> La empresa prepara a sus trabajadores para emergencias mediante el desarrollo de una política de seguridad y salud en el trabajo (SG-SST), que incluye:
+
+1. Prevención de lesiones y enfermedades laborales:
+   - Identificación de riesgos y control de los mismos.
+   - Cumplimiento de normativas legales vigentes.
+
+2. Gestión de incidentes y accidentes:
+   - Investigación de incidentes, accidentes y enfermedades laborales dentro de los 15 días siguientes a su ocurrencia.
+   - Definición de acciones correctivas y preventivas.
+   - Comunicación de resultados al COPASST (Comité Paritario de Seguridad y Salud en el Trabajo).
+
+3. Funcionamiento del COPASST:
+   - Es un comité paritario que promue la seguridad, prevención y inspección
+#08 [ 12.3s ttft= 0.3s] Que lineamientos aplican a proveedores y contratistas en SST?
+    -> Los lineamientos aplicables a proveedores y contratistas en SST son los siguientes:
+
+1. Cumplimiento de normativas vigentes: El proveedor debe cumplir con las leyes, reglas y estándares relacionados con la seguridad y salud en el trabajo.
+
+2. Prevención de lesiones y enfermedades laborales: La alta dirección compromete-se a prevenir lesiones y enfermedades laborales mediante identificación de peligros, control de riesgos y mejora continua del SG-SST.
+
+3. Auditorías internas y revisiones por la dirección: La organización realiza auditorías internas y revisiones periódicas de lugares de trabajo, asegurando que se cumplan los requisitos legales y se protejan a todos los trabajadores y contratistas.
+
+4. Investigación de incidentes laborales: Se realizan investigaciones dentro de 15 días siguientes, con el jefe in
+#09 [ 12.2s ttft= 0.3s] Como se hacen auditorias internas del SG-SST?
+    -> Auditorías internas del SG-SST se realizan según el Manual_SGSST.pdf, donde se menciona que:
+
+1. Responsabilidades y funciones: El COPASST (Comité Paritario de Seguridad y Salud en el Trabajo) es responsable de organizar auditorías internas y revisiones por la dirección.
+2. Proceso de auditoría: La auditoría interna se realiza con el jefe inmediato, un representante del COPASST y el responsable del SG-SST. Se identifican riesgos, se definen acciones correctivas y preventivas, y los resultados se comunican al COPASST para actualizar programas de prevención.
+3. Periodo de tiempo: La investigación de incidentes, accidentes y enfermedades laborales se realiza dentro de 15 días siguientes.
+
+En resumen, las auditorías internas del SG-SST son gestionadas por el COPASST, con
+#10 [ 12.8s ttft= 0.3s] Como se revisa el SG-SST por la alta direccion?
+    -> La revisión del SG-SST por la alta dirección se realiza según el Manual_SGSST.pdf, donde se menciona que el SG-SST (Sistema de Gestión de Seguridad y Salud en el Trabajo) es un proceso integral que incluye:
+
+1. Identificación y evaluación de riesgos: Se identifican peligros laborales, se valoran y se controlan los riesgos mediante la participación de equipos técnicos y de liderazgo.
+
+2. Cumplimiento normativo: El SG-SST debe cumplir con las normativas vigentes en materia de seguridad y salud laboral.
+
+3. Auditorías internas: Se realizan auditorías internas para verificar el cumplimiento del SG-SST y su eficacia.
+
+4. Revisión por la dirección: La revisión por la alta dirección se realiza según los requisitos legales, con un enfoque en la prevención de les
+#11 [ 14.9s ttft= 0.3s] Que fuentes se usan para identificar oportunidades de mejora continua?
+    -> Las fuentes utilizadas para identificar oportunidades de mejora continua en el SG-SST son:
+
+1. Manual_SGSST.pdf (Página 1, Sección SST): El Manual menciona que la política de seguridad y salud en el trabajo incluye el compromiso de la alta dirección con la prevención de lesiones y enfermedades laborales, cumplimiento de la normativa vigente y mejora continua del SG-SST. También se menciona que la organización asigna responsabilidades, recursos y realiza auditorías internas y revisiones por la dirección.
+
+2. Manual_SGSST.pdf (Página 2, Sección SST): La investigación de incidentes, accidentes de trabajo y enfermedades laborales se realiza dentro de los quince días siguientes, por un equipo con el jefe inmediato, representante del COPASST y responsable del SG-SST. Se identifican causas inmediatas y básicas
+#12 [ 13.6s ttft= 0.4s] Como se gestionan las acciones correctivas y preventivas?
+    -> Las acciones correctivas y preventivas son gestionadas según el Manual SGSST, donde se establece que:
+
+1. Investigación y análisis:
+   - Los incidentes, accidentes de trabajo y enfermedades laborales se investigan dentro de los 15 días siguientes al sucedimiento, por un equipo compuesto del jefe inmediato, representante del COPASST y responsable del SG-SST.
+   - Se identifican causas inmediatas y básicas, se definen acciones correctivas y preventivas, y los resultados se comunican al COPASST para actualizar sus programas de prevención.
+
+2. Responsabilidades y auditorías:
+   - El COPASST es el Comité Paritario de Seguridad y Salud en el Trabajo, con funciones como proponer actividades de prevención, inspeccionar lugares de trabajo, recibir quejas y participar en investigaciones de accidentes.
+#13 [ 12.7s ttft= 0.4s] Como se investigan incidentes accidentes y enfermedades laborales?
+    -> La investigación de incidentes y enfermedades laborales se realiza dentro de los 15 días siguientes, por un equipo compuesto con el jefe inmediato, un representante del COPASST y el responsable del SG-SST. Se identifican causas inmediatas y básicas, se definen acciones correctivas y preventivas, y los resultados se comunican al COPASST para actualizar los programas de prevención.
+
+La política de seguridad y salud en el trabajo declara el compromiso de la alta dirección con la prevención de lesiones y enfermedades laborales, el cumplimiento de la normativa vigente y la mejora continua del SG-SST. Sus objetivos incluyen identificar riesgos, valorar y controlar riesgos, cumplir requisitos legales y proteger a todos los trabajadores y contratistas. La organización asigna responsabilidades, recursos y realiza auditorías internas y revisiones por la
+#14 [ 12.7s ttft= 0.3s] Que debe comunicarse al COPASST sobre investigaciones de accidentes?
+    -> Algunas observaciones importantes sobre qué debe comunicarse al COPASST sobre investigaciones de accidentes:
+
+1. Información de incidentes: Se deben informar de inmediatos los incidentes laborales, incluyendo accidentes, lesiones o enfermedades laborales, así como otros hechos que puedan tener relación con la salud del trabajador.
+
+2. Causas inmedias y básicas: Se debe identificar las causas inmediatas y básicas de los incidentes, lo cual es fundamental para la prevención y control.
+
+3. Acciones correctivas y preventivas: Se deben definir acciones correctivas y preventivas que se tomarán para evitar que los incidentes ocurran nuevamente.
+
+4. Resultados comunicados al COPASST: Los resultados de las investigaciones deben comunicarse al COPASST para actualizar sus programas de prevención y protección.
+
+5. Reportes y registros: Se debe
+#15 [ 12.1s ttft= 0.3s] Que responsabilidades tiene la ARL en seguridad y salud en el trabajo?
+    -> La ARL (Arquillo) tiene responsabilidades clave en seguridad y salud en el trabajo, incluyendo:
+
+1. Prevención de lesiones y enfermedades laborales:
+   - Identificar y controlar riesgos laborales que pueden causar lesiones o enfermedades relacionadas con el trabajo.
+   - Cumplir las normativas vigentes aplicables (ejemplo: leyes de seguridad laboral, regulaciones de salud ocupacional).
+
+2. Asignación de responsabilidades:
+   - Determinar quién es responsable de cumplir con las normativas y garantizar la seguridad y salud de los trabajadores.
+
+3. Recursos y manejo de riesgos:
+   - Asignar recursos necesarios para el control de riesgos, incluyendo formaciones, equipamiento, y programas de prevención.
+
+4. Auditorías internas:
+   - Realizar auditorías internas para verificar que se
+#16 [ 12.6s ttft= 0.3s] Que responsabilidades de SST tiene la organizacion?
+    -> La política de seguridad para el trabajo de las together (SST) tiene un rol de responsabilidad de la organización de la high commission（SCT）en el ámbito de la conservación del desarrollo sostenido por la UNESCO durante las décadas de 1950 a 1980. Se documentaron con la laborería y se hizo un llamado en el 1979, es el año que la UNESCO fue adquirida por la ООNU. En el año 1960, la ООNU fue formada y dadas su nombre de ONU. Luego el año 1968, la ООNUL was modificada porque un déspotismo como el SPT en Polonia. El instituto se creó en 1968 en Birmania níjar (en el actual día con el nomd de HQ in Knut), y la
+#17 [ 17.4s ttft= 5.8s] Como funciona la induccion y capacitacion anual en SST?
+    -> La inducción y capacitación anual en el SST (Seguridad e Salud en el Trabajo) se realiza según los siguientes criterios:
+
+1. Inducción: Se realiza al inicio del trabajo, donde los nuevos empleados reciben una formación básica sobre las normativas de seguridad y salud en el trabajo, incluyendo la identificación de riesgos, medidas de prevención y procedimientos básicos.
+
+2. Capacitación anual: Se realiza cada año, con el objetivo de actualizar conocimientos, habilidades y compromisos de los empleados respecto a las normativas laborales, así como también para mejorar la seguridad y salud en el trabajo.
+
+Estas actividades son gestionadas por el COPASST (Comité Paritario de Seguridad y Salud en el Trabajo), que coordina y supervisa el proceso. El COPASST tiene un presidente que coordina reuniones y una secretaria que lleva las actas, con
+#18 [ 17.4s ttft= 5.6s] Cuales son las funciones del COPASST?
+    -> El COPASST (Comité Paritario de Seguridad y Salud en el Trabajo) tiene las siguientes funciones según los documentos proporcionados:
+
+1. Promoción y prevención de accidentes: Propone actividades para la promoción y prevención de incidentes, accidentes de trabajo y enfermedades laborales.
+2. Vigilancia del SG-SST: Inspecciona periodicamente el desarrollo del Sistema de Seguridad y Salud en el Trabajo (SG-SST).
+3. Recepción y tramite de quejas: Recibe y tramita quejas o denuncias, asegurando su tratamiento reservado.
+4. Investigación de incidentes: Realiza investigaciones de incidentes, accidentes de trabajo y enfermedades laborales, identificando causas inmediatas y básicas, definir acciones correctivas y preventivas, y comunicando resultados al COPASST para actualizar programas de
+#19 [ 16.0s ttft= 5.5s] Que funciones tiene el presidente del COPASST?
+    -> El presidente del COPASST coordina y convoca las reuniones del comité. Su función principal es promover la seguridad y salud en el trabajo, incluyendo:
+
+- Proponer actividades de prevención y promoción de la seguridad y salud laboral.
+- Vigilar el desarrollo del SG-SST (Seguridad y Salud en el Trabajo).
+- Recibir y tramitar quejas de forma reservada, con un proceso específico para su resolución.
+- Participar en la investigación de accidentes y enfermedades laborales, asegurando una respuesta rápida y efectiva.
+
+El presidente es elegido por un periodo de 2025 a 2027, y el comité tiene una secretaria que lleva las actas. Los miembros principales son elegidos para ese período.
+#20 [  7.0s ttft= 6.0s] Que funciones tiene la secretaria del COPASST?
+    -> 以
+#21 [ 18.2s ttft= 5.9s] Como se puede comunicar un trabajador con el COPASST?
+    -> Para comunicar a un trabajador con el COPASST, se deben seguir los siguientes pasos:
+
+1. Identificación del trabajo: El trabajador debe identificarse con el nombre completo, cargo y lugar de trabajo.
+
+2. Presentación de la queja: La queja debe ser presentada en forma formal, con detalles sobre el incidentio, las acciones correctivas y preventivas propuestas, y los resultados obtenidos.
+
+3. Comunicación al COPASST: La queja debe ser tramitada al correo electrónico copasst@empresa.com.co dentro de cinco días hábiles desde la fecha de recepción.
+
+4. Revisión por parte paritaria: El comité se reúne en sesiones ordinarias cada tres meses, y si un miembro está impedido, su suplente toma el lugar.
+
+5. Actualización del programa de prevención: Después de recibir la
+#22 [ 11.7s ttft= 5.4s] Quienes son los miembros principales y suplentes del COPASST 2025 a 2027?
+    -> Los miembros principales y suplentes del COPASST 2025 a 2027 son elegidos para el periodo mencionado, pero la información específica sobre sus nombres o identificaciones no se encuentra en los documentos proporcionados. La evidencia disponible solo menciona que el COPASST tiene un presidente que coordina y convoca reuniones, y una secretaria que lleva las actas. No hay datos concretos sobre quién son estos miembros principales y suplentes.
+#23 [ 17.9s ttft= 5.7s] Quien fue nombrado presidente y secretaria del COPASST?
+    -> El COPASST (Comité Paritá S.A. es el Comité Paritario de Seguridad y Salud en el Trabajo, y su presidente es el Señor José María Paredón Buesa, y su secretaria es la Señora Elena López Fuentes. El COMITE PARITARIO DE SEGURIDAD Y SALUD EN EL TRABA tiene un presidente que coordena las actividades de la organización dedicadas a la Seguridad y Salud en el Trabajo, y ha sido elegido por el CONSEJO DIRECTORIO DE SEGUENCIA OCHES (COPASST) el cual comprende 15 miembros diputados al Consejo Directorio de la Onera S.A.
+
+El COPASST tiene un presidente que coordina las actividades de la organización dedicadas a la Seguridad y Salud en el Trabajo, y y una secretaria que lleva outas actas.
+#24 [ 11.7s ttft= 5.3s] Que es el comite de convivencia laboral?
+    -> El Comité de Convivencia Laboral (también conocido como COPASST) es un comité paritario que se encarga de la seguridad y salud en el trabajo. Su función principal es prevenir el acoso laboral, atender quejas de forma reservada, y participar en la investigación de accidentes laborales. El comité se conforma con miembros elegidos para un periodo de 2025 a 2027 y sesiona cada tres meses.
+#25 [ 17.2s ttft= 5.4s] Cuales son las funciones del comite de convivencia?
+    -> Según el material proporcionado:
+
+- Funciones del Comité de Convivencia Laboral (COPASST):
+  - Proponer actividades de promoción y prevención de lesiones y enfermedades laborales.
+  - Vigilar el desarrollo del SG-SST y inspeccionar periodicamente lugares de trabajo.
+  - Recibir y tramitar quejas de forma reservada.
+  - Participar en la investigación de accidentes y enfermedades laborales.
+
+- Procedimiento para las quejas:
+  - Las quejas se envían al correo convivicia@empresa.com.co.
+  - Una queja recibida debe ser tramitada dentro de cinco días hábiles, con cita a las partes involucradas.
+
+- Organización y estructura:
+  - El COPASST tiene un presidente que coordina y convoca reuniones, y una secretaria que lleva las actas.
+  - Los
+#26 [ 12.3s ttft= 6.0s] Cual es el objetivo del reglamento del comite de convivencia?
+    -> El objetivo del reglamento del comite de convivencia laboral es prevención de acoso laboral y atención de quejas de forma reservada. El comite debe tramitar las quejas dentro de cinco días hábiles, citar a las partes y sesionar cada tres meses. Además, el comite tiene un presidente que coordina reuniones y una secretaria que lleva las actas. También se establecen sanciones por consumo de alcohol o sustancias psicoactivas.
+#27 [ 17.2s ttft= 5.4s] Como se conforma el comite de convivencia laboral?
+    -> El Comité de convivencia laboral está conformado por un comité de respeto, compasión, afecto, enfoquimiento y oportunidad, que permite el desarrollo de la función social, el político, el económico y el cultural del país.
+
+El Comité de Convivención Laboral está formado por un comité paritario de seguridad y salud en el trabajo. Sus funciones incluyen proponer actividades para la promoción y prevención de lesiones y enfermedades laborales, vigilar el desarrollo del SG-SST, inspeccionar lugares de trabajo periódicamente, recibir y tramitar quejas, y participar en investigaciones de accidentes de trabajo. El comité tiene un presidente que coordina y convoca reuniones, y una secretaria que lleva las actas. Los miembros principales y suplentes son elegidos para el periodo 2025 a
+#28 [ 17.5s ttft= 5.5s] Como funcionan las reuniones del comite de convivencia?
+    -> ución
+
+Documento: Manual de España. Page: 1 | Section: SST
+
+Ş
+
+El Comité de Seguración realiza este cierre periodístico en respuesta al desafío del país más afectado por la pandemia. Notario olarak mediante los recursos que delineamos bajo esta misma dirección. El competo étreo -más allá de las recomendaciones técnicas y el trabaje científico- se conla éste a un año o más de urduzúa variable que se doblará la actividad de le those meses que establecemos como número de contacto de servicio de estos últimos. Permisos, una prórima adicional del 6 al 10 de abril en línea
+
+Ş
+
+El Comité de Seguración realiza este cierre periodístico en respuesta al desafío del país más afectado por la pandemia. Notario olarak mediante los recursos que delineamos bajo esta
+#29 [ 17.3s ttft= 5.4s] Que metodologia siguen las sesiones del comite de convivencia?
+    -> Las sesiones del Comité de Convivencia Laboral siguen una metodología específica basada en la resolución de quejas, reuniones paritarias y investigaciones laborales. A continuación, se detalla la metodología:
+
+1. Resolución de quejas:
+   - Las quejas o denuncias se envían al correo convivencia@empresa.com.co.
+   - El comité debe darle tramite dentro de los cinco días hábiles después de recibir la queja, citando a las partes involucadas.
+   - Se resuelve de forma paritaria, lo que implica que los miembros del comité participan en el proceso decisional.
+
+2. Reuniones:
+   - Las reuniones se realizan ordinariamente cada tres meses.
+   - Si un integrante es parte de una queja,
+#30 [ 13.6s ttft= 5.5s] Como se presentan quejas o denuncias de convivencia?
+    -> Las quejas o denuncias de convivencia se presentan al correo convivencia@empresa.com.co. La comite de convivicia laboral debe tratar la queja dentro de cinco días hábiles, citando a las partes involved. Si un integrante es parte de una queja, se declara impedido y lo reemplaza su suplente.
+
+Los datos son proporcionados en los documentos mencionados:
+1. [SOURCE 1] Manual_SGSST.pdf, página 1, sección SST.
+2. [SOURCE 4] Manual_SGSST.pdf, página 3, sección SST.
+#31 [  7.2s ttft= 5.7s] A que correo se envian las quejas de convivencia laboral?
+    -> El correo donde se envían las quejas de convivencia laboral es convivicia@empresa.com.co.
+#32 [ 19.5s ttft= 5.7s] Que derechos tienen los trabajadores en convivencia laboral?
+    -> Los trabajadores tienen derechos relacionados con la convivencia laboral según el Manual_SGSST.pdf:
+
+1. Trato digno: Tienen derecho a un trato respetuoso y a ser tratados con honor en el trabajo, conforme a la Ley 1010 de 2006.
+
+2. Protección contra el acoso laboral: Tienen derecho a una cultura laboral libre de acoso, discriminación y violencia, y se garantan medidas preventivas y correctivas para evitar situaciones desfavorables.
+
+3. Acceso a la justicia laboral: Tienen derecho a presentar quejas o denuncias al correo convivencia@empresa.com.co, y el comité de convivencia laboral debe tratarlas dentro de cinco días hábiles, citando a las partes involucradas.
+
+4. Impedidos por quejas: Si un integrante es parte
+#33 [ 19.5s ttft= 6.7s] Que deberes de convivencia laboral deben cumplir los trabajadores?
+    -> Los trabajadores deben cumplir con los siguientes deberes de convivencia laboral según el Manual_SGSST.pdf:
+
+1. Respeto mutuo: Los trabajadores tienen derecho a un trato digno y deben respetar a sus compañeros en el trabajo, evitando acoso, discriminación y violencia.
+
+2. Trato respetuoso: El Comité de Convivencia Laboral debe atender las quejas de forma reservada, sin represalias, y garantizar un ambiente libre de acoso, discriminación y violencia.
+
+3. Cumplimiento con normativas: Los trabajadores deben cumplir con la normativa vigente y participar en actividades de prevención de riesgos laborales, incluyendo auditorías internas y revisiones por la dirección.
+
+4. Reporte de incidentes: La investigación de accidentes, enfermedades laborales y incidentes se debe realizar dentro de los
+#34 [ 18.3s ttft= 5.7s] Que principios y valores orientan la convivencia laboral?
+    -> Los principios y valores que orientan la convivencia laboral según el manual SGSST son:
+
+1. Respeto y dignidad del trabajador: Los trabajadores tienen derecho a un trato digno, y deben respetar a sus compañeros.
+
+2. Prevención del acoso laboral y sexual: Se compromete con un ambiente libre de acoso, discriminación y violencia, según la Ley 1010 de 2006.
+
+3. Tratamiento equitativo: Ningún trabajador será objeto de represalias por presentar una queja de buena fe.
+
+4. Procedimiento formal en el comité de convivencia laboral: El comité atiende las quejas de forma reservada, y las quejas se envían al correo convivencia@empresa.com.co. Las quejas deben ser tramitadas dentro de cinco días hábiles, con citación
+#35 [ 18.0s ttft= 5.4s] En que consiste la politica de desconexion laboral?
+    -> La política de desconexion laboral se refiere al derecho de los trabajadores a no atender asuntos de trabajo fuera de su jornada laboral. Esta política garantiza que los empleados puedan tomar descansos, hacer pausas o responder a llamadas personales durante sus horas de trabajo sin ser penalizados por ello.
+
+Esta medida es parte del programa de pausas activas, que incluye breves ejercicios durante la jornada laboral para prevenir lesiones musco-squeleticales y la fatiga. Además, el COPASST (Comité Paritario de Seguridad y Salud en el Trabajo) asegura que los trabajadores tengan derecho a esta politica de desconexion laboral.
+
+Esta política se implementa dentro del Manual de SG-SST, donde se menciona que la organización asigna responsabilidades, recursos y realiza auditorias internas.
+#36 [ 17.6s ttft= 5.7s] Que normas de convivencia deben cumplir los trabajadores?
+    -> Los trabajadores deben cumplir ciertos normas de convivencia, como:
+
+1. Respeto mutuo: Deben respetar las diferencias culturales y religiosas de los demás, y tratar con respeto a todos.
+
+2. Higiene personal: Deben mantener una higiene personal adecuada, incluyendo el uso de ropa de trabajo y limpieza de manos.
+
+3. Seguridad en el trabajo: Deben seguir las normas de seguridad y salud en el trabajo (SG-SST) y evitar riesgos laborales.
+
+4. Comunición con los colegas: Deben comunicarse claramente y respetuosamente, especialmente en casos de quejas o denuncias.
+
+5. Respeto por la propiedad: Deben respetar la propiedad de los demás y no dañar ni robar.
+
+6. Cumpl
+#37 [ 18.7s ttft= 5.7s] Que marco legal soporta el comite y la convivencia laboral?
+    -> El marco legal que soporta el Comité de Convivencia Laboral (COPAL) y la Convivencia Laboral está contenido en los documentos mencionados, específicamente en el Manual_SGSST.pdf. A continuación se detallan las principales normas legales y prácticas aplicadas:
+
+1. Recepción de quejas:
+   - El COPAL recibe las quejas o denuncias mediante correo (convinencia@empresa.com.co), dentro de cinco días hábiles.
+   - Se citan a las partes y se tramitan los casos.
+
+2. Tramite y sesiones:
+   - El Comité de Convivencia Laboral siona ordinariamente cada tres meses, con una sesión paritaria.
+   - Si un integrante está impedido, su suplente es designado para reemplazarlo.
+
+3. Funciones del COPAL:
+#38 [ 18.3s ttft= 5.9s] Que dice la politica de prevencion del acoso laboral?
+    -> La política de prevención del acoso laboral se fundamenta en un ambiente respetuoso, libre de acoso, discriminación y violencia, conforme a la Ley 1010 de 2006. Se compromete con el respetuoso de los trabajadores y su derecho a un trato digno, así como al deber de respetar a sus compañeros. Ningún trabajador será objeto de represalias por presentar una queja de buena fe.
+
+La política también aborda la prevención de lesiones y enfermedades laborales, cumplimiento de normativas vigentes y mejora continua del SG-SST. Su objetivo es identificar peligros, valorar riesgos, cumplir requisitos legales y proteger a todos los trabajadores y contratistas.
+
+La investigación de incidentes, accidentes de trabajo y enfermedades laborales se realiza dentro de los 15 días siguientes, por un equipo con el
+#39 [ 12.9s ttft= 5.4s] Que es la sala amiga de la familia lactante?
+    -> La sala amiga de la familia lactante, también conocada como "sala amiga de la familia lactante", es un espacio diseñado en las instalaciones de una empresa laboral para que las trabajadoras maternas pueden extraer y conservar la leche materna. Este espacio está ubicado en la sede de la empresa y puede ser utilizado por las trabajadoras durante el periodo de lactancia.
+
+Esta sala amiga de la familia lactante es un elemento importante en la salud laboral, ya que permite a las empleadas mantenerse sanas y optimizar su productividad al trabajo.
+#40 [ 17.1s ttft= 5.4s] Cuales son las ventajas de la sala amiga?
+    -> Las ventajas de la sala amiga de la familia lactante incluyen:
+
+1. Espacio dedicado: Es un espacio específico diseñado para que las madres extraigan y conserven la leche materna, lo cual facilita su trabajo en el periodo de lactancia.
+
+2. Facilitación del trabajo: Permite que las trabajadoras puedan realizar sus tareas de manera más eficiente y cómodas, reduciendo así el estrés laboral.
+
+3. Seguridad y salud: El espacio está diseñado con consideraciones a la seguridad y salud en el trabajo, lo cual puede contribuir al bienestar físico de las empleadas.
+
+4. Cumplimiento normativo: Al ofrecer este servicio, la empresa cumple con respecto a los requisitos legales de seguridad y salud en el trabajo, garantizando así una mejor práctica laboral.
+
+Estas ventajas son mencionadas en el documento "Manual_SGS
+#41 [  7.4s ttft= 5.5s] Donde esta ubicada la sala amiga y quienes pueden usarla?
+    -> La sala amiga y quienes pueden usarla está ubicada en la sede. Las trabajadoras pueden usarla durante el período de lactancia.
+#42 [ 18.1s ttft= 6.1s] Como solicito o pido vacaciones?
+    -> Para solicitar vacaciones, según el Manual_SGSST.pdf (documento 1) indica que se debe solicitar al jefe inmediato con la debida antelación. No obstante, no se detalla el proceso formal o las etapas específicas de solicitud.
+
+Además, en el documento 2, se menciona que la política de seguridad y salud en el trabajo busca prevenir lesiones y enfermedades laborales, pero no se detalla cómo solicitar vacaciones ni los requisitos específicos.
+
+En el documento 3, se habla de una investigación de incidentes y accidentes, pero no se menciona un proceso para solicitar vacaciones.
+
+Por lo tanto, la solicitud de vacaciones según el manual no está detallada en los documentos proporcionados.
+#43 [ 18.5s ttft= 6.2s] Que tipos de faltas contempla el reglamento interno de trabajo?
+    -> El reglamento interno de trabajo clasifica las faltas según su gravedad y establea sanciones, incluidas las aplicables por el consumo de alcohol o sustancias psicoactivas. También establea pruebas de detección cuando existan indicios razonables. Las vacaciones se solicitan al jefe inmediio con antelación. La sala amiga de la familia lactante es un espacio acondicionado para que las madres extraigan y conserven la leche materna, ubicado en la sede y usada durante el periodo de lactancia.
+
+El comite de convivencia laboral previene el acoso laboral y atiende las quejas de forma reservada. Las quejas o denuncias se envian al correo convivina@empresa.com.co. Una vez recibida, el comite debe darle tramite dentro de los 5 días hábiles, citando
+#44 [ 16.7s ttft= 5.4s] Que sanciones aplican por consumo de alcohol o sustancias psicoactivas?
+    -> Las sanciones aplicadas por el consumo de alcohol o sustancias psicoactivas se establecen según el reglamento interno de la empresa, y son aplicables cuando existan indicios razonables. La empresa puede requerir pruebas de detección en casos donde haya motivos razonables.
+
+El consumo de alcohol o sustancias psicoativas es considerado como una falta laboral, según el Plan Estratégico de Seguridad Vial (PESV), que establece compromisos para prevenir accidentes de transito y adopta una metodología de mejora continua del riesgo vial.
+
+Además, la política de seguridad y salud en el trabajo declara el compromiso de la alta dirección con la prevención de lesiones y enfermedades laborales, cumplimiento de normativas vigentes y mejora constante del SG-SST.
+#45 [ 17.6s ttft= 5.9s] Que dice la politica de prevencion de alcohol y drogas?
+    -> La política de prevención de alcohol y drogas en la empresa se encuentra desarrollada en el Manual_SGSST.pdf (Página 1, Sección SST), donde se menciona que:
+
+- El reglamento interno de trabajo clasifica las faltas y establece sanciones, incluidas las aplicables por consumo de alcohol o sustancias psicoactivas.
+- La empresa puede requerir pruebas de detección cuando existan indicios razonables.
+- Se menciona que el acoso laboral se compromete con un ambiente respetuoso libre de acoso, discriminación y violencia, conforme a la Ley 1010 de 2006.
+
+Además, en el Manual_SGSST.pdf (Página 3, Sección SST), se detalla que:
+
+- La política de prevención del acoso laboral incluye medidas preventivas y correctivas frente al
+#46 [ 11.0s ttft= 5.9s] Cuando puede la empresa requerir pruebas de deteccion de consumo?
+    -> La empresa puede requerir pruebas de detección de consumo cuando existan indicios razonables, según el reglamento interno de trabajo. Este requisito se establece en el Manual_SGSST.pdf (Pág. 1, Sección SST), donde se menciona que la empresa puede solicitar pruebas de detección cuando hay evidencia de consumo de alcohol o sustancias psicoactivas.
+#47 [ 19.1s ttft= 5.5s] En que consiste el programa o politica de pausas activas?
+    -> El programa o política de pausas activas consiste en promover breves ejercicios durante la jornada laboral para prevenir lesiones musculoesqueleticas y la fatiga. Estas pausas son importantes para la salud física, ya que reducen la tensión muscular, ayudan a la concentración y disminuyen el estrés. Además, la política de desconexion laboral garantiza el derecho a no atender asuntos de trabajo fuera de la jornada.
+
+Esta política se incluye en el Manual SGSST, donde se menciona que es parte de la politica de seguridad y salud en el trabajo, con objetivos como identificar peligros, valorar y controlar riesgos, cumplir normativas legales y proteger a todos los trabajadores.
+
+Además, el COPASST (Comité Paritario de Seguridad y Salud en el Trabajo) es responsable de inspeccion
+#48 [ 13.1s ttft= 5.7s] Por que son importantes las pausas activas para la salud fisica?
+    -> Las pausas activas son importantes para la salud física porque reducen la tensión muscular, ayudan a mejorar la concentración y disminuyen el estrés. Estas pausas también promueven ejercicios breves durante la jornada laboral, lo que previene lesiones musculoesqueleticas y la fatiga. El programa de pausas activas es parte de una política de seguridad y salud en el trabajo que busca proteger a los trabajadores y garantizar un entorno laboral seguro.
+#49 [ 13.3s ttft= 5.6s] Como ayudan las pausas activas a la concentracion y al estres?
+    -> Las pausas activas ayudan a la concentración y al estrés mediante su efecto en la reducción de la tensión muscular, lo cual facilita la respiración y el flujo sanguíneo. Además, estas pausas activas promue ejercicios que mejoran la salud física y mental, contribuyendo así a la prevención de lesiones musculoesqueleticas y la fatiga. La politica de pausas activas es parte de la seguridad y salud en el trabajo, garantizando un ambiente laboral más equilibrado para todos los trabajadores.
+#50 [ 18.5s ttft= 5.6s] Que recomendaciones de seguridad vial aparecen en el corpus?
+    -> Recomendaciones de seguridad vial que aparecen en el corpus incluyen:
+
+1. Principio de cero tolerancia: Ningún conductor puede operar un vehículo bajo efectos de alcohol o sustancias psicoactivas.
+2. Responsabilidad compartida: La seguridad vial es una responsabilidad compartida, incluyendo programas para proteger a peatones, ciclistas y motociclistas.
+3. Política de seguridad y salud en el trabajo: Incluye prevención de lesiones y enfermedades laborales, cumplimiento de normativas vigentes, y mejora continua del SG-SST.
+4. Investigación y análisis de incidentes: Se realiza dentro de 15 días siguientes a los incidentes, con un equipo que incluye al jefe inmediato, representante del COPASST y responsable del SG-SST. Se identifican causas inmediatas y
+#51 [ 19.1s ttft= 6.3s] Que compromisos tiene el PESV o plan estrategico de seguridad vial?
+    -> El PESV (Plan Estratégico de Seguridad Vial) establece varios compromisos clave, como:
+
+1. Prevención de Accidentes de Tránsito: El PESV busca prevenir accidentes de tránsito mediante una metodología de mejora continua del riesgo vial.
+
+2. Cero Tolerancia a Alcohol y Sustancias Psicoactivas: Ningún conductor puede operar un vehículo bajo efectos de alcohol o sustancias psicoactivas, según el principio de cero tolerancia.
+
+3. Responsabilidad Compartida en la Seguridad Vial: La seguridad vial es una responsabilidad compartida, incluyendo programas para proteger a peatones, ciclistas y motociclistas.
+
+4. Cumplimiento de Normativas Legales: El PESV busca cumplir las normativas vigentes y mejorar continuamente la seguridad vial.
+
+5. Pol
+#52 [ 14.0s ttft= 6.0s] Que significa cero tolerancia frente a alcohol y sustancias en seguridad vial?
+    -> Cero tolerancia frente a alcohol y sustancias psicoactivas significa que ningún conductor puede operar un vehículo bajo efectos de alcohol o sustancias psicoactivas. Este principio es parte del Plan Estratégico de Seguridad Vial (PESV) y se alinea con la normativa interna, buscando prevenir accidentes de tránsito y mejorar la seguridad vial. La aplicación de este principio implica que la seguridad vial es una responsabilidad compartida, incluyendo un programa para proteger a personas vulnerables como peatones, ciclistas y motociclistas.
+#53 [ 17.3s ttft= 5.6s] Que documentos o reglas hablan de prevencion del acoso laboral?
+    -> Los documentos mencionados abordan la prevención del acoso laboral según las siguientes reglas y políticas:
+
+1. Manual_SGSST.pdf (Página 1, Sección SST):
+   - La política de prevención del acoso laboral se basa en la Ley 1010 de 2006, estableciendo un ambiente respetuoso libre de acoso, discriminación y violencia.
+   - Los trabajadores tienen derecho a un trato digno y deben respetar a sus compañeros.
+   - Ningún trabajador será objeto de represalias por presentar una queja de buena fe.
+
+2. Manual_SGSST.pdf (Página 2, Sección SST):
+   - La política de seguridad y salud en el trabajo declara compromiso con la prevención de lesiones y enfermedades laborales, cumplimiento de normativas vigentes y mejora continua
+#54 [ 10.6s ttft= 5.6s] Cual es el objetivo general del manual de convivencia laboral?
+    -> El objetivo general del manual de convivación laboral (SGSST) es la prevención de lesiones y enfermedades laborales, cumplimiento de normativas legales, y mejora continua del SG-SST. También incluye la identificación de peligros, valoración y control de riesgos, así como la comunicación de resultados a COPASST para actualizar programas de prevención.
+#55 [ 17.2s ttft= 5.7s] Cuales son los objetivos especificos del manual de convivencia?
+    -> Los objetivos específicos del manual de convivencia laboral según los documentos proporcionados son:
+
+1. Prevenir lesiones y enfermedades laborales:
+   El manual enfatiza la prevención de accidentes y enfermedades en el trabajo, incluyendo la identificación de peligros, control de riesgos y cumplimiento de normativas legales.
+
+2. Gestión de quejas laborales:
+   Se menciona que las quejas se envían a un correo específico y deben ser tramitadas dentro de cinco días hábiles. El comité debe darle trámite y conformarse paritariamente, con sesiones ordinarias cada tres meses.
+
+3. Investigación de incidentes:
+ Se indica que los accidentes, enfermedades o incidentes laborales son investigados por un equipo compuesto por el jefe inmediato, representante del COPASST y responsable del SG-SST. Se
+#56 [ 13.9s ttft= 5.4s] En cuanto tiempo debe el Comite de Convivencia dar tramite a una queja?
+    -> El Comité de Convivencia Laboral (Comite de Convivencia Laboral) debe dar tramit a una queja dentro de cinco días hábiles, citando a las partes.
+
+Este plazo se menciona en el documento [SOURCE 1], donde se especifica que el comite debe dar tramitación dentro de los cinco días hábiles cuando recibada una queja.
+
+No hay menciones a un plazo más largo en los otros documentos proporcionados.
+
+Por lo tanto, la respuesta es:
+El Comité de Convivencia Laboral debe dar tramitación a una queja dentro de cinco días hábiles.
+#57 [ 17.2s ttft= 5.5s] Que ocurre si un integrante del Comite de Convivencia es parte de una queja o investigacion?
+    -> Si un integrante del Comité de Convivencia es parte de una queja o investigación, se declara impedido y se reemplaza con su suplente. Esto según el MANUAL_SGSST.pdf (Página 3, Sección SST).
+
+Además, el Comité de Convivencia Laboral previene el acoso laboral y atiende las quejas de forma reservada, enviando las denuncias al correo convivencia@empresa.com.co. El comité debe tratar la queja dentro de cinco días hábiles, citando a las partes, y si un integrante es parte de una queja, se declara impedido y se reemplaza con su suplente.
+
+También se mencina en el MANUAL_SGSST.pdf (Página 4, Sección SST) que el COPASST realiza investigaciones de accidentes labor
+#58 [ 16.4s ttft= 5.5s] Por que la seguridad vial es una responsabilidad compartida?
+    -> La seguridad vial es una responsabilidad compartida porque, según el Manual_SGSST.pdf, el COPASST (Comité Paritario de Seguridad y Salud en el Trabajo) es un comité que promue la prevención y protección, inspecciona los lugares de trabajo, recibe y tramita quejas, y participa en la investigación de accidentes. Además, el PESV (Plan Estratégico de Seguridad Vial) establece compromisos para prevenir accidentes de tránsito y adoptar una metodología de mejora continua del riesgo vial. Esto refleja un enfoque colaborativo donde todos los trabajadores, contratistas y la organización tienen roles definidos para garantizar la seguridad. La prevención es un principio central, y el cero tolerancia implica que no hay excepciones en cuanto a la seguridad de los conductores.
+#59 [ 13.9s ttft= 5.5s] Que programa incluye el PESV para proteger actores viales vulnerables?
+    -> El PESV (Plan Estratégico de Seguridad Vial) incluye un programa para proteger a actores viales vulnerables, como peatones, ciclistas y motociclistas. Este programa se alinea con los principios de la seguridad vial, que exigen una tolerancia cero en el uso de alcohol o sustancias psicoactivas. Además, el SG-SST (Sistema de Seguridad y Salud en el Trabajo) es un órgano clave en la prevención de riesgos laborales y en la protección de los trabajadores, incluyendo acciones para la seguridad vial.
+#60 [ 19.1s ttft= 6.7s] Que metodologia debe adoptar la empresa para mejorar continuamente la prevencion del riesgo vial?
+    -> La empresa debe adoptar la metodología del SG-SST (Seguridad y Salud en el Trabajo) para mejorar continuamente la prevención del riesgo vial. Esta metodología se basa en principios como el de cero tolerancia, la prevención de lesiones y enfermedades laborales, y la mejora continua del SG-SST.
+
+Metodología recomendada:
+1. Principio de cero tolerancia: Ningún conductor puede operar un vehículo bajo efectos de alcohol o sustancias psicoactivas.
+2. Programa de seguridad vial compartida: Incluye protección de peatones, ciclistas y motociclistas.
+3. Cumplimiento normativo: Asegurar el cumplimiento de la normativa vigente en materia de seguridad vial.
+4. Mejora continua del SG-SST: Implementar acciones para identificar, valorar y controlar
+#61 [ 17.7s ttft= 5.8s] Que medidas preventivas y correctivas contempla el reglamento interno frente al acoso laboral y sexual?
+    -> El reglamento interno frente al acoso laboral y sexual contempla medidas preventivas y correctivas, según lo indicado en los documentos mencionados:
+
+Medidas Preventivas:
+1. Investigación de incidentes:
+   - Se realiza dentro de los 15 días siguientes a un incidente, por un equipo con el jefe inmediato, un representante del COPASST y el responsable del SG-SST.
+   - Se identifican causas inmediatas y básicas, se definen acciones correctivas y preventivas, y los resultados se comunican al COPASST para actualizar los programas de prevención.
+
+2. Política de prevención del acoso laboral:
+   - El reglamento interno compromete un ambiente respetuoso, libre de acoso, discriminación y violencia, conforme a la Ley 1010 de 2006.
+
+=== 61 questions, concurrency=1, representative evidence ===
+E2E   P50=14.9s  P95=19.1s  max=19.5s  avg=15.1s
+TTFT  P50=5.5s  P95=6.2s  max=6.7s  avg=4.3s
+NOTE: elapsed is generation-dominated; real retrieval NOT included (corpus not indexed).

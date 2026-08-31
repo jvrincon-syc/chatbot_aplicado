@@ -1,7 +1,5 @@
 import type { ChatError } from "../types";
 
-// Known errorCode -> user-facing headline. Unrecognized codes fall back to a generic
-// headline below, but the raw backend message is still shown.
 const ERROR_MESSAGES: Record<string, string> = {
   CHATBOT_LLM_UNAVAILABLE:
     "El modelo de IA local no esta disponible en este momento. Intenta de nuevo en unos segundos.",
@@ -22,9 +20,6 @@ const ERROR_MESSAGES: Record<string, string> = {
 
 const FALLBACK_HEADLINE = "Ocurrio un error al procesar tu pregunta.";
 
-// System-level error notice (not an inline message bubble). Shows a friendly headline per
-// known errorCode, the raw backend detail, whether retrieval succeeded before generation
-// failed, and a retry affordance for the last question sent.
 export function ErrorBanner({ error, onRetry }: { error: ChatError | null; onRetry?: () => void }) {
   if (!error) return null;
 

@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using System.Text;
 using Chatbot.Sst.Application.Abstractions;
 using Chatbot.Sst.Application.Generation;
 using Chatbot.Sst.Domain;
@@ -33,5 +35,34 @@ public sealed class GroundedAnswerService : IChatService
 
         var citations = evidence.Items.Select(e => e.Citation).Distinct().ToArray();
         return new ChatResponse(formattedAnswer, citations, Abstained: false);
+    }
+
+    public async IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(
+        UserQuestion question,
+        EvidencePackage evidence,
+        [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        if (evidence.IsEmpty)
+        {
+            // Fail-closed: deterministic abstention, LLM never invoked (same as AnswerAsync).
+            yield return ChatAnswerChunk.Completed(ChatResponse.Abstention());
+            yield break;
+        }
+
+        var normalized = _normalizer.Normalize(question);
+        var messages = EvidencePromptBuilder.Build(normalized, evidence);
+
+        var raw = new StringBuilder();
+        await foreach (var chunk in _llm.GenerateStreamingAsync(new LlmRequest(messages), cancellationToken))
+        {
+            raw.Append(chunk.Delta);
+            yield return ChatAnswerChunk.Token(chunk.Delta);
+        }
+
+        // Format once over the full text (same formatter as the non-streaming path) and build
+        // citations from exactly the evidence sent to the model.
+        var formattedAnswer = GeneratedAnswerFormatter.Format(raw.ToString());
+        var citations = evidence.Items.Select(e => e.Citation).Distinct().ToArray();
+        yield return ChatAnswerChunk.Completed(new ChatResponse(formattedAnswer, citations, Abstained: false));
     }
 }

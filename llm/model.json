@@ -13,7 +13,7 @@
   },
   "generation": {
     "temperature": 0,
-    "maxOutputTokens": 120,
+    "maxOutputTokens": 200,
     "reasoning": "off",
     "enableThinking": false
   },

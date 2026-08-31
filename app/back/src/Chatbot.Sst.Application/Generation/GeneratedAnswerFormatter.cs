@@ -10,6 +10,11 @@ public static class GeneratedAnswerFormatter
 {
     private static readonly Regex MultipleBlankLines = new(@"\n{3,}", RegexOptions.Compiled);
 
+    // Qwen3 sometimes emits <think>...</think> reasoning (or a stray </think>) even with thinking
+    // disabled, especially under the IQ4_XS quant. Strip it so it never reaches the user.
+    private static readonly Regex ThinkBlock = new(@"<think>.*?</think>", RegexOptions.Compiled | RegexOptions.Singleline);
+    private static readonly Regex StrayThinkTag = new(@"</?think>", RegexOptions.Compiled);
+
     public static string Format(string? rawAnswer)
     {
         if (string.IsNullOrWhiteSpace(rawAnswer))
@@ -17,7 +22,8 @@ public static class GeneratedAnswerFormatter
             return string.Empty;
         }
 
-        var normalized = rawAnswer.Replace("\r\n", "\n").Replace('\r', '\n').Trim();
+        var normalized = rawAnswer.Replace("\r\n", "\n").Replace('\r', '\n');
+        normalized = StrayThinkTag.Replace(ThinkBlock.Replace(normalized, string.Empty), string.Empty).Trim();
         var lines = normalized.Split('\n');
         var keptLines = new List<string>(lines.Length);
 

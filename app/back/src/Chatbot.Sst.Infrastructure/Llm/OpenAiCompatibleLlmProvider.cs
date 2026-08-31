@@ -1,4 +1,6 @@
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Chatbot.Sst.Application.Abstractions;
 using Microsoft.Extensions.Logging;
@@ -52,6 +54,71 @@ public sealed class OpenAiCompatibleLlmProvider : ILlmProvider
         };
     }
 
+    public async IAsyncEnumerable<LlmStreamChunk> GenerateStreamingAsync(
+        LlmRequest request,
+        [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        var payload = new ChatCompletionRequest
+        {
+            Model = _options.Model,
+            Temperature = request.Temperature ?? _options.Temperature,
+            MaxTokens = request.MaxOutputTokens ?? _options.MaxOutputTokens,
+            Stream = true,
+            Messages = request.Messages
+                .Select(m => new ChatMessage { Role = ToWireRole(m.Role), Content = m.Content })
+                .ToList()
+        };
+
+        using var httpRequest = new HttpRequestMessage(HttpMethod.Post, "/v1/chat/completions")
+        {
+            Content = JsonContent.Create(payload)
+        };
+        using var response = await _http.SendAsync(
+            httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+        response.EnsureSuccessStatusCode();
+
+        await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+        using var reader = new StreamReader(stream);
+
+        // llama-server emits OpenAI-style SSE: lines "data: {json}\n\n", ending with "data: [DONE]".
+        while (!reader.EndOfStream)
+        {
+            var line = await reader.ReadLineAsync(cancellationToken);
+            if (string.IsNullOrEmpty(line) || !line.StartsWith("data:", StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            var data = line["data:".Length..].Trim();
+            if (data == "[DONE]")
+            {
+                yield break;
+            }
+
+            string? delta = null;
+            try
+            {
+                using var doc = JsonDocument.Parse(data);
+                if (doc.RootElement.TryGetProperty("choices", out var choices) && choices.GetArrayLength() > 0
+                    && choices[0].TryGetProperty("delta", out var d)
+                    && d.TryGetProperty("content", out var c) && c.ValueKind == JsonValueKind.String)
+                {
+                    delta = c.GetString();
+                }
+            }
+            catch (JsonException ex)
+            {
+                _logger.LogWarning(ex, "Skipping malformed SSE chunk from local LLM.");
+                continue;
+            }
+
+            if (!string.IsNullOrEmpty(delta))
+            {
+                yield return new LlmStreamChunk(delta);
+            }
+        }
+    }
+
     public async Task<bool> IsAvailableAsync(CancellationToken cancellationToken)
     {
         try
@@ -81,6 +148,22 @@ public sealed class OpenAiCompatibleLlmProvider : ILlmProvider
         [JsonPropertyName("messages")] public required List<ChatMessage> Messages { get; init; }
         [JsonPropertyName("temperature")] public double Temperature { get; init; }
         [JsonPropertyName("max_tokens")] public int MaxTokens { get; init; }
+        [JsonPropertyName("stream")] public bool Stream { get; init; }
+
+        // Greedy decoding (temperature 0) on the small IQ4_XS quant is prone to degenerate
+        // repetition loops. A mild penalty curbs them without changing factual output.
+        [JsonPropertyName("repeat_penalty")] public double RepeatPenalty { get; init; } = 1.1;
+
+        // Qwen3 emits a <think>...</think> block unless thinking is disabled via the chat
+        // template. Without this the answer is polluted with "</think>" and wastes prefill/gen
+        // budget. Mirrors the enable_thinking=false the llm/model.json contract requires.
+        [JsonPropertyName("chat_template_kwargs")]
+        public ChatTemplateKwargs ChatTemplateKwargs { get; } = new();
+    }
+
+    private sealed class ChatTemplateKwargs
+    {
+        [JsonPropertyName("enable_thinking")] public bool EnableThinking { get; init; }
     }
 
     private sealed class ChatMessage

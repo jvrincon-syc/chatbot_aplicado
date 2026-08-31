@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Chatbot.Sst.Application.Abstractions;
 using Chatbot.Sst.Application.Generation;
 using Chatbot.Sst.Domain;
@@ -25,26 +26,37 @@ public sealed class ChatDispatchCoordinator : IChatDispatchCoordinator
         "Fallo inesperado al despachar la pregunta al backend de contexto.";
 
     // Prefill (prompt processing) of the evidence block dominates local-LLM latency — measured
-    // 77% of total generation time — and scales roughly linearly with prompt size. Retrieval's
-    // topK (5-10) is already reranked by relevance, so keeping only the highest-scored chunks
-    // trims prefill cost while preserving enough source diversity for a grounded, multi-source
-    // answer.
-    private const int MaxEvidenceItems = 5;
+    // 77% of total generation time — and scales roughly linearly with prompt size. Two guards
+    // bound it: at most MaxEvidenceItems chunks AND at most EvidenceTokenBudget estimated tokens,
+    // so four huge chunks can't still produce a huge prefill. Retrieval already reranks by
+    // relevance, so keeping the highest-scored chunks preserves grounding. This is a hard cap:
+    // the token budget only ever selects fewer than MaxEvidenceItems, never more.
+    private const int MaxEvidenceItems = 4;
+
+    private const string DeltaEventType = "chat.answer.delta.v1";
+    private const string CompletedEventType = "chat.answer.completed.v1";
+    private const string FailedEventType = "chat.request.failed.v1";
 
     private readonly IChatRequestStore _store;
     private readonly IChatbotDispatchClient _dispatchClient;
     private readonly IChatService _chat;
+    private readonly IChatEventStream _events;
+    private readonly GenerationOptions _generation;
     private readonly ILogger<ChatDispatchCoordinator> _logger;
 
     public ChatDispatchCoordinator(
         IChatRequestStore store,
         IChatbotDispatchClient dispatchClient,
         IChatService chat,
+        IChatEventStream events,
+        GenerationOptions generation,
         ILogger<ChatDispatchCoordinator> logger)
     {
         _store = store;
         _dispatchClient = dispatchClient;
         _chat = chat;
+        _events = events;
+        _generation = generation;
         _logger = logger;
     }
 
@@ -124,8 +136,29 @@ public sealed class ChatDispatchCoordinator : IChatDispatchCoordinator
         try
         {
             var evidence = ToEvidencePackage(delivery.Chunks);
-            var response = await _chat.AnswerAsync(new UserQuestion(delivery.Question), evidence, CancellationToken.None);
-            _store.Complete(requestId, delivery, response);
+            ChatResponse? final = null;
+
+            // Stream token-by-token: each delta reaches the browser over SSE as it is produced
+            // (TTFT ~= prefill), then the terminal event carries the full answer + citations.
+            await foreach (var chunk in _chat.AnswerStreamingAsync(
+                new UserQuestion(delivery.Question), evidence, CancellationToken.None))
+            {
+                if (chunk.IsFinal)
+                {
+                    final = chunk.Final;
+                    break;
+                }
+
+                await PublishAsync(
+                    requestId, DeltaEventType,
+                    JsonSerializer.Serialize(new { delta = chunk.Delta }), terminal: false);
+            }
+
+            // Defensive: a stream that ends without a final chunk is treated as an abstention
+            // rather than persisting a half-answer.
+            final ??= ChatResponse.Abstention();
+            _store.Complete(requestId, delivery, final);
+            await PublishAsync(requestId, CompletedEventType, SerializeCompleted(final), terminal: true);
         }
         catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException or InvalidOperationException)
         {
@@ -139,8 +172,38 @@ public sealed class ChatDispatchCoordinator : IChatDispatchCoordinator
                 code,
                 ex.GetType().Name);
             _store.Fail(requestId, code, message, delivery);
+            await PublishAsync(
+                requestId, FailedEventType,
+                JsonSerializer.Serialize(new { errorCode = code, error = message }), terminal: true);
         }
     }
+
+    // Best-effort: the store already holds the authoritative state (poll fallback), so a Redis
+    // publish failure degrades SSE to polling rather than failing the whole generation.
+    private async Task PublishAsync(string requestId, string eventType, string json, bool terminal)
+    {
+        try
+        {
+            await _events.PublishAsync(requestId, new ChatStreamEvent(eventType, json, terminal), CancellationToken.None);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to publish {EventType} for chat request {RequestId} to the event stream.", eventType, requestId);
+        }
+    }
+
+    private static string SerializeCompleted(ChatResponse response) => JsonSerializer.Serialize(new
+    {
+        answer = response.Answer,
+        abstained = response.Abstained,
+        citations = response.Citations.Select(c => new
+        {
+            documentId = c.DocumentId,
+            documentTitle = c.DocumentTitle,
+            page = c.Page,
+            section = c.Section,
+        }),
+    });
 
     /// <summary>
     /// Maps the exception shapes thrown by ILlmProvider into a client-safe error code/message pair.
@@ -164,34 +227,70 @@ public sealed class ChatDispatchCoordinator : IChatDispatchCoordinator
     // exactly what the LLM saw — never cite a chunk that was trimmed before reaching the prompt.
     private EvidencePackage ToEvidencePackage(IReadOnlyList<WebhookChunk> chunks)
     {
-        var items = chunks
+        // Sort defensively by score rather than trusting upstream order. Ties keep their
+        // relative input order (OrderByDescending is stable) — fine since retrieval already
+        // ranks reasonably; nothing here needs to be smarter than that.
+        var ranked = chunks
             .Where(chunk => !string.IsNullOrWhiteSpace(chunk.Text))
             .Select(chunk => chunk.ToEvidence())
+            .OrderByDescending(item => item.Score)
             .ToArray();
 
-        if (items.Length == 0)
+        if (ranked.Length == 0)
         {
             return EvidencePackage.Empty;
         }
 
-        // Sort defensively by score rather than trusting upstream order, then keep only the
-        // top N. Ties keep their relative input order (OrderByDescending is stable) — fine
-        // since retrieval already ranks reasonably; nothing here needs to be smarter than that.
-        var kept = items.Length > MaxEvidenceItems
-            ? items.OrderByDescending(item => item.Score).Take(MaxEvidenceItems).ToArray()
-            : items;
+        var budget = _generation.EvidenceTokenBudget;
+        var selected = new List<Evidence>(MaxEvidenceItems);
+        var usedTokens = 0;
 
-        var tokens = kept.Sum(item => EvidencePromptBuilder.EstimateTokens(item.Content));
-
-        if (kept.Length != items.Length)
+        foreach (var item in ranked)
         {
-            var beforeTokens = items.Sum(item => EvidencePromptBuilder.EstimateTokens(item.Content));
-            _logger.LogInformation(
-                "Evidence trimmed from {BeforeCount} to {AfterCount} chunks by score " +
-                "(estimated tokens {BeforeTokens} -> {AfterTokens}).",
-                items.Length, kept.Length, beforeTokens, tokens);
+            if (selected.Count == MaxEvidenceItems)
+            {
+                break;
+            }
+
+            var estimated = EvidencePromptBuilder.EstimateTokens(item.Content);
+
+            // Fallback: the single highest-ranked chunk alone exceeds the whole budget.
+            // Truncate it to the budget rather than sending no evidence — an oversized best
+            // chunk still grounds the answer better than empty. Citations are built from this
+            // same (truncated) content downstream, so we never cite text the LLM didn't see.
+            if (selected.Count == 0 && estimated > budget)
+            {
+                var truncated = item with { Content = TruncateToTokens(item.Content, budget) };
+                selected.Add(truncated);
+                usedTokens = EvidencePromptBuilder.EstimateTokens(truncated.Content);
+                break;
+            }
+
+            if (usedTokens + estimated > budget)
+            {
+                continue;
+            }
+
+            selected.Add(item);
+            usedTokens += estimated;
         }
 
-        return new EvidencePackage(kept, tokens);
+        if (selected.Count != ranked.Length)
+        {
+            _logger.LogInformation(
+                "Evidence selected {AfterCount}/{BeforeCount} chunks within limits " +
+                "(<= {MaxItems} items, <= {Budget} tokens; using {UsedTokens}).",
+                selected.Count, ranked.Length, MaxEvidenceItems, budget, usedTokens);
+        }
+
+        return new EvidencePackage(selected, usedTokens);
+    }
+
+    // EstimateTokens ~= chars / 4, so budget * 4 chars caps the estimate at the budget.
+    // ponytail: cuts mid-word; a budget guard doesn't need sentence-boundary truncation.
+    private static string TruncateToTokens(string text, int tokenBudget)
+    {
+        var maxChars = tokenBudget * 4;
+        return text.Length <= maxChars ? text : text[..maxChars];
     }
 }

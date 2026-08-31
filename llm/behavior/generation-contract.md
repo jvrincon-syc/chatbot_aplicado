@@ -20,7 +20,7 @@ EVIDENCE:
 | system instructions | ~100-180    |
 | question            | ~20-60      |
 | evidence            | ~300-700    |
-| output              | <=120       |
+| output              | <=200       |
 
 Many candidates are retrieved; only the top reranked, budget-bounded fragments reach the LLM.
 

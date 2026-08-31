@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using System.Text;
 using Chatbot.Sst.Application;
 using Chatbot.Sst.Application.Abstractions;
 using Chatbot.Sst.Application.Generation;
@@ -17,6 +19,18 @@ public class GroundedAnswerServiceTests
             Calls++;
             Last = request;
             return Task.FromResult(new LlmResponse(reply));
+        }
+
+        public async IAsyncEnumerable<LlmStreamChunk> GenerateStreamingAsync(
+            LlmRequest request, [EnumeratorCancellation] CancellationToken ct)
+        {
+            Calls++;
+            Last = request;
+            // Split into two chunks so the test proves deltas concatenate back to the full text.
+            var mid = reply.Length / 2;
+            yield return new LlmStreamChunk(reply[..mid]);
+            yield return new LlmStreamChunk(reply[mid..]);
+            await Task.CompletedTask;
         }
 
         public Task<bool> IsAvailableAsync(CancellationToken ct) => Task.FromResult(true);
@@ -68,6 +82,48 @@ public class GroundedAnswerServiceTests
         Assert.Equal("Correo\nEl correo es convivencia@empresa.com.", result.Answer);
         Assert.Single(result.Citations);
         Assert.Equal(1, llm.Calls);
+    }
+
+    [Fact]
+    public async Task Streaming_with_evidence_yields_deltas_then_final_with_citations()
+    {
+        var llm = new SpyLlm("respuesta");
+        var evidence = new EvidencePackage(
+            [new Evidence("El extintor se revisa cada mes.", new Citation("doc-1", "Manual SST", "12"), 0.9)],
+            10);
+
+        var deltas = new StringBuilder();
+        ChatResponse? final = null;
+        await foreach (var chunk in Service(llm).AnswerStreamingAsync(
+            new UserQuestion("¿cada cuánto?"), evidence, CancellationToken.None))
+        {
+            if (chunk.IsFinal) final = chunk.Final;
+            else deltas.Append(chunk.Delta);
+        }
+
+        Assert.Equal("respuesta", deltas.ToString());
+        Assert.NotNull(final);
+        Assert.Equal("respuesta", final!.Answer);
+        Assert.False(final.Abstained);
+        Assert.Single(final.Citations);
+        Assert.Equal("doc-1", final.Citations[0].DocumentId);
+        Assert.Equal(1, llm.Calls);
+    }
+
+    [Fact]
+    public async Task Streaming_empty_evidence_abstains_without_calling_the_llm()
+    {
+        var llm = new SpyLlm("should not be used");
+        ChatResponse? final = null;
+        await foreach (var chunk in Service(llm).AnswerStreamingAsync(
+            new UserQuestion("¿algo?"), EvidencePackage.Empty, CancellationToken.None))
+        {
+            if (chunk.IsFinal) final = chunk.Final;
+        }
+
+        Assert.NotNull(final);
+        Assert.True(final!.Abstained);
+        Assert.Equal(0, llm.Calls);
     }
 
     [Fact]

@@ -8,9 +8,18 @@ public interface ILlmProvider
 {
     Task<LlmResponse> GenerateAsync(LlmRequest request, CancellationToken cancellationToken);
 
+    /// <summary>
+    /// Streams the completion token-by-token as it is produced, so callers can surface the
+    /// answer as it forms (TTFT ~= prefill time) instead of waiting for the whole body.
+    /// </summary>
+    IAsyncEnumerable<LlmStreamChunk> GenerateStreamingAsync(LlmRequest request, CancellationToken cancellationToken);
+
     /// <summary>True when the underlying model endpoint is reachable.</summary>
     Task<bool> IsAvailableAsync(CancellationToken cancellationToken);
 }
+
+/// <summary>One streamed piece of a completion. <see cref="Delta"/> is the incremental text.</summary>
+public sealed record LlmStreamChunk(string Delta);
 
 public enum LlmRole
 {

@@ -183,7 +183,7 @@ public sealed class ManualChatbotDispatchLoadTests
             ? SstHybridQuestions[..Math.Min(limit, SstHybridQuestions.Length)]
             : SstHybridQuestions;
 
-        var results = new List<(int Number, string Question, string? RequestId, int ChunkCount, string? Answer, string? Error)>(questions.Length);
+        var results = new List<(int Number, string Question, string? RequestId, int ChunkCount, string? Answer, string? Error, double ElapsedSeconds)>(questions.Length);
 
         Log($"[{DateTimeOffset.Now:O}] Starting chunk-dispatch run for {questions.Length} questions.");
         Log($"local_api={baseUrl}");
@@ -208,6 +208,9 @@ public sealed class ManualChatbotDispatchLoadTests
             int chunkCount = 0;
             string? answer = null;
             string? error = null;
+            // Wall-clock the whole per-question chain (POST -> retrieval -> webhook -> LLM ->
+            // settle). Started before the POST, read when we settle/fail/timeout below.
+            var sw = Stopwatch.StartNew();
 
             try
             {
@@ -220,7 +223,7 @@ public sealed class ManualChatbotDispatchLoadTests
                     Log($"  START FAILED: {(int)startResp.StatusCode} {startResp.ReasonPhrase}");
                     Log($"  {startJson}");
                     error = $"start_failed_{(int)startResp.StatusCode}";
-                    results.Add((questionNumber, question, null, 0, null, error));
+                    results.Add((questionNumber, question, null, 0, null, error, sw.Elapsed.TotalSeconds));
                     continue;
                 }
 
@@ -280,8 +283,11 @@ public sealed class ManualChatbotDispatchLoadTests
                     if (root.TryGetProperty("answer", out var av) && av.ValueKind != JsonValueKind.Null)
                     {
                         answer = av.GetString();
-                        var preview = answer?.Length > 200 ? string.Concat(answer.AsSpan(0, 200), "...") : answer;
-                        Log($"  ANSWER: {preview}");
+                        // Full generated answer, not a 200-char preview: this run is how we
+                        // judge answer quality question-by-question.
+                        Log($"  ELAPSED: {sw.Elapsed.TotalSeconds:F1}s");
+                        Log($"  ANSWER (full):");
+                        Log($"    {answer?.Replace("\n", "\n    ")}");
                     }
 
                     if (state == "failed" && root.TryGetProperty("error", out var ev) && ev.ValueKind != JsonValueKind.Null)
@@ -305,7 +311,8 @@ public sealed class ManualChatbotDispatchLoadTests
                 error = ex.GetType().Name;
             }
 
-            results.Add((questionNumber, question, requestId, chunkCount, answer, error));
+            sw.Stop();
+            results.Add((questionNumber, question, requestId, chunkCount, answer, error, sw.Elapsed.TotalSeconds));
 
             if (error is null)
             {
@@ -341,7 +348,7 @@ public sealed class ManualChatbotDispatchLoadTests
         foreach (var r in results)
         {
             var status = r.Error ?? (r.Answer is not null ? "ok" : "no_answer");
-            Log($"  #{r.Number,-3} chunks={r.ChunkCount,-3} status={status,-16} {Truncate(r.Question, 60)}");
+            Log($"  #{r.Number,-3} {r.ElapsedSeconds,6:F1}s chunks={r.ChunkCount,-3} status={status,-16} {Truncate(r.Question, 60)}");
         }
 
         var withChunks = results.Count(r => r.ChunkCount > 0);
@@ -352,6 +359,17 @@ public sealed class ManualChatbotDispatchLoadTests
         Log($"With chunks: {withChunks}/{results.Count}");
         Log($"With answer: {withAnswer}/{results.Count}");
         Log($"Failed:      {failed}/{results.Count}");
+
+        // Per-question latency over the questions that actually answered (failures/timeouts
+        // would skew the percentiles). P95 is the number that must land under the 25s target.
+        var times = results.Where(r => r.Answer is not null).Select(r => r.ElapsedSeconds).OrderBy(t => t).ToArray();
+        if (times.Length > 0)
+        {
+            double Pct(double p) => times[Math.Min(times.Length - 1, (int)Math.Round(p / 100.0 * (times.Length - 1)))];
+            Log($"");
+            Log($"Answer latency (n={times.Length}): " +
+                $"P50={Pct(50):F1}s  P95={Pct(95):F1}s  max={times[^1]:F1}s  avg={times.Average():F1}s");
+        }
 
         // A green test here used to mean nothing: it only asserted the loop ran,
         // never that any question actually succeeded. Assert real success so a
