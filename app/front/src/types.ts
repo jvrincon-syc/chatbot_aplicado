@@ -7,6 +7,11 @@ export interface Citation {
   section?: string | null;
 }
 
+export interface ChatRequestChunk {
+  documentId: string;
+  metadata?: Record<string, string | null> | null;
+}
+
 export interface ChatResponse {
   answer: string;
   citations: Citation[];
@@ -22,6 +27,7 @@ export interface ChatRequestStatus {
   conversationId?: string | null;
   dispatchId?: string | null;
   chunksSent?: number | null;
+  chunks?: ChatRequestChunk[] | null;
   answer?: string | null;
   citations?: Citation[] | null;
   abstained?: boolean | null;

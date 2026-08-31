@@ -12,6 +12,18 @@ namespace Chatbot.Sst.Application;
 /// </summary>
 public sealed class GroundedAnswerService : IChatService
 {
+    // Cut generation the moment the model drifts into text the formatter would strip anyway:
+    // a stray Qwen think tag, a Fuentes/Sources section (the UI shows citations separately, per
+    // the system prompt), or an echo of the [SOURCE ...] prompt structure. llama-server removes
+    // the matched sequence from the output, so this only ever saves wasted tokens.
+    private static readonly IReadOnlyList<string> DefaultStopSequences =
+    [
+        "</think>",
+        "\nFuentes",
+        "\nSources",
+        "\n[SOURCE ",
+    ];
+
     private readonly IQueryNormalizer _normalizer;
     private readonly ILlmProvider _llm;
 
@@ -30,7 +42,8 @@ public sealed class GroundedAnswerService : IChatService
 
         var normalized = _normalizer.Normalize(question);
         var messages = EvidencePromptBuilder.Build(normalized, evidence);
-        var response = await _llm.GenerateAsync(new LlmRequest(messages), cancellationToken);
+        var response = await _llm.GenerateAsync(
+            new LlmRequest(messages) { StopSequences = DefaultStopSequences }, cancellationToken);
         var formattedAnswer = GeneratedAnswerFormatter.Format(response.Content);
 
         var citations = evidence.Items.Select(e => e.Citation).Distinct().ToArray();
@@ -53,7 +66,8 @@ public sealed class GroundedAnswerService : IChatService
         var messages = EvidencePromptBuilder.Build(normalized, evidence);
 
         var raw = new StringBuilder();
-        await foreach (var chunk in _llm.GenerateStreamingAsync(new LlmRequest(messages), cancellationToken))
+        await foreach (var chunk in _llm.GenerateStreamingAsync(
+            new LlmRequest(messages) { StopSequences = DefaultStopSequences }, cancellationToken))
         {
             raw.Append(chunk.Delta);
             yield return ChatAnswerChunk.Token(chunk.Delta);

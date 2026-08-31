@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 import { getChatRequest, startChat } from "../api/chat";
 import { ApiError } from "../api/client";
-import type { ChatError, ChatMessage, ChatRequestStatus } from "../types";
+import type { ChatError, ChatMessage, ChatRequestChunk, ChatRequestStatus, Citation } from "../types";
 
 const POLL_INTERVAL_MS = 1000;
 const MAX_POLL_DURATION_MS = 210_000;
@@ -26,13 +26,59 @@ function toChatError(error: unknown, requestId?: string | null): ChatError {
 }
 
 function toAssistantMessage(status: ChatRequestStatus): ChatMessage {
+  const citationLabelsByDocumentId = indexCitationLabels(status.chunks);
   return {
     id: crypto.randomUUID(),
     role: "assistant",
     text: status.answer ?? "No se recibio respuesta final del backend local.",
     abstained: status.abstained ?? false,
-    citations: status.citations ?? [],
+    citations: (status.citations ?? []).map((citation) => ({
+      ...citation,
+      documentTitle: resolveCitationTitle(citation, citationLabelsByDocumentId),
+    })),
   };
+}
+
+function indexCitationLabels(
+  chunks: ChatRequestStatus["chunks"],
+): ReadonlyMap<string, string> {
+  const labels = new Map<string, string>();
+  for (const chunk of chunks ?? []) {
+    const label = readChunkCitationLabel(chunk);
+    if (label && !labels.has(chunk.documentId)) {
+      labels.set(chunk.documentId, label);
+    }
+  }
+
+  return labels;
+}
+
+function readChunkCitationLabel(chunk: ChatRequestChunk): string | null {
+  const metadata = chunk.metadata;
+  if (!metadata) {
+    return null;
+  }
+
+  const preferred = metadata["citation_label"]?.trim();
+  if (preferred) {
+    return preferred;
+  }
+
+  const fallback = metadata["document_name"]?.trim();
+  return fallback || null;
+}
+
+function resolveCitationTitle(
+  citation: Citation,
+  citationLabelsByDocumentId: ReadonlyMap<string, string>,
+): string {
+  const explicitLabel = citationLabelsByDocumentId.get(citation.documentId);
+  if (explicitLabel) {
+    return explicitLabel;
+  }
+
+  const title = citation.documentTitle?.trim();
+  return title || citation.documentId;
 }
 
 // All chat state + orchestration lives here so any screen can reuse it.

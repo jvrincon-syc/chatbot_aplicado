@@ -1,0 +1,16 @@
+0.02.393.653 W Setting 'enable_thinking' via --chat-template-kwargs is deprecated. Use --reasoning on / --reasoning off instead.
+0.02.410.107 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.02.456.751 I srv    load_model: loading model 'C:\Users\jvrincon\Documents\rag-models\qwen3-1.7b\Qwen_Qwen3-1.7B-IQ4_XS.gguf'
+0.03.383.556 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.08.032.056 I cmn          init: llama threadpool init, n_threads = 10
+0.10.571.387 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+0.10.616.018 I srv  llama_server: model loaded
+0.10.616.149 I srv  llama_server: listening on http://127.0.0.1:8001
+16.34.573.960 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+16.34.576.732 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+16.49.734.312 I slot print_timing: id  0 | task 0 | n_gen =    100, tg =  10.18 t/s, tg_3s =  10.28 t/s
+16.52.213.293 I slot print_timing: id  0 | task 0 | prompt eval time =    5392.46 ms /   553 tokens (    9.75 ms per token,   102.55 tokens per second)
+16.52.213.536 I slot print_timing: id  0 | task 0 |        eval time =   12242.97 ms /   120 tokens (  102.88 ms per token,     9.72 tokens per second)
+16.52.213.549 I slot print_timing: id  0 | task 0 |       total time =   17635.43 ms /   673 tokens
+16.52.213.552 I slot print_timing: id  0 | task 0 |    graphs reused =        119
+16.52.220.840 I slot      release: id  0 | task 0 | stop processing: n_tokens = 672, truncated = 0

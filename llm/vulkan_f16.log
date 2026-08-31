@@ -1,0 +1,4 @@
+0.00.073.513 W Setting 'enable_thinking' via --chat-template-kwargs is deprecated. Use --reasoning on / --reasoning off instead.
+0.00.084.932 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.107.010 I srv    load_model: loading model 'C:/Users/jvrincon/Documents/rag-models/qwen3-1.7b/Qwen_Qwen3-1.7B-IQ4_XS.gguf'
+0.00.709.068 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden

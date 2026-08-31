@@ -53,9 +53,12 @@ public sealed class RedisChatEventStream : IChatEventStream
 
         while (!cancellationToken.IsCancellationRequested)
         {
-            // ponytail: short poll on the high-level StreamReadAsync (well-tested) instead of
-            // hand-parsing a raw XREAD BLOCK result. 25ms << the ~57ms/token gen cadence, so it
-            // adds no perceptible latency. Upgrade to XREAD BLOCK via Execute if fan-out scales.
+            // Short poll on the high-level StreamReadAsync rather than XREAD BLOCK: StackExchange.Redis
+            // multiplexes every command over one connection, and a blocking XREAD stalls that whole
+            // connection — it collides with the client command timeout AND serializes every other
+            // request's publish/read behind it (proven by the RedisIntegration test's block-on-empty
+            // case timing out). 25ms << the ~57ms/token gen cadence, so this adds no perceptible
+            // latency. A real XREAD BLOCK would need a dedicated connection per subscriber.
             var entries = await db.StreamReadAsync(key, lastId, count: 64);
             if (entries.Length == 0)
             {

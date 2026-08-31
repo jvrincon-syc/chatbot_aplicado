@@ -18,8 +18,8 @@
     "enableThinking": false
   },
   "runtime": {
-    "device": "none",
-    "gpuLayers": 0,
+    "device": "Vulkan0",
+    "gpuLayers": 99,
     "threads": 10,
     "threadsBatch": 10,
     "poll": 0,

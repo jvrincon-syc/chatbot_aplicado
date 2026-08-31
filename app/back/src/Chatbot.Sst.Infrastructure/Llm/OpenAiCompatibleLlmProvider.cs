@@ -35,6 +35,7 @@ public sealed class OpenAiCompatibleLlmProvider : ILlmProvider
             Model = _options.Model,
             Temperature = request.Temperature ?? _options.Temperature,
             MaxTokens = request.MaxOutputTokens ?? _options.MaxOutputTokens,
+            StopSequences = request.StopSequences?.ToList(),
             Messages = request.Messages
                 .Select(m => new ChatMessage { Role = ToWireRole(m.Role), Content = m.Content })
                 .ToList()
@@ -63,6 +64,7 @@ public sealed class OpenAiCompatibleLlmProvider : ILlmProvider
             Model = _options.Model,
             Temperature = request.Temperature ?? _options.Temperature,
             MaxTokens = request.MaxOutputTokens ?? _options.MaxOutputTokens,
+            StopSequences = request.StopSequences?.ToList(),
             Stream = true,
             Messages = request.Messages
                 .Select(m => new ChatMessage { Role = ToWireRole(m.Role), Content = m.Content })
@@ -149,6 +151,15 @@ public sealed class OpenAiCompatibleLlmProvider : ILlmProvider
         [JsonPropertyName("temperature")] public double Temperature { get; init; }
         [JsonPropertyName("max_tokens")] public int MaxTokens { get; init; }
         [JsonPropertyName("stream")] public bool Stream { get; init; }
+
+        // Reuse the KV cache across requests so the static system prompt (~150 tokens) is not
+        // re-prefilled every call. llama-server already has the cache enabled; sending the flag
+        // explicitly makes the reuse deterministic.
+        [JsonPropertyName("cache_prompt")] public bool CachePrompt { get; init; } = true;
+
+        // Stop generation as soon as the model emits a degenerate think tag or trailing prompt
+        // echo; llama-server drops the stop text from the output. Omitted from the wire when null.
+        [JsonPropertyName("stop")] public List<string>? StopSequences { get; init; }
 
         // Greedy decoding (temperature 0) on the small IQ4_XS quant is prone to degenerate
         // repetition loops. A mild penalty curbs them without changing factual output.

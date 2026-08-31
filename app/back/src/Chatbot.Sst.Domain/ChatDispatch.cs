@@ -75,7 +75,35 @@ public sealed record WebhookChunk(
         };
 
         var section = string.IsNullOrWhiteSpace(SectionTitle) ? SectionPath : SectionTitle;
-        return new Evidence(Text, new Citation(DocumentId, DocumentId, page, section), Score);
+        var title = ResolveCitationTitle();
+        return new Evidence(Text, new Citation(DocumentId, title, page, section), Score);
+    }
+
+    private string ResolveCitationTitle()
+    {
+        if (TryGetMetadataValue("citation_label", out var citationLabel))
+        {
+            return citationLabel;
+        }
+
+        if (TryGetMetadataValue("document_name", out var documentName))
+        {
+            return documentName;
+        }
+
+        return DocumentId;
+    }
+
+    private bool TryGetMetadataValue(string key, out string value)
+    {
+        value = string.Empty;
+        if (Metadata is null || !Metadata.TryGetValue(key, out var raw) || string.IsNullOrWhiteSpace(raw))
+        {
+            return false;
+        }
+
+        value = raw;
+        return true;
     }
 }
 

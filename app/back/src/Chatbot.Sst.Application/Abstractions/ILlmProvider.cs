@@ -38,6 +38,12 @@ public sealed record LlmRequest(IReadOnlyList<LlmMessage> Messages)
 {
     public int? MaxOutputTokens { get; init; }
     public double? Temperature { get; init; }
+
+    /// <summary>
+    /// Sequences that stop generation early (the model server drops them from the output).
+    /// Used to cut degenerate think tags and trailing prompt echo. Null = no stop sequences.
+    /// </summary>
+    public IReadOnlyList<string>? StopSequences { get; init; }
 }
 
 public sealed record LlmResponse(string Content)

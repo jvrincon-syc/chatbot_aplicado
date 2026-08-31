@@ -1,0 +1,3 @@
+ADVERTENCIA: CHATBOT_LLM_MODEL_PATH not set; using model.json defaultPath: 
+C:\Users\jvrincon\Documents\rag-models\qwen3-1.7b\Qwen_Qwen3-1.7B-IQ4_XS.gguf
+Starting llama-server on 127.0.0.1:8001 (loopback only)...
