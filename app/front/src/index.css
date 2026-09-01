@@ -173,6 +173,7 @@ body {
   cursor: pointer;
   width: 100%;
   text-align: left;
+  text-decoration: none;
   transition: background-color 150ms ease, color 150ms ease;
 }
 
@@ -195,6 +196,22 @@ body {
 
 .sidebar__link--active svg {
   opacity: 1;
+}
+
+.sidebar__link:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.sidebar__link--disabled {
+  color: var(--muted-light);
+  cursor: default;
+  opacity: 0.78;
+}
+
+.sidebar__link--disabled:hover {
+  background: none;
+  color: var(--muted-light);
 }
 
 .sidebar__divider {
@@ -457,6 +474,12 @@ body {
   color: var(--ink);
 }
 
+.bubble__action--active {
+  background: var(--primary-soft);
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
 .bubble--typing {
   padding: 14px 16px;
 }
@@ -486,6 +509,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.cites__item {
+  display: flex;
+  min-width: 0;
 }
 
 .cites__more {
@@ -518,6 +546,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  max-width: 100%;
+  text-decoration: none;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 }
 
 .chip svg {
@@ -531,18 +562,39 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1px;
+  min-width: 0;
 }
 
 .chip__title {
   font-weight: 600;
   color: var(--primary);
   line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .chip__meta {
   font-size: 11px;
   color: var(--muted);
   font-weight: 400;
+}
+
+.chip--link {
+  cursor: pointer;
+}
+
+.chip--link:hover {
+  background: var(--primary-soft);
+  border-color: var(--primary-light);
+}
+
+.chip--static {
+  cursor: default;
+}
+
+.chip__external {
+  display: inline-flex;
+  color: var(--primary);
+  flex: none;
 }
 
 /* ── Typing Dots ────────────────────────────────────────────────────────── */

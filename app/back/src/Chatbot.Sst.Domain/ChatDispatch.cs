@@ -65,6 +65,20 @@ public sealed record WebhookChunk(
     string? EmbeddingProfileId = null,
     string? CorpusVersion = null)
 {
+    private static readonly string[] SourceUrlMetadataKeys =
+    [
+        "source_url",
+        "sourceUrl",
+        "document_url",
+        "documentUrl",
+        "pdf_url",
+        "pdfUrl",
+        "file_url",
+        "fileUrl",
+        "url",
+        "href"
+    ];
+
     public Evidence ToEvidence()
     {
         var page = PageStart switch
@@ -76,7 +90,8 @@ public sealed record WebhookChunk(
 
         var section = string.IsNullOrWhiteSpace(SectionTitle) ? SectionPath : SectionTitle;
         var title = ResolveCitationTitle();
-        return new Evidence(Text, new Citation(DocumentId, title, page, section), Score);
+        var sourceUrl = ResolveSourceUrl();
+        return new Evidence(Text, new Citation(DocumentId, title, page, section, sourceUrl), Score);
     }
 
     private string ResolveCitationTitle()
@@ -94,16 +109,47 @@ public sealed record WebhookChunk(
         return DocumentId;
     }
 
+    private string? ResolveSourceUrl()
+    {
+        foreach (var key in SourceUrlMetadataKeys)
+        {
+            if (TryGetMetadataValue(key, out var value) && IsHttpUrl(value))
+            {
+                return value.Trim();
+            }
+        }
+
+        return null;
+    }
+
+    private static bool IsHttpUrl(string value)
+        => Uri.TryCreate(value.Trim(), UriKind.Absolute, out var uri)
+            && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
+
     private bool TryGetMetadataValue(string key, out string value)
     {
         value = string.Empty;
-        if (Metadata is null || !Metadata.TryGetValue(key, out var raw) || string.IsNullOrWhiteSpace(raw))
+        if (Metadata is null)
         {
             return false;
         }
 
-        value = raw;
-        return true;
+        if (Metadata.TryGetValue(key, out var raw) && !string.IsNullOrWhiteSpace(raw))
+        {
+            value = raw;
+            return true;
+        }
+
+        foreach (var item in Metadata)
+        {
+            if (string.Equals(item.Key, key, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(item.Value))
+            {
+                value = item.Value;
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 

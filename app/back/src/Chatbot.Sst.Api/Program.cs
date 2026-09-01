@@ -90,6 +90,11 @@ app.MapGet("/api/chat/requests/{requestId}/events", async (
     response.Headers.CacheControl = "no-cache";
     response.Headers.Append("X-Accel-Buffering", "no");
 
+    // Flush headers + an SSE comment now so the browser's EventSource connection opens immediately,
+    // instead of hanging "connecting" until the first token (~retrieval + prefill later).
+    await response.WriteAsync(": connected\n\n", ct);
+    await response.Body.FlushAsync(ct);
+
     await foreach (var evt in events.SubscribeAsync(requestId, ct))
     {
         await response.WriteAsync($"event: {evt.EventType}\ndata: {evt.DataJson}\n\n", ct);

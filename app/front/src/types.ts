@@ -5,6 +5,7 @@ export interface Citation {
   documentTitle?: string | null;
   page?: string | null;
   section?: string | null;
+  sourceUrl?: string | null;
 }
 
 export interface ChatRequestChunk {
@@ -52,4 +53,6 @@ export interface ChatMessage {
   text: string;
   abstained?: boolean;
   citations?: Citation[];
+  // True while tokens are still streaming in over SSE; cleared once the terminal event lands.
+  streaming?: boolean;
 }

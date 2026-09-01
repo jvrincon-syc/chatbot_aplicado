@@ -34,6 +34,12 @@ public static class DependencyInjection
             var options = sp.GetRequiredService<IOptions<LlmOptions>>().Value;
             client.BaseAddress = new Uri(options.BaseUrl);
             client.Timeout = TimeSpan.FromSeconds(options.RequestTimeoutSeconds);
+            // Remote OpenAI-compatible endpoints (e.g. a cloud GPU studio) require a bearer token;
+            // the local llama-server leaves ApiKey null and needs no auth header.
+            if (!string.IsNullOrWhiteSpace(options.ApiKey))
+            {
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {options.ApiKey}");
+            }
         });
 
         services.AddHttpClient<IChatbotDispatchClient, HttpChatbotDispatchClient>((sp, client) =>

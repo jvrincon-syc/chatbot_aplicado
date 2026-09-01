@@ -43,4 +43,42 @@ public sealed class WebhookChunkTests
 
         Assert.Equal("politica_sst.pdf", evidence.Citation.DocumentTitle);
     }
+
+    [Fact]
+    public void ToEvidence_preserves_http_source_url_from_metadata()
+    {
+        var chunk = new WebhookChunk(
+            "node-1",
+            "doc_123",
+            "Texto",
+            0.91,
+            "vector",
+            Metadata: new Dictionary<string, string?>
+            {
+                ["source_url"] = "https://sst.example/docs/politica_sst.pdf"
+            });
+
+        var evidence = chunk.ToEvidence();
+
+        Assert.Equal("https://sst.example/docs/politica_sst.pdf", evidence.Citation.SourceUrl);
+    }
+
+    [Fact]
+    public void ToEvidence_ignores_non_http_source_url_from_metadata()
+    {
+        var chunk = new WebhookChunk(
+            "node-1",
+            "doc_123",
+            "Texto",
+            0.91,
+            "vector",
+            Metadata: new Dictionary<string, string?>
+            {
+                ["source_url"] = "file:///C:/docs/politica_sst.pdf"
+            });
+
+        var evidence = chunk.ToEvidence();
+
+        Assert.Null(evidence.Citation.SourceUrl);
+    }
 }

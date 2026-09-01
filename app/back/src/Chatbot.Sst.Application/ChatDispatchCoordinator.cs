@@ -202,6 +202,7 @@ public sealed class ChatDispatchCoordinator : IChatDispatchCoordinator
             documentTitle = c.DocumentTitle,
             page = c.Page,
             section = c.Section,
+            sourceUrl = c.SourceUrl,
         }),
     });
 

@@ -5,7 +5,8 @@ public sealed record Citation(
     string DocumentId,
     string? DocumentTitle = null,
     string? Page = null,
-    string? Section = null);
+    string? Section = null,
+    string? SourceUrl = null);
 
 /// <summary>A chunk selected by the external context backend and supplied to the local LLM.</summary>
 public sealed record Evidence(string Content, Citation Citation, double Score);

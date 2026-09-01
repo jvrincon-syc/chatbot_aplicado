@@ -16,6 +16,13 @@ public sealed class LlmOptions
     [Required]
     public string Model { get; init; } = "qwen3-1.7b";
 
+    /// <summary>
+    /// Optional bearer token for a remote OpenAI-compatible endpoint (e.g. a cloud GPU studio).
+    /// Null/empty for the local llama-server, which needs no auth. Kept out of appsettings; supply
+    /// it via the <c>Llm__ApiKey</c> environment variable so the secret is never committed.
+    /// </summary>
+    public string? ApiKey { get; init; }
+
     [Range(1, 600)]
     public int RequestTimeoutSeconds { get; init; } = 60;
 

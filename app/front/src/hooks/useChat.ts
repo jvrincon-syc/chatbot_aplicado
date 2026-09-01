@@ -1,13 +1,20 @@
 import { useCallback, useRef, useState } from "react";
-import { getChatRequest, startChat } from "../api/chat";
+import { startChat, streamChat } from "../api/chat";
 import { ApiError } from "../api/client";
 import type { ChatError, ChatMessage, ChatRequestChunk, ChatRequestStatus, Citation } from "../types";
 
-const POLL_INTERVAL_MS = 1000;
-const MAX_POLL_DURATION_MS = 210_000;
-const CLIENT_POLL_TIMEOUT_CODE = "CHATBOT_CLIENT_POLL_TIMEOUT";
-
-const sleep = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms));
+const SOURCE_URL_METADATA_KEYS = [
+  "source_url",
+  "sourceUrl",
+  "document_url",
+  "documentUrl",
+  "pdf_url",
+  "pdfUrl",
+  "file_url",
+  "fileUrl",
+  "url",
+  "href",
+];
 
 function toChatError(error: unknown, requestId?: string | null): ChatError {
   if (error instanceof ApiError) {
@@ -27,6 +34,7 @@ function toChatError(error: unknown, requestId?: string | null): ChatError {
 
 function toAssistantMessage(status: ChatRequestStatus): ChatMessage {
   const citationLabelsByDocumentId = indexCitationLabels(status.chunks);
+  const citationUrlsByDocumentId = indexCitationSourceUrls(status.chunks);
   return {
     id: crypto.randomUUID(),
     role: "assistant",
@@ -35,6 +43,7 @@ function toAssistantMessage(status: ChatRequestStatus): ChatMessage {
     citations: (status.citations ?? []).map((citation) => ({
       ...citation,
       documentTitle: resolveCitationTitle(citation, citationLabelsByDocumentId),
+      sourceUrl: resolveCitationSourceUrl(citation, citationUrlsByDocumentId),
     })),
   };
 }
@@ -68,6 +77,36 @@ function readChunkCitationLabel(chunk: ChatRequestChunk): string | null {
   return fallback || null;
 }
 
+function indexCitationSourceUrls(
+  chunks: ChatRequestStatus["chunks"],
+): ReadonlyMap<string, string> {
+  const urls = new Map<string, string>();
+  for (const chunk of chunks ?? []) {
+    const url = readChunkCitationSourceUrl(chunk);
+    if (url && !urls.has(chunk.documentId)) {
+      urls.set(chunk.documentId, url);
+    }
+  }
+
+  return urls;
+}
+
+function readChunkCitationSourceUrl(chunk: ChatRequestChunk): string | null {
+  const metadata = chunk.metadata;
+  if (!metadata) {
+    return null;
+  }
+
+  for (const key of SOURCE_URL_METADATA_KEYS) {
+    const url = normalizeHttpUrl(metadata[key]);
+    if (url) {
+      return url;
+    }
+  }
+
+  return null;
+}
+
 function resolveCitationTitle(
   citation: Citation,
   citationLabelsByDocumentId: ReadonlyMap<string, string>,
@@ -79,6 +118,29 @@ function resolveCitationTitle(
 
   const title = citation.documentTitle?.trim();
   return title || citation.documentId;
+}
+
+function resolveCitationSourceUrl(
+  citation: Citation,
+  citationUrlsByDocumentId: ReadonlyMap<string, string>,
+): string | null {
+  return normalizeHttpUrl(citation.sourceUrl)
+    ?? citationUrlsByDocumentId.get(citation.documentId)
+    ?? null;
+}
+
+function normalizeHttpUrl(value?: string | null): string | null {
+  const trimmed = value?.trim();
+  if (!trimmed) {
+    return null;
+  }
+
+  try {
+    const url = new URL(trimmed);
+    return url.protocol === "http:" || url.protocol === "https:" ? trimmed : null;
+  } catch {
+    return null;
+  }
 }
 
 // All chat state + orchestration lives here so any screen can reuse it.
@@ -108,19 +170,57 @@ export function useChat() {
     }
   }, []);
 
+  // Stream one pending request over SSE: render tokens live into a placeholder message, then
+  // swap it for the final formatted answer + citations (or drop it and surface the error).
+  const runStream = useCallback(async (requestId: string) => {
+    const streamingId = crypto.randomUUID();
+    setMessages((prev) => [...prev, { id: streamingId, role: "assistant", text: "", streaming: true }]);
+
+    try {
+      const status = await streamChat(requestId, {
+        onDelta: (delta) =>
+          setMessages((prev) =>
+            prev.map((message) =>
+              message.id === streamingId ? { ...message, text: message.text + delta } : message,
+            ),
+          ),
+      });
+
+      lastPendingRequestIdRef.current = null;
+
+      if (status.state === "failed") {
+        setMessages((prev) => prev.filter((message) => message.id !== streamingId));
+        setError({
+          code: status.errorCode ?? "CHATBOT_UNKNOWN_FAILURE",
+          message: status.error ?? "No se pudo completar la conversacion.",
+          chunksSent: status.chunksSent,
+          requestId: status.requestId,
+        });
+        return;
+      }
+
+      const finalMessage = toAssistantMessage(status);
+      setMessages((prev) =>
+        prev.map((message) => (message.id === streamingId ? { ...finalMessage, id: streamingId } : message)),
+      );
+    } catch (error) {
+      setMessages((prev) => prev.filter((message) => message.id !== streamingId));
+      throw error;
+    }
+  }, []);
+
   const resumePendingRequest = useCallback(async (requestId: string) => {
     setError(null);
     setLoading(true);
 
     try {
-      const status = await waitForCompletion(requestId);
-      settleStatus(status);
+      await runStream(requestId);
     } catch (error) {
       setError(toChatError(error, requestId));
     } finally {
       setLoading(false);
     }
-  }, [settleStatus]);
+  }, [runStream]);
 
   const send = useCallback(async (text: string) => {
     const trimmed = text.trim();
@@ -133,19 +233,20 @@ export function useChat() {
     setLoading(true);
 
     try {
-      let status = await startChat(trimmed, { conversationId });
+      const status = await startChat(trimmed, { conversationId });
       if (status.state === "pending") {
         lastPendingRequestIdRef.current = status.requestId;
-        status = await waitForCompletion(status.requestId);
+        await runStream(status.requestId);
+      } else {
+        // Already settled synchronously (e.g. immediate abstention/failure): no stream to open.
+        settleStatus(status);
       }
-
-      settleStatus(status);
     } catch (error) {
       setError(toChatError(error, lastPendingRequestIdRef.current));
     } finally {
       setLoading(false);
     }
-  }, [conversationId, loading, settleStatus]);
+  }, [conversationId, loading, runStream, settleStatus]);
 
   const retry = useCallback(() => {
     if (loading) return;
@@ -161,24 +262,14 @@ export function useChat() {
     }
   }, [loading, resumePendingRequest, send]);
 
-  return { messages, loading, error, send, retry };
-}
+  const reset = useCallback(() => {
+    if (loading) return;
 
-async function waitForCompletion(requestId: string): Promise<ChatRequestStatus> {
-  const deadline = Date.now() + MAX_POLL_DURATION_MS;
+    lastQuestionRef.current = null;
+    lastPendingRequestIdRef.current = null;
+    setError(null);
+    setMessages([]);
+  }, [loading]);
 
-  while (Date.now() < deadline) {
-    const status = await getChatRequest(requestId);
-    if (status.state !== "pending") {
-      return status;
-    }
-
-    await sleep(POLL_INTERVAL_MS);
-  }
-
-  throw new ApiError(
-    0,
-    "La respuesta tarda mas de lo normal, pero la solicitud sigue en proceso.",
-    CLIENT_POLL_TIMEOUT_CODE,
-  );
+  return { messages, loading, error, send, retry, reset };
 }

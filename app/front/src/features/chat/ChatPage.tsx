@@ -13,14 +13,14 @@ const SUGGESTIONS = [
 ];
 
 export function ChatPage() {
-  const { messages, loading, error, send, retry } = useChat();
+  const { messages, loading, error, send, retry, reset } = useChat();
   const empty = messages.length === 0 && !loading;
 
   return (
     <div className="app">
       <div className="app__topbar" aria-hidden="true" />
       <div className="app__body">
-        <Sidebar />
+        <Sidebar onNewChat={reset} newChatDisabled={loading} />
 
         <main className="main">
           <div className="main__workspace">

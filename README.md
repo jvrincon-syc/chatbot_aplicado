@@ -96,7 +96,7 @@ Notas:
 
 ```powershell
 cd C:\Users\jvrincon\Documents\chatbot_aplicado_sst\app\front
-npm run dev
+      npm run dev
 ```
 
 Notas:

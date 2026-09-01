@@ -17,11 +17,17 @@ const NAV_ITEMS = [
 ];
 
 const NAV_SECONDARY = [
-  { icon: ICON_BOOK, label: "Guías SST" },
-  { icon: ICON_GEAR, label: "Configuración" },
+  { icon: ICON_BOOK, label: "Guias SST" },
+  { icon: ICON_GEAR, label: "Configuracion" },
 ];
 
-export function Sidebar() {
+export function Sidebar({
+  onNewChat,
+  newChatDisabled = false,
+}: {
+  onNewChat?: () => void;
+  newChatDisabled?: boolean;
+}) {
   const { user, logout } = useAuth();
 
   return (
@@ -34,15 +40,25 @@ export function Sidebar() {
         </div>
       </div>
 
-      <nav className="sidebar__nav">
+      <nav className="sidebar__nav" aria-label="Navegacion principal">
         <ul className="sidebar__nav-group">
           {NAV_ITEMS.map((item) => (
             <li key={item.label} className="sidebar__nav-item">
-              <button
-                type="button"
-                className={`sidebar__link${item.active ? " sidebar__link--active" : ""}`}
-                dangerouslySetInnerHTML={{ __html: item.icon + item.label }}
-              />
+              {item.active ? (
+                <button
+                  type="button"
+                  className="sidebar__link sidebar__link--active"
+                  onClick={onNewChat}
+                  disabled={newChatDisabled}
+                  dangerouslySetInnerHTML={{ __html: item.icon + item.label }}
+                />
+              ) : (
+                <span
+                  className="sidebar__link sidebar__link--disabled"
+                  aria-disabled="true"
+                  dangerouslySetInnerHTML={{ __html: item.icon + item.label }}
+                />
+              )}
             </li>
           ))}
         </ul>
@@ -52,9 +68,9 @@ export function Sidebar() {
         <ul className="sidebar__nav-group">
           {NAV_SECONDARY.map((item) => (
             <li key={item.label} className="sidebar__nav-item">
-              <button
-                type="button"
-                className="sidebar__link"
+              <span
+                className="sidebar__link sidebar__link--disabled"
+                aria-disabled="true"
                 dangerouslySetInnerHTML={{ __html: item.icon + item.label }}
               />
             </li>
@@ -67,7 +83,7 @@ export function Sidebar() {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
         </div>
         <p className="sidebar__safety-text">
-          ¡La seguridad es compromiso de todos!
+          La seguridad es compromiso de todos.
         </p>
       </div>
 
@@ -84,7 +100,7 @@ export function Sidebar() {
             type="button"
             className="sidebar__logout"
             onClick={logout}
-            aria-label="Cerrar sesión"
+            aria-label="Cerrar sesion"
             dangerouslySetInnerHTML={{ __html: ICON_LOGOUT }}
           />
         </div>
