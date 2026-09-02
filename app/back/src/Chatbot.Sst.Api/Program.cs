@@ -1,8 +1,22 @@
+using System.Net.Http.Headers;
 using Chatbot.Sst.Application.Abstractions;
 using Chatbot.Sst.Api;
 using Chatbot.Sst.Domain;
 using Chatbot.Sst.Infrastructure;
+using Chatbot.Sst.Infrastructure.Dispatch;
 using Chatbot.Sst.Infrastructure.Llm;
+using Microsoft.Extensions.Options;
+
+// Development only: pull the repo-root secrets.env into environment variables BEFORE building
+// configuration, so its `Llm__BaseUrl`/`Llm__ApiKey` (Lightning studio) and `ChatbotDispatch__*`
+// override appsettings via the env-var provider. The secret ApiKey never lands in appsettings.
+if (string.Equals(
+        Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
+        "Development",
+        StringComparison.OrdinalIgnoreCase))
+{
+    SecretsEnvLoader.LoadFromAncestors();
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -160,6 +174,46 @@ app.MapGet("/api/chat/rag-releases", async (IChatbotDispatchClient dispatchClien
             new { errorCode = "CHATBOT_RAG_RELEASES_UNEXPECTED_FAILURE", error = "No se pudieron consultar las releases RAG disponibles." },
             statusCode: StatusCodes.Status502BadGateway);
     }
+});
+
+// Selectable LLM models for the frontend model picker (id + label). Keys/URLs stay server-side.
+app.MapGet("/api/llm/models", (IOptions<LlmOptions> llmOptions) =>
+    Results.Ok(llmOptions.Value.Profiles
+        .Where(p => !string.IsNullOrWhiteSpace(p.Id))
+        .Select(p => new { id = p.Id, label = string.IsNullOrWhiteSpace(p.Label) ? p.Id : p.Label })
+        .ToArray()));
+
+// Citation link proxy: the browser opens a plain <a> link (no auth header possible), so it hits
+// this endpoint, which fetches the raw document from the external chatbot backend WITH the bearer
+// (browser never sees it) and streams it back. The document is a file on that backend's disk, not
+// in any database — this service has no DB.
+app.MapGet("/api/documents/raw/{**relPath}", async (
+    string relPath,
+    IHttpClientFactory httpClientFactory,
+    IOptions<ChatbotDispatchOptions> dispatchOptions,
+    CancellationToken cancellationToken) =>
+{
+    var options = dispatchOptions.Value;
+    var target = $"{options.BaseUrl.TrimEnd('/')}/api/documents/raw/{relPath}";
+
+    var client = httpClientFactory.CreateClient();
+    using var request = new HttpRequestMessage(HttpMethod.Get, target);
+    if (!string.IsNullOrWhiteSpace(options.BearerToken))
+    {
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", options.BearerToken);
+    }
+
+    using var upstream = await client.SendAsync(request, cancellationToken);
+    if (!upstream.IsSuccessStatusCode)
+    {
+        return Results.StatusCode((int)upstream.StatusCode);
+    }
+
+    // Buffer: SST source docs are small PDFs (~MB). Switch to a streamed response if that changes.
+    // ponytail: read-into-memory, fine at this size.
+    var bytes = await upstream.Content.ReadAsByteArrayAsync(cancellationToken);
+    var contentType = upstream.Content.Headers.ContentType?.ToString() ?? "application/octet-stream";
+    return Results.File(bytes, contentType);
 });
 
 app.Run();

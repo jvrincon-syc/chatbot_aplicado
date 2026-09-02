@@ -281,7 +281,7 @@ public sealed class ChatDispatchCoordinatorTests
     {
         public EvidencePackage? CapturedEvidence { get; private set; }
 
-        public Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
+        public Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken, string? modelId = null)
         {
             CapturedEvidence = evidence;
             var citations = evidence.Items.Select(e => e.Citation).ToArray();
@@ -289,7 +289,7 @@ public sealed class ChatDispatchCoordinatorTests
         }
 
         public async IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(
-            UserQuestion question, EvidencePackage evidence, [EnumeratorCancellation] CancellationToken cancellationToken)
+            UserQuestion question, EvidencePackage evidence, [EnumeratorCancellation] CancellationToken cancellationToken, string? modelId = null)
         {
             CapturedEvidence = evidence;
             var citations = evidence.Items.Select(e => e.Citation).ToArray();
@@ -383,10 +383,10 @@ public sealed class ChatDispatchCoordinatorTests
 
     private sealed class NeverCalledChatService : IChatService
     {
-        public Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
+        public Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken, string? modelId = null)
             => throw new InvalidOperationException("Should not be called in these tests.");
 
-        public IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
+        public IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken, string? modelId = null)
             => throw new InvalidOperationException("Should not be called in these tests.");
     }
 
@@ -401,14 +401,14 @@ public sealed class ChatDispatchCoordinatorTests
 
     private sealed class GatedChatService(Task gate) : IChatService
     {
-        public async Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
+        public async Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken, string? modelId = null)
         {
             await gate;
             return new ChatResponse("Respuesta final", [new Citation("doc-1", "doc-1", "3", "Incidentes")], false);
         }
 
         public async IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(
-            UserQuestion question, EvidencePackage evidence, [EnumeratorCancellation] CancellationToken cancellationToken)
+            UserQuestion question, EvidencePackage evidence, [EnumeratorCancellation] CancellationToken cancellationToken, string? modelId = null)
         {
             await gate;
             yield return ChatAnswerChunk.Completed(
@@ -420,10 +420,10 @@ public sealed class ChatDispatchCoordinatorTests
     {
         private readonly Exception _toThrow = toThrow ?? new InvalidOperationException("boom: simulated unexpected generation failure.");
 
-        public Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
+        public Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken, string? modelId = null)
             => throw _toThrow;
 
-        public IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
+        public IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken, string? modelId = null)
             => throw _toThrow;
     }
 }

@@ -13,7 +13,7 @@ const SUGGESTIONS = [
 ];
 
 export function ChatPage() {
-  const { messages, loading, error, send, retry, reset } = useChat();
+  const { messages, loading, error, send, retry, reset, models, selectedModel, setSelectedModel } = useChat();
   const empty = messages.length === 0 && !loading;
 
   return (
@@ -29,6 +29,19 @@ export function ChatPage() {
                 <span className="main__context-dot" />
                 Marco Legal SST Colombia
               </span>
+              {models.length > 0 && (
+                <select
+                  className="model-select"
+                  aria-label="Modelo de IA"
+                  value={selectedModel}
+                  disabled={loading}
+                  onChange={(e) => setSelectedModel(e.target.value)}
+                >
+                  {models.map((m) => (
+                    <option key={m.id} value={m.id}>{m.label}</option>
+                  ))}
+                </select>
+              )}
             </div>
 
             {empty ? (

@@ -4,6 +4,7 @@ using Chatbot.Sst.Application.Generation;
 using Chatbot.Sst.Infrastructure.Dispatch;
 using Chatbot.Sst.Infrastructure.Llm;
 using Chatbot.Sst.Infrastructure.Redis;
+using Chatbot.Sst.Infrastructure.Streaming;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -54,23 +55,35 @@ public static class DependencyInjection
             client.DefaultRequestHeaders.ConnectionClose = true;
         });
 
-        services.AddOptions<RedisOptions>()
-            .Bind(configuration.GetSection(RedisOptions.SectionName))
-            .ValidateDataAnnotations();
-
-        services.AddSingleton<IConnectionMultiplexer>(sp =>
+        // Redis backs the chat event stream (SSE replay) for multi-node deployments. When it isn't
+        // configured (empty Redis:Configuration), fall back to an in-process stream: the publisher
+        // and SSE subscriber share one process locally, so Redis is unnecessary and requiring it
+        // would just make every SSE request time out when Redis is down.
+        var redisConfiguration = configuration.GetSection(RedisOptions.SectionName)["Configuration"];
+        if (string.IsNullOrWhiteSpace(redisConfiguration))
         {
-            var options = sp.GetRequiredService<IOptions<RedisOptions>>().Value;
-            var config = ConfigurationOptions.Parse(options.Configuration);
-            if (!string.IsNullOrEmpty(options.Password))
+            services.AddSingleton<IChatEventStream, InMemoryChatEventStream>();
+        }
+        else
+        {
+            services.AddOptions<RedisOptions>()
+                .Bind(configuration.GetSection(RedisOptions.SectionName))
+                .ValidateDataAnnotations();
+
+            services.AddSingleton<IConnectionMultiplexer>(sp =>
             {
-                config.Password = options.Password;
-            }
-            // Don't crash startup if Redis is briefly unavailable; the multiplexer reconnects.
-            config.AbortOnConnectFail = false;
-            return ConnectionMultiplexer.Connect(config);
-        });
-        services.AddSingleton<IChatEventStream, RedisChatEventStream>();
+                var options = sp.GetRequiredService<IOptions<RedisOptions>>().Value;
+                var config = ConfigurationOptions.Parse(options.Configuration);
+                if (!string.IsNullOrEmpty(options.Password))
+                {
+                    config.Password = options.Password;
+                }
+                // Don't crash startup if Redis is briefly unavailable; the multiplexer reconnects.
+                config.AbortOnConnectFail = false;
+                return ConnectionMultiplexer.Connect(config);
+            });
+            services.AddSingleton<IChatEventStream, RedisChatEventStream>();
+        }
 
         services.AddSingleton<IQueryNormalizer, DefaultQueryNormalizer>();
         services.AddSingleton<IChatService, GroundedAnswerService>();

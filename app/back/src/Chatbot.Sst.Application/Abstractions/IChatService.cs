@@ -8,14 +8,14 @@ namespace Chatbot.Sst.Application.Abstractions;
 /// </summary>
 public interface IChatService
 {
-    Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken);
+    Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken, string? modelId = null);
 
     /// <summary>
     /// Same fail-closed grounded generation as <see cref="AnswerAsync"/>, but streamed: yields a
     /// <see cref="ChatAnswerChunk"/> per token as the answer forms, then exactly one final chunk
     /// carrying the complete <see cref="ChatResponse"/> (formatted answer + citations).
     /// </summary>
-    IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken);
+    IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken, string? modelId = null);
 }
 
 /// <summary>

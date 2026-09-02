@@ -1,5 +1,7 @@
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Chatbot.Sst.Application.Abstractions;
@@ -30,18 +32,23 @@ public sealed class OpenAiCompatibleLlmProvider : ILlmProvider
 
     public async Task<LlmResponse> GenerateAsync(LlmRequest request, CancellationToken cancellationToken)
     {
+        var endpoint = ResolveEndpoint(request.ModelId);
         var payload = new ChatCompletionRequest
         {
-            Model = _options.Model,
+            Model = endpoint.Model,
             Temperature = request.Temperature ?? _options.Temperature,
             MaxTokens = request.MaxOutputTokens ?? _options.MaxOutputTokens,
             StopSequences = request.StopSequences?.ToList(),
+            ChatTemplateKwargs = endpoint.LlamaCpp ? ThinkingKwargsFor(endpoint.Model) : null,
+            CachePrompt = endpoint.LlamaCpp ? true : null,
+            RepeatPenalty = endpoint.LlamaCpp ? 1.1 : null,
             Messages = request.Messages
                 .Select(m => new ChatMessage { Role = ToWireRole(m.Role), Content = m.Content })
                 .ToList()
         };
 
-        using var response = await _http.PostAsJsonAsync("/v1/chat/completions", payload, cancellationToken);
+        using var httpRequest = BuildRequest(endpoint, payload);
+        using var response = await _http.SendAsync(httpRequest, cancellationToken);
         response.EnsureSuccessStatusCode();
 
         var body = await response.Content.ReadFromJsonAsync<ChatCompletionResponse>(cancellationToken)
@@ -59,28 +66,31 @@ public sealed class OpenAiCompatibleLlmProvider : ILlmProvider
         LlmRequest request,
         [EnumeratorCancellation] CancellationToken cancellationToken)
     {
+        var endpoint = ResolveEndpoint(request.ModelId);
         var payload = new ChatCompletionRequest
         {
-            Model = _options.Model,
+            Model = endpoint.Model,
             Temperature = request.Temperature ?? _options.Temperature,
             MaxTokens = request.MaxOutputTokens ?? _options.MaxOutputTokens,
             StopSequences = request.StopSequences?.ToList(),
+            ChatTemplateKwargs = endpoint.LlamaCpp ? ThinkingKwargsFor(endpoint.Model) : null,
+            CachePrompt = endpoint.LlamaCpp ? true : null,
+            RepeatPenalty = endpoint.LlamaCpp ? 1.1 : null,
             Stream = true,
             Messages = request.Messages
                 .Select(m => new ChatMessage { Role = ToWireRole(m.Role), Content = m.Content })
                 .ToList()
         };
 
-        using var httpRequest = new HttpRequestMessage(HttpMethod.Post, "/v1/chat/completions")
-        {
-            Content = JsonContent.Create(payload)
-        };
+        using var httpRequest = BuildRequest(endpoint, payload);
         using var response = await _http.SendAsync(
             httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         response.EnsureSuccessStatusCode();
 
         await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
-        using var reader = new StreamReader(stream);
+        // Explicit UTF-8 (no BOM sniffing) so multi-byte characters that span read buffers are
+        // decoded correctly and accents never arrive mangled.
+        using var reader = new StreamReader(stream, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
 
         // llama-server emits OpenAI-style SSE: lines "data: {json}\n\n", ending with "data: [DONE]".
         while (!reader.EndOfStream)
@@ -136,6 +146,67 @@ public sealed class OpenAiCompatibleLlmProvider : ILlmProvider
         }
     }
 
+    // enable_thinking is a Qwen3 chat-template kwarg. Emitting it for a non-Qwen3 model (e.g.
+    // Qwen2.5) can mis-render the template and produce corrupted/garbled text, so only send it
+    // when the configured model is a Qwen3.
+    private static ChatTemplateKwargs? ThinkingKwargsFor(string model)
+        => model.Contains("qwen3", StringComparison.OrdinalIgnoreCase) ? new ChatTemplateKwargs() : null;
+
+    // LlamaCpp = true when the target is the local/studio llama-server, which accepts its own
+    // non-OpenAI extensions (cache_prompt, repeat_penalty, chat_template_kwargs). A remote
+    // OpenAI-strict endpoint (Groq) rejects those with 400, so they must be omitted there.
+    private readonly record struct ResolvedEndpoint(string Url, string? ApiKey, string Model, bool LlamaCpp);
+
+    // Resolves the request's model selection to a concrete endpoint. A configured profile overrides
+    // the default BaseUrl/Model/ApiKey; a profile with empty BaseUrl/Model falls back to the default
+    // Llm config, and its key comes from the env var it names (ApiKeyEnv) — Groq is OpenAI-compatible
+    // so a Groq profile is just its BaseUrl + model id + GROQ_API_KEY.
+    private ResolvedEndpoint ResolveEndpoint(string? modelId)
+    {
+        var baseUrl = _options.BaseUrl;
+        var model = _options.Model;
+        var apiKey = _options.ApiKey;
+        var llamaCpp = true;  // default endpoint is the local/studio llama-server
+
+        if (!string.IsNullOrWhiteSpace(modelId))
+        {
+            var profile = _options.Profiles.FirstOrDefault(
+                p => string.Equals(p.Id, modelId, StringComparison.OrdinalIgnoreCase));
+            if (profile is not null)
+            {
+                // A profile that overrides BaseUrl points at a different provider (e.g. Groq), which
+                // is OpenAI-strict — drop the llama.cpp-only params for it.
+                if (!string.IsNullOrWhiteSpace(profile.BaseUrl))
+                {
+                    baseUrl = profile.BaseUrl;
+                    llamaCpp = false;
+                }
+                if (!string.IsNullOrWhiteSpace(profile.Model)) model = profile.Model;
+                var envKey = string.IsNullOrWhiteSpace(profile.ApiKeyEnv)
+                    ? null
+                    : Environment.GetEnvironmentVariable(profile.ApiKeyEnv);
+                if (!string.IsNullOrWhiteSpace(envKey)) apiKey = envKey;
+            }
+        }
+
+        return new ResolvedEndpoint($"{baseUrl.TrimEnd('/')}/v1/chat/completions", apiKey, model, llamaCpp);
+    }
+
+    private static HttpRequestMessage BuildRequest(ResolvedEndpoint endpoint, ChatCompletionRequest payload)
+    {
+        // Absolute URL overrides the HttpClient BaseAddress; per-request auth overrides its default
+        // header — both needed so one client can call the local studio and a remote Groq endpoint.
+        var httpRequest = new HttpRequestMessage(HttpMethod.Post, endpoint.Url)
+        {
+            Content = JsonContent.Create(payload),
+        };
+        if (!string.IsNullOrWhiteSpace(endpoint.ApiKey))
+        {
+            httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", endpoint.ApiKey);
+        }
+        return httpRequest;
+    }
+
     private static string ToWireRole(LlmRole role) => role switch
     {
         LlmRole.System => "system",
@@ -152,24 +223,29 @@ public sealed class OpenAiCompatibleLlmProvider : ILlmProvider
         [JsonPropertyName("max_tokens")] public int MaxTokens { get; init; }
         [JsonPropertyName("stream")] public bool Stream { get; init; }
 
-        // Reuse the KV cache across requests so the static system prompt (~150 tokens) is not
-        // re-prefilled every call. llama-server already has the cache enabled; sending the flag
-        // explicitly makes the reuse deterministic.
-        [JsonPropertyName("cache_prompt")] public bool CachePrompt { get; init; } = true;
+        // Reuse the KV cache across requests so the static system prompt is not re-prefilled every
+        // call. llama.cpp-only; omitted (null) for OpenAI-strict endpoints like Groq, which 400 on it.
+        [JsonPropertyName("cache_prompt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? CachePrompt { get; init; }
 
         // Stop generation as soon as the model emits a degenerate think tag or trailing prompt
         // echo; llama-server drops the stop text from the output. Omitted from the wire when null.
         [JsonPropertyName("stop")] public List<string>? StopSequences { get; init; }
 
-        // Greedy decoding (temperature 0) on the small IQ4_XS quant is prone to degenerate
-        // repetition loops. A mild penalty curbs them without changing factual output.
-        [JsonPropertyName("repeat_penalty")] public double RepeatPenalty { get; init; } = 1.1;
+        // Greedy decoding on a small quant is prone to repetition loops; a mild penalty curbs them.
+        // llama.cpp-only param — omitted (null) for OpenAI-strict endpoints like Groq (400 otherwise).
+        [JsonPropertyName("repeat_penalty")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public double? RepeatPenalty { get; init; }
 
-        // Qwen3 emits a <think>...</think> block unless thinking is disabled via the chat
-        // template. Without this the answer is polluted with "</think>" and wastes prefill/gen
-        // budget. Mirrors the enable_thinking=false the llm/model.json contract requires.
+        // Qwen3 emits a <think>...</think> block unless thinking is disabled via the chat template.
+        // This kwarg is Qwen3-SPECIFIC: sending enable_thinking to a Qwen2.5 (or other) model can
+        // mis-render its chat template and corrupt the output, so it is only set for Qwen3 (see
+        // ThinkingKwargsFor) and omitted from the wire otherwise.
         [JsonPropertyName("chat_template_kwargs")]
-        public ChatTemplateKwargs ChatTemplateKwargs { get; } = new();
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ChatTemplateKwargs? ChatTemplateKwargs { get; init; }
     }
 
     private sealed class ChatTemplateKwargs

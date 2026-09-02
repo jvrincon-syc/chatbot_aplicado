@@ -1,5 +1,5 @@
-import { useCallback, useRef, useState } from "react";
-import { startChat, streamChat } from "../api/chat";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { getModels, startChat, streamChat, type LlmModel } from "../api/chat";
 import { ApiError } from "../api/client";
 import type { ChatError, ChatMessage, ChatRequestChunk, ChatRequestStatus, Citation } from "../types";
 
@@ -149,8 +149,27 @@ export function useChat() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ChatError | null>(null);
   const [conversationId] = useState(() => `conv_${crypto.randomUUID().replaceAll("-", "")}`);
+  const [models, setModels] = useState<LlmModel[]>([]);
+  const [selectedModel, setSelectedModel] = useState<string>("");
   const lastQuestionRef = useRef<string | null>(null);
   const lastPendingRequestIdRef = useRef<string | null>(null);
+
+  // Load the backend's selectable models once; default to the first.
+  useEffect(() => {
+    let active = true;
+    getModels()
+      .then((list) => {
+        if (!active) return;
+        setModels(list);
+        setSelectedModel((current) => current || list[0]?.id || "");
+      })
+      .catch(() => {
+        /* model picker is optional; a failure just leaves the default backend model */
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const settleStatus = useCallback((status: ChatRequestStatus) => {
     lastPendingRequestIdRef.current = null;
@@ -233,7 +252,7 @@ export function useChat() {
     setLoading(true);
 
     try {
-      const status = await startChat(trimmed, { conversationId });
+      const status = await startChat(trimmed, { conversationId, modelId: selectedModel || undefined });
       if (status.state === "pending") {
         lastPendingRequestIdRef.current = status.requestId;
         await runStream(status.requestId);
@@ -246,7 +265,7 @@ export function useChat() {
     } finally {
       setLoading(false);
     }
-  }, [conversationId, loading, runStream, settleStatus]);
+  }, [conversationId, loading, runStream, settleStatus, selectedModel]);
 
   const retry = useCallback(() => {
     if (loading) return;
@@ -271,5 +290,5 @@ export function useChat() {
     setMessages([]);
   }, [loading]);
 
-  return { messages, loading, error, send, retry, reset };
+  return { messages, loading, error, send, retry, reset, models, selectedModel, setSelectedModel };
 }

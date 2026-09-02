@@ -31,4 +31,23 @@ public sealed class LlmOptions
 
     [Range(0.0, 2.0)]
     public double Temperature { get; init; }
+
+    /// <summary>
+    /// Selectable model profiles surfaced to the frontend. A profile with an empty BaseUrl falls
+    /// back to the top-level Llm config (the default endpoint). Its API key is read from the env var
+    /// named by <see cref="LlmProfile.ApiKeyEnv"/> (so keys stay in secrets.env, never appsettings);
+    /// empty ApiKeyEnv falls back to the top-level <see cref="ApiKey"/>. Groq is OpenAI-compatible,
+    /// so a Groq profile is just BaseUrl=https://api.groq.com/openai/v1 + its model id.
+    /// </summary>
+    public IReadOnlyList<LlmProfile> Profiles { get; init; } = [];
+}
+
+/// <summary>One frontend-selectable LLM (endpoint + model). See <see cref="LlmOptions.Profiles"/>.</summary>
+public sealed class LlmProfile
+{
+    public string Id { get; init; } = string.Empty;
+    public string Label { get; init; } = string.Empty;
+    public string BaseUrl { get; init; } = string.Empty;
+    public string Model { get; init; } = string.Empty;
+    public string? ApiKeyEnv { get; init; }
 }

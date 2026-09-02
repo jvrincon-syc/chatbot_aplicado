@@ -5,6 +5,7 @@ export interface StartChatOptions {
   conversationId?: string;
   messageId?: string;
   topK?: number;
+  modelId?: string;
 }
 
 export const startChat = (question: string, options: StartChatOptions = {}) =>
@@ -13,7 +14,16 @@ export const startChat = (question: string, options: StartChatOptions = {}) =>
     conversationId: options.conversationId,
     messageId: options.messageId,
     topK: options.topK,
+    modelId: options.modelId,
   });
+
+/** A selectable LLM model exposed by the backend for the model picker. */
+export interface LlmModel {
+  id: string;
+  label: string;
+}
+
+export const getModels = () => getJson<LlmModel[]>("/api/llm/models");
 
 export const getChatRequest = (requestId: string) =>
   getJson<ChatRequestStatus>(`/api/chat/requests/${encodeURIComponent(requestId)}`);

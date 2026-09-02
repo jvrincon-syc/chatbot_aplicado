@@ -7,14 +7,16 @@ public sealed record StartChatRequest(
     string Question,
     string? ConversationId = null,
     string? MessageId = null,
-    int? TopK = null)
+    int? TopK = null,
+    string? ModelId = null)
 {
     public ChatQuestionSubmission ToDomain()
         => new(
             Question.Trim(),
             ChatContractHelpers.NormalizeOptional(ConversationId),
             ChatContractHelpers.NormalizeOptional(MessageId),
-            TopK ?? 10);
+            TopK ?? 6,
+            ChatContractHelpers.NormalizeOptional(ModelId));
 }
 
 public sealed record ChatRequestStatusResponse(
@@ -124,7 +126,7 @@ public sealed record ChatWebhookRequest(
             RagReleaseId.Trim(),
             RetrievalProfileId.Trim(),
             Question.Trim(),
-            TopK ?? 10,
+            TopK ?? 6,
             (Chunks ?? []).Select(chunk => chunk.ToDomain()).ToArray(),
             DispatchedAt,
             ChatContractHelpers.NormalizeOptional(ConversationId),

@@ -15,6 +15,13 @@ public static class GeneratedAnswerFormatter
     private static readonly Regex ThinkBlock = new(@"<think>.*?</think>", RegexOptions.Compiled | RegexOptions.Singleline);
     private static readonly Regex StrayThinkTag = new(@"</?think>", RegexOptions.Compiled);
 
+    // The model sometimes leaks an English relevance verdict into the Spanish answer, e.g.
+    // "... proporcionados. Irrelevant para SST." or "Irrelevantes para este tema, ...". Strip that
+    // clause. Case-sensitive on the capitalized English form so the legitimate Spanish word
+    // "irrelevante para ..." is never touched.
+    private static readonly Regex LeakedRelevanceNote =
+        new(@"\s*\bIrrelevant(?:es)?\s+para\b[^.\n]*\.?", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
     public static string Format(string? rawAnswer)
     {
         if (string.IsNullOrWhiteSpace(rawAnswer))
@@ -23,7 +30,8 @@ public static class GeneratedAnswerFormatter
         }
 
         var normalized = rawAnswer.Replace("\r\n", "\n").Replace('\r', '\n');
-        normalized = StrayThinkTag.Replace(ThinkBlock.Replace(normalized, string.Empty), string.Empty).Trim();
+        normalized = StrayThinkTag.Replace(ThinkBlock.Replace(normalized, string.Empty), string.Empty);
+        normalized = LeakedRelevanceNote.Replace(normalized, string.Empty).Trim();
         var lines = normalized.Split('\n');
         var keptLines = new List<string>(lines.Length);
 

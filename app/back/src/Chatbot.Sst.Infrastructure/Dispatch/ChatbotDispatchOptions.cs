@@ -30,7 +30,7 @@ public sealed class ChatbotDispatchOptions
     public string RagReleasesPathTemplate { get; init; } = "/api/chatbot/rag-releases?project_id={project_id}&rag_variant_id={rag_variant_id}";
 
     [Range(1, 25)]
-    public int DefaultTopK { get; init; } = 10;
+    public int DefaultTopK { get; init; } = 6;
 
     [Range(1, 600)]
     public int RequestTimeoutSeconds { get; init; } = 120;

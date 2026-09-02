@@ -31,7 +31,15 @@ public sealed class ChatDispatchCoordinator : IChatDispatchCoordinator
     // so four huge chunks can't still produce a huge prefill. Retrieval already reranks by
     // relevance, so keeping the highest-scored chunks preserves grounding. This is a hard cap:
     // the token budget only ever selects fewer than MaxEvidenceItems, never more.
-    private const int MaxEvidenceItems = 4;
+    private const int MaxEvidenceItems = 5;
+
+    private const string CodeRefusalMessage =
+        "Solo puedo ayudarte con preguntas sobre los documentos de seguridad y salud en el trabajo " +
+        "(SST) de la empresa. No genero código, scripts ni algoritmos. ¿En qué tema de SST te puedo ayudar?";
+
+    private const string LowRelevanceMessage =
+        "No encontré información suficiente en los documentos de SST de la empresa para responder eso. " +
+        "¿Puedo ayudarte con otra pregunta sobre seguridad y salud en el trabajo?";
 
     private const string DeltaEventType = "chat.answer.delta.v1";
     private const string CompletedEventType = "chat.answer.completed.v1";
@@ -89,7 +97,7 @@ public sealed class ChatDispatchCoordinator : IChatDispatchCoordinator
         }
         catch (ChatDispatchException ex)
         {
-            _store.Fail(requestId, ex.ErrorCode, ex.Message);
+            await FailAndPublishAsync(requestId, ex.ErrorCode, ex.Message);
         }
         catch (Exception ex)
         {
@@ -100,8 +108,21 @@ public sealed class ChatDispatchCoordinator : IChatDispatchCoordinator
                 ex,
                 "Unexpected failure dispatching chat request {RequestId} to the external chatbot backend.",
                 requestId);
-            _store.Fail(requestId, DispatchUnexpectedFailedCode, DispatchUnexpectedFailedMessage);
+            await FailAndPublishAsync(requestId, DispatchUnexpectedFailedCode, DispatchUnexpectedFailedMessage);
         }
+    }
+
+    // A dispatch-stage failure (backend 500/OOM, connection refused) happens after SubmitAsync
+    // already returned Pending and the browser opened its SSE subscription. Marking the store
+    // Failed is not enough: without a terminal event on the stream the SSE waits forever and the
+    // UI hangs. Publish the failed event so the open stream — and any late/reconnecting subscriber,
+    // which replays from the start — settles instead of hanging.
+    private async Task FailAndPublishAsync(string requestId, string errorCode, string message)
+    {
+        _store.Fail(requestId, errorCode, message);
+        await PublishAsync(
+            requestId, FailedEventType,
+            JsonSerializer.Serialize(new { errorCode, error = message }), terminal: true);
     }
 
     public ChatRequestSnapshot? Get(string requestId) => _store.Get(requestId);
@@ -133,15 +154,60 @@ public sealed class ChatDispatchCoordinator : IChatDispatchCoordinator
 
     private async Task GenerateInBackgroundAsync(string requestId, ChatWebhookDelivery delivery)
     {
+        // FAQ fast path: a confident FAQ hit comes back as a single chunk the retrieval tagged
+        // embedding_profile_id="faq". Its text is already the curated final answer, so return it
+        // verbatim and skip the LLM entirely — the whole point of the FAQ shortcut is a sub-second
+        // reply instead of ~14s of local generation. No try/catch: there is no external call to fail.
+        var faqResponse = TryBuildFaqResponse(delivery);
+        if (faqResponse is not null)
+        {
+            _store.Complete(requestId, delivery, faqResponse);
+            await PublishAsync(requestId, CompletedEventType, SerializeCompleted(faqResponse), terminal: true);
+            return;
+        }
+
+        // Code-request hard block: the small local model caves to "write me a script" under SST
+        // framing despite the system prompt, so refuse deterministically before generation. No LLM,
+        // no citations — a fixed scope message the model cannot be talked out of.
+        if (CodeRequestDetector.IsCodeRequest(delivery.Question))
+        {
+            var refusal = new ChatResponse(CodeRefusalMessage, [], Abstained: false);
+            _store.Complete(requestId, delivery, refusal);
+            await PublishAsync(requestId, CompletedEventType, SerializeCompleted(refusal), terminal: true);
+            return;
+        }
+
+        // Relevance gate: log the best rerank score for every request (so the threshold can be tuned
+        // against real traffic) and, when configured, abstain deterministically below it instead of
+        // letting the small model improvise from loosely-related evidence.
+        var maxScore = delivery.Chunks.Count > 0 ? delivery.Chunks.Max(c => c.Score) : double.NegativeInfinity;
+        _logger.LogInformation(
+            "Evidence max rerank score {Score} ({ChunkCount} chunks) for chat request {RequestId}: {Question}",
+            maxScore, delivery.Chunks.Count, requestId, delivery.Question);
+        if (_generation.MinEvidenceScore is { } minScore && maxScore < minScore)
+        {
+            _logger.LogInformation(
+                "Abstaining (score {Score} < MinEvidenceScore {Threshold}) for chat request {RequestId}.",
+                maxScore, minScore, requestId);
+            var lowRelevance = new ChatResponse(LowRelevanceMessage, [], Abstained: true);
+            _store.Complete(requestId, delivery, lowRelevance);
+            await PublishAsync(requestId, CompletedEventType, SerializeCompleted(lowRelevance), terminal: true);
+            return;
+        }
+
         try
         {
             var evidence = ToEvidencePackage(delivery.Chunks);
             ChatResponse? final = null;
 
+            // The model the user picked in the frontend was stored on the pending request; use it
+            // for this generation (null => provider default).
+            var modelId = _store.Get(requestId)?.ModelId;
+
             // Stream token-by-token: each delta reaches the browser over SSE as it is produced
             // (TTFT ~= prefill), then the terminal event carries the full answer + citations.
             await foreach (var chunk in _chat.AnswerStreamingAsync(
-                new UserQuestion(delivery.Question), evidence, CancellationToken.None))
+                new UserQuestion(delivery.Question), evidence, CancellationToken.None, modelId))
             {
                 if (chunk.IsFinal)
                 {
@@ -222,6 +288,53 @@ public sealed class ChatDispatchCoordinator : IChatDispatchCoordinator
         // (InvalidOperationException from OpenAiCompatibleLlmProvider) — generic delivery failure.
         _ => (LlmDeliveryFailedCode, LlmDeliveryFailedMessage)
     };
+
+    // Detects a FAQ hit and turns it into the final answer without the LLM. The retrieval side
+    // returns exactly one chunk tagged embedding_profile_id="faq" whose Text is the curated answer.
+    private static ChatResponse? TryBuildFaqResponse(ChatWebhookDelivery delivery)
+    {
+        if (delivery.Chunks.Count != 1)
+        {
+            return null;
+        }
+
+        var chunk = delivery.Chunks[0];
+        if (!string.Equals(chunk.EmbeddingProfileId, "faq", StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        var answer = chunk.Text?.Trim();
+        if (string.IsNullOrEmpty(answer))
+        {
+            return null;
+        }
+
+        // The curated FAQ set marks unanswerable entries with a fail-closed status; honour it so the
+        // UI renders them as an abstention rather than a confident answer.
+        var status = ReadMetadata(chunk, "faq_status");
+        var abstained = status is "insufficient_evidence" or "conflicting_evidence";
+
+        // Synthetic FAQ ids (greetings with no backing document) would make noisy citations; only
+        // cite a hit that carries a real document identity.
+        IReadOnlyList<Citation> citations = chunk.DocumentId.StartsWith("FAQ-", StringComparison.OrdinalIgnoreCase)
+            ? []
+            : [chunk.ToEvidence().Citation];
+
+        return new ChatResponse(answer, citations, abstained);
+    }
+
+    private static string? ReadMetadata(WebhookChunk chunk, string key)
+    {
+        if (chunk.Metadata is null)
+        {
+            return null;
+        }
+
+        return chunk.Metadata.TryGetValue(key, out var value) && !string.IsNullOrWhiteSpace(value)
+            ? value
+            : null;
+    }
 
     // Applied once here so the prompt (EvidencePromptBuilder) and the citations
     // (GroundedAnswerService, built from the same EvidencePackage.Items) always agree on

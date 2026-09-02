@@ -14,7 +14,8 @@ public sealed record ChatQuestionSubmission(
     string Question,
     string? ConversationId = null,
     string? MessageId = null,
-    int TopK = 10);
+    int TopK = 6,
+    string? ModelId = null);
 
 /// <summary>Published release resolved at runtime before dispatching the question.</summary>
 public sealed record PublishedRelease(
@@ -185,4 +186,5 @@ public sealed record ChatRequestSnapshot(
     IReadOnlyList<WebhookChunk>? Chunks = null,
     ChatResponse? Response = null,
     string? ErrorCode = null,
-    string? Error = null);
+    string? Error = null,
+    string? ModelId = null);

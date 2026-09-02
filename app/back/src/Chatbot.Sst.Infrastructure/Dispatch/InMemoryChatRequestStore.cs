@@ -18,7 +18,8 @@ public sealed class InMemoryChatRequestStore : IChatRequestStore
             Question: submission.Question,
             TopK: submission.TopK,
             State: ChatRequestState.Pending,
-            ConversationId: NormalizeOptional(submission.ConversationId));
+            ConversationId: NormalizeOptional(submission.ConversationId),
+            ModelId: NormalizeOptional(submission.ModelId));
 
         _requests[requestId] = snapshot;
         return snapshot;

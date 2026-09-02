@@ -33,7 +33,7 @@ public sealed class GroundedAnswerService : IChatService
         _llm = llm;
     }
 
-    public async Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken)
+    public async Task<ChatResponse> AnswerAsync(UserQuestion question, EvidencePackage evidence, CancellationToken cancellationToken, string? modelId = null)
     {
         if (evidence.IsEmpty)
         {
@@ -43,17 +43,17 @@ public sealed class GroundedAnswerService : IChatService
         var normalized = _normalizer.Normalize(question);
         var messages = EvidencePromptBuilder.Build(normalized, evidence);
         var response = await _llm.GenerateAsync(
-            new LlmRequest(messages) { StopSequences = DefaultStopSequences }, cancellationToken);
+            new LlmRequest(messages) { StopSequences = DefaultStopSequences, ModelId = modelId }, cancellationToken);
         var formattedAnswer = GeneratedAnswerFormatter.Format(response.Content);
 
-        var citations = evidence.Items.Select(e => e.Citation).Distinct().ToArray();
-        return new ChatResponse(formattedAnswer, citations, Abstained: false);
+        return BuildResponse(formattedAnswer, evidence);
     }
 
     public async IAsyncEnumerable<ChatAnswerChunk> AnswerStreamingAsync(
         UserQuestion question,
         EvidencePackage evidence,
-        [EnumeratorCancellation] CancellationToken cancellationToken)
+        [EnumeratorCancellation] CancellationToken cancellationToken,
+        string? modelId = null)
     {
         if (evidence.IsEmpty)
         {
@@ -67,7 +67,7 @@ public sealed class GroundedAnswerService : IChatService
 
         var raw = new StringBuilder();
         await foreach (var chunk in _llm.GenerateStreamingAsync(
-            new LlmRequest(messages) { StopSequences = DefaultStopSequences }, cancellationToken))
+            new LlmRequest(messages) { StopSequences = DefaultStopSequences, ModelId = modelId }, cancellationToken))
         {
             raw.Append(chunk.Delta);
             yield return ChatAnswerChunk.Token(chunk.Delta);
@@ -76,7 +76,19 @@ public sealed class GroundedAnswerService : IChatService
         // Format once over the full text (same formatter as the non-streaming path) and build
         // citations from exactly the evidence sent to the model.
         var formattedAnswer = GeneratedAnswerFormatter.Format(raw.ToString());
+        yield return ChatAnswerChunk.Completed(BuildResponse(formattedAnswer, evidence));
+    }
+
+    // A refusal/abstention answer grounds on nothing, so drop its citations — otherwise the UI shows
+    // a "Fuentes" block that falsely implies the documents backed the (non-)answer.
+    private static ChatResponse BuildResponse(string answer, EvidencePackage evidence)
+    {
+        if (RefusalDetector.IsRefusal(answer))
+        {
+            return new ChatResponse(answer, [], Abstained: true);
+        }
+
         var citations = evidence.Items.Select(e => e.Citation).Distinct().ToArray();
-        yield return ChatAnswerChunk.Completed(new ChatResponse(formattedAnswer, citations, Abstained: false));
+        return new ChatResponse(answer, citations, Abstained: false);
     }
 }

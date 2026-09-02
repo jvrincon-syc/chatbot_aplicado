@@ -44,6 +44,12 @@ public sealed record LlmRequest(IReadOnlyList<LlmMessage> Messages)
     /// Used to cut degenerate think tags and trailing prompt echo. Null = no stop sequences.
     /// </summary>
     public IReadOnlyList<string>? StopSequences { get; init; }
+
+    /// <summary>
+    /// Optional id of a configured LLM profile to use for this request (frontend model selector).
+    /// Null = the provider's default endpoint/model. The provider resolves the id.
+    /// </summary>
+    public string? ModelId { get; init; }
 }
 
 public sealed record LlmResponse(string Content)

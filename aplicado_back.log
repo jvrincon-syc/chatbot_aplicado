@@ -24,3 +24,87 @@ info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
       Received HTTP response headers after 21057.1456ms - 500
 info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
       End processing HTTP request after 21057.4258ms - 500
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[100]
+      Start processing HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[100]
+      Sending HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
+      Received HTTP response headers after 21349.981ms - 500
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
+      End processing HTTP request after 21353.3536ms - 500
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[100]
+      Start processing HTTP request GET http://127.0.0.1:8765/api/platform/projects/proj_sst-general/releases?*
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[100]
+      Sending HTTP request GET http://127.0.0.1:8765/api/platform/projects/proj_sst-general/releases?*
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
+      Received HTTP response headers after 48.9785ms - 200
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
+      End processing HTTP request after 49.9515ms - 200
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[100]
+      Start processing HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[100]
+      Sending HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
+      Received HTTP response headers after 21103.2381ms - 500
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
+      End processing HTTP request after 21103.6959ms - 500
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[100]
+      Start processing HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[100]
+      Sending HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
+      Received HTTP response headers after 21396.9804ms - 500
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
+      End processing HTTP request after 21399.8593ms - 500
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[100]
+      Start processing HTTP request GET http://127.0.0.1:8765/api/platform/projects/proj_sst-general/releases?*
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[100]
+      Sending HTTP request GET http://127.0.0.1:8765/api/platform/projects/proj_sst-general/releases?*
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
+      Received HTTP response headers after 48.7608ms - 200
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
+      End processing HTTP request after 52.6933ms - 200
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[100]
+      Start processing HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[100]
+      Sending HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
+      Received HTTP response headers after 21123.3575ms - 500
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
+      End processing HTTP request after 21124.7926ms - 500
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[100]
+      Start processing HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[100]
+      Sending HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: Chatbot.Sst.Application.ChatDispatchCoordinator[0]
+      Evidence selected 4/10 chunks within limits (<= 4 items, <= 700 tokens; using 30).
+info: System.Net.Http.HttpClient.ILlmProvider.LogicalHandler[100]
+      Start processing HTTP request POST https://8000-01m1f8edbkwpj5jngz54s4fyn7.cloudspaces.litng.ai/v1/chat/completions
+info: System.Net.Http.HttpClient.ILlmProvider.ClientHandler[100]
+      Sending HTTP request POST https://8000-01m1f8edbkwpj5jngz54s4fyn7.cloudspaces.litng.ai/v1/chat/completions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
+      Received HTTP response headers after 10383.9037ms - 202
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
+      End processing HTTP request after 10384.4171ms - 202
+info: System.Net.Http.HttpClient.ILlmProvider.ClientHandler[101]
+      Received HTTP response headers after 599.0555ms - 200
+info: System.Net.Http.HttpClient.ILlmProvider.LogicalHandler[101]
+      End processing HTTP request after 599.8281ms - 200
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[100]
+      Start processing HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[100]
+      Sending HTTP request POST http://127.0.0.1:8765/api/chatbot/questions
+info: Chatbot.Sst.Application.ChatDispatchCoordinator[0]
+      Evidence selected 4/10 chunks within limits (<= 4 items, <= 700 tokens; using 680).
+info: System.Net.Http.HttpClient.ILlmProvider.LogicalHandler[100]
+      Start processing HTTP request POST https://8000-01m1f8edbkwpj5jngz54s4fyn7.cloudspaces.litng.ai/v1/chat/completions
+info: System.Net.Http.HttpClient.ILlmProvider.ClientHandler[100]
+      Sending HTTP request POST https://8000-01m1f8edbkwpj5jngz54s4fyn7.cloudspaces.litng.ai/v1/chat/completions
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.ClientHandler[101]
+      Received HTTP response headers after 21840.988ms - 202
+info: System.Net.Http.HttpClient.IChatbotDispatchClient.LogicalHandler[101]
+      End processing HTTP request after 21841.4122ms - 202
+info: System.Net.Http.HttpClient.ILlmProvider.ClientHandler[101]
+      Received HTTP response headers after 253.5887ms - 200
+info: System.Net.Http.HttpClient.ILlmProvider.LogicalHandler[101]
+      End processing HTTP request after 253.7006ms - 200
