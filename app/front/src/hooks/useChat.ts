@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getModels, startChat, streamChat, type LlmModel } from "../api/chat";
 import { ApiError } from "../api/client";
+import { DEFAULT_LLM_MODELS, mergeLlmModels, resolveInitialModelId } from "../modelCatalog";
 import type { ChatError, ChatMessage, ChatRequestChunk, ChatRequestStatus, Citation } from "../types";
+
+const SELECTED_MODEL_STORAGE_KEY = "sst_chatbot_selected_model";
 
 const SOURCE_URL_METADATA_KEYS = [
   "source_url",
@@ -149,8 +152,10 @@ export function useChat() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ChatError | null>(null);
   const [conversationId] = useState(() => `conv_${crypto.randomUUID().replaceAll("-", "")}`);
-  const [models, setModels] = useState<LlmModel[]>([]);
-  const [selectedModel, setSelectedModel] = useState<string>("");
+  const [models, setModels] = useState<LlmModel[]>(() => [...DEFAULT_LLM_MODELS]);
+  const [selectedModel, setSelectedModelState] = useState<string>(() =>
+    resolveInitialModelId(DEFAULT_LLM_MODELS, localStorage.getItem(SELECTED_MODEL_STORAGE_KEY), ""),
+  );
   const lastQuestionRef = useRef<string | null>(null);
   const lastPendingRequestIdRef = useRef<string | null>(null);
 
@@ -160,15 +165,23 @@ export function useChat() {
     getModels()
       .then((list) => {
         if (!active) return;
-        setModels(list);
-        setSelectedModel((current) => current || list[0]?.id || "");
+        const merged = mergeLlmModels(list);
+        setModels(merged);
+        setSelectedModelState((current) =>
+          resolveInitialModelId(merged, localStorage.getItem(SELECTED_MODEL_STORAGE_KEY), current),
+        );
       })
       .catch(() => {
-        /* model picker is optional; a failure just leaves the default backend model */
+        /* Keep the built-in picker options; the backend still validates the selected model id. */
       });
     return () => {
       active = false;
     };
+  }, []);
+
+  const setSelectedModel = useCallback((modelId: string) => {
+    setSelectedModelState(modelId);
+    localStorage.setItem(SELECTED_MODEL_STORAGE_KEY, modelId);
   }, []);
 
   const settleStatus = useCallback((status: ChatRequestStatus) => {

@@ -3,6 +3,7 @@ import { Sidebar } from "../../components/Sidebar";
 import { MessageList } from "../../components/MessageList";
 import { ChatInput } from "../../components/ChatInput";
 import { ErrorBanner } from "../../components/ErrorBanner";
+import { ModelPicker } from "../../components/ModelPicker";
 
 const ICON_SHIELD_CHECK = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>';
 
@@ -29,19 +30,12 @@ export function ChatPage() {
                 <span className="main__context-dot" />
                 Marco Legal SST Colombia
               </span>
-              {models.length > 0 && (
-                <select
-                  className="model-select"
-                  aria-label="Modelo de IA"
-                  value={selectedModel}
-                  disabled={loading}
-                  onChange={(e) => setSelectedModel(e.target.value)}
-                >
-                  {models.map((m) => (
-                    <option key={m.id} value={m.id}>{m.label}</option>
-                  ))}
-                </select>
-              )}
+              <ModelPicker
+                models={models}
+                selectedModel={selectedModel}
+                disabled={loading}
+                onChange={setSelectedModel}
+              />
             </div>
 
             {empty ? (
